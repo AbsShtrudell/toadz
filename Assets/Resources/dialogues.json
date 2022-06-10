@@ -35,6 +35,11 @@
                     "trigger" : "End",
                     "text" : "To node 0",
                     "node" : 0
+                },
+                {
+                    "trigger" : "End",
+                    "text" : "To node 1",
+                    "node" : 1
                 }
             ]
         }

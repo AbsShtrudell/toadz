@@ -9,24 +9,30 @@ public class DialogueController : MonoBehaviour
     [SerializeField]
     private TextAsset dialoguesFile;
 
-    private DialogueNode currentNode;
+    public DialogueNode currentNode
+    { get; private set; }
+
     private DialoguesList nodes;
 
     public event Action<DialogueNode> onNodeChanged;
 
-    private void OnEnable()
+    private void Awake()
     {
         if (dialoguesFile != null)
         {
             nodes = DialogueReader.ReadDialogues(dialoguesFile);
             currentNode = FindNode(0);
-            NextNode(0);
+            onNodeChanged?.Invoke(currentNode);
         }
+    }
+
+    private void OnEnable()
+    {
+        currentNode = FindNode(0);
     }
 
     private void OnDisable()
     {
-        nodes = null;
         currentNode = null;
     }
 

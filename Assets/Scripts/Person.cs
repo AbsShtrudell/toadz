@@ -19,6 +19,10 @@ public class Person : ScriptableObject
 {
     [SerializeField]
     private int m_id;
+
+    [SerializeField]
+    private string m_name;
+
     [SerializeField]
     private List<EmotionVisual> m_Emotions = new List<EmotionVisual>(3);
 }
