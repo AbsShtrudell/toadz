@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Emotions 
+public enum Emotions
 {
     Idle, Anger, Happines
 }
@@ -14,15 +14,12 @@ public struct EmotionVisual
     public Sprite sprite;
 }
 
-
-public class Person : ScriptableObject
+public class PersonController : MonoBehaviour
 {
     [SerializeField]
-    private int m_id;
-
+    private Person[] persons;
     [SerializeField]
-    private string m_name;
-
+    private Person[] currentPerson;
     [SerializeField]
-    private List<EmotionVisual> m_Emotions = new List<EmotionVisual>(3);
+    private Sprite sprite;
 }
