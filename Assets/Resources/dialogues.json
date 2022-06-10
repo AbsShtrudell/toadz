@@ -1,0 +1,42 @@
+{
+    "dialogues" : [
+        {
+            "id" : 0,
+            "text" : "simple text",
+            "background" : 0,
+            "persons" : [
+                {
+                    "id" : 0,
+                    "emotion" : 0
+                }
+            ],
+            "selection" : false,
+            "branches" : [
+                {
+                    "trigger" : 0,
+                    "text" : "selection text",
+                    "node" : 1
+                }
+            ]
+        },
+        {
+            "id" : 1,
+            "text" : "Hm, i need to restart",
+            "background" : 1,
+            "persons" : [
+                {
+                    "id" : 1,
+                    "emotion" : 1
+                }
+            ],
+            "selection" : true,
+            "branches" : [
+                {
+                    "trigger" : 1,
+                    "text" : " To node 0",
+                    "node" : 0
+                }
+            ]
+        }
+    ]
+}
