@@ -6,15 +6,20 @@ using UnityEngine;
 public class DialogueNode
 {
     [SerializeField]
-    private int id;
+    public int id;
+
     [SerializeField]
-    private string text;
+    public string text;
+
     [SerializeField]
-    private int background;
+    public int background;
+
     [SerializeField]
-    private DialoguePerson[] persons;
+    public DialoguePerson[] persons;
+
     [SerializeField]
-    private bool selection;
+    public bool selection;
+
     [SerializeField]
-    private DialogueBranch[] branches;
+    public DialogueBranch[] branches;
 }

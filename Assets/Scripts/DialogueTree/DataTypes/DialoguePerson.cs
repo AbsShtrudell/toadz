@@ -6,7 +6,25 @@ using UnityEngine;
 public class DialoguePerson
 {
     [SerializeField]
-    private int id;
+    public int id;
+
     [SerializeField]
-    private Emotions emotion;
+    private string emotion;
+
+    public Emotions emotionType
+    {
+        get
+        {
+            Emotions result;
+            if (!System.Enum.TryParse<Emotions>(emotion, out result))
+                result = Emotions.Idle;
+
+            return result;
+        }
+        set
+        {
+            emotion = value.ToString();
+        }
+
+    }
 }

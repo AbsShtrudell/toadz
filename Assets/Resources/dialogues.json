@@ -7,13 +7,13 @@
             "persons" : [
                 {
                     "id" : 0,
-                    "emotion" : 0
+                    "emotion" : "Anger"
                 }
             ],
             "selection" : false,
             "branches" : [
                 {
-                    "trigger" : 0,
+                    "trigger" : "None",
                     "text" : "selection text",
                     "node" : 1
                 }
@@ -26,14 +26,14 @@
             "persons" : [
                 {
                     "id" : 1,
-                    "emotion" : 1
+                    "emotion" : "Idle"
                 }
             ],
             "selection" : true,
             "branches" : [
                 {
-                    "trigger" : 1,
-                    "text" : " To node 0",
+                    "trigger" : "End",
+                    "text" : "To node 0",
                     "node" : 0
                 }
             ]

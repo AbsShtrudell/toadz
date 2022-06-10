@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum Emotions 
 {
-    Idle, Angry, Happy
+    Idle, Anger, Happines
 }
 
 [System.Serializable]

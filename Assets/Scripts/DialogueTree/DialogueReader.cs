@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueReader
+static public class DialogueReader
 {
-    private DialoguesList ReadDialogues(TextAsset file)
+    static public DialoguesList ReadDialogues(TextAsset file)
     {
         DialoguesList result = JsonUtility.FromJson<DialoguesList>(file.text);
 

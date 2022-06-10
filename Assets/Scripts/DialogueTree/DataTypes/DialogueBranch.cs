@@ -6,9 +6,28 @@ using UnityEngine;
 public class DialogueBranch
 {
     [SerializeField]
-    private TriggerTypes trigger;
+    private string trigger;
+
     [SerializeField]
-    private string text;
+    public string text;
+
     [SerializeField]
-    private int node;
+    public int node;
+
+    public TriggerTypes triggerType
+    {
+        get 
+        {
+            TriggerTypes result;
+            if (!System.Enum.TryParse<TriggerTypes>(trigger, out result))
+                result = TriggerTypes.None;
+
+            return result;
+        }
+        set
+        {
+            trigger = value.ToString();
+        }
+            
+    }
 }
