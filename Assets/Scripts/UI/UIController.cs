@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class UIController : MonoBehaviour
 {
@@ -19,8 +20,10 @@ public class UIController : MonoBehaviour
     [SerializeField]
     private GameObject SelectionButtonRef;
 
-    [SerializeField]
+    [Zenject.Inject]
     private DialogueController dialogueController;
+    [Zenject.Inject]
+    private PersonController personController;
 
     private bool select;
     private List<RectTransform> buttons = new List<RectTransform>();
@@ -32,18 +35,27 @@ public class UIController : MonoBehaviour
 
     private void OnEnable()
     {
-        dialogueController.onNodeChanged += DialogueController_onNodeChanged;
+        dialogueController.onNodeChanged += OnNodeChanged;
+        personController.onPersonChanged += OnPersonChanged;
+
+        OnNodeChanged(dialogueController.currentNode);
     }
 
     private void OnDisable()
     {
-        dialogueController.onNodeChanged -= DialogueController_onNodeChanged;
+        dialogueController.onNodeChanged -= OnNodeChanged;
+        personController.onPersonChanged -= OnPersonChanged;
     }
 
-    private void DialogueController_onNodeChanged(DialogueNode node)
+    private void OnNodeChanged(DialogueNode node)
     {
         ChangeDialogueText(node.text);
         ChangeDialoguePanelState(node.branches, node.selection);
+    }
+
+    private void OnPersonChanged(Person person)
+    {
+        nameText.text = person.personName;
     }
 
     public void onTextPanelClicked()

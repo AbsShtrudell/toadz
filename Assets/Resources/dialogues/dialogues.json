@@ -1,0 +1,109 @@
+{
+    "dialogues" : [
+        {
+            "id" : 0,
+            "text" : "simple text",
+            "background" : 0,
+            "person" : 
+            {
+                "id" : 0,
+                "emotion" : "Anger"
+            },
+            "selection" : false,
+            "branches" : [
+                {
+                    "trigger" : "None",
+                    "text" : "selection text",
+                    "node" : 1
+                }
+            ]
+        },
+        {
+            "id" : 1,
+            "text" : "TRTRTRTRTRTRTRTRTRTRTRTRTRTRTRTTRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRTRRRRRRRRRRRRRRRRTTRRTTRRTTRRT",
+            "background" : 1,
+            "person" : 
+            {
+                "id" : 1,
+                "emotion" : "Idle"
+            },
+            "selection" : true,
+            "branches" : [
+                {
+                    "trigger" : "None",
+                    "text" : "Next",
+                    "node" : 2
+                },
+                {
+                    "trigger" : "None",
+                    "text" : "Another way",
+                    "node" : 3
+                }
+            ]
+        },
+        {
+            "id" : 2,
+            "text" : "Maybe restart",
+            "background" : 0,
+            "person" : 
+            {
+                "id" : 1,
+                "emotion" : "Anger"
+            },
+            "selection" : true,
+            "branches" : [
+                {
+                    "trigger" : "None",
+                    "text" : "To node 0",
+                    "node" : 0
+                },
+                {
+                    "trigger" : "None",
+                    "text" : "To node 1",
+                    "node" : 1
+                }
+            ]
+        },
+        {
+            "id" : 3,
+            "text" : "TESTTTTTTSTST FSDFDS FADFFG WFRFWRF",
+            "background" : 2,
+            "person" : 
+            {
+                "id" : 0,
+                "emotion" : "Anger"
+            },
+            "selection" : false,
+            "branches" : [
+                {
+                    "trigger" : "None",
+                    "text" : "Skip",
+                    "node" : 4
+                }
+            ]
+        },
+        {
+            "id" : 4,
+            "text" : "Hm, i need to restart",
+            "background" : 2,
+            "person" : 
+            {
+                "id" : 0,
+                "emotion" : "Idle"
+            },
+            "selection" : true,
+            "branches" : [
+                {
+                    "trigger" : "None",
+                    "text" : "Yes",
+                    "node" : 0
+                },
+                {
+                    "trigger" : "None",
+                    "text" : "No",
+                    "node" : 4
+                }
+            ]
+        }
+    ]
+}

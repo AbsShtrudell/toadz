@@ -1,6 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum Emotions
+{
+    Idle, Anger, Happines
+}
+
+[System.Serializable]
+public struct EmotionVisual
+{
+    public Emotions emotion;
+    public Sprite sprite;
+}
 
 [CreateAssetMenu(fileName = "PersonSO", menuName = "ScriptableObjects/Person")]
 public class Person : ScriptableObject

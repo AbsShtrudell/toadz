@@ -15,7 +15,7 @@ public class DialogueNode
     public int background;
 
     [SerializeField]
-    public DialoguePerson[] persons;
+    public DialoguePerson person;
 
     [SerializeField]
     public bool selection;

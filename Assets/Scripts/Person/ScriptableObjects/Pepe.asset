@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_id: 0
   m_name: Pepe
-  m_Emotions:
+  m_emotions:
   - emotion: 0
     sprite: {fileID: 21300000, guid: a62835628b8fa704eaf30c1b3c5cd6e9, type: 3}
+  - emotion: 1
+    sprite: {fileID: 21300000, guid: ea9e49e5666c84849a85e2848a5985fa, type: 3}
