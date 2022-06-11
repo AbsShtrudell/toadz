@@ -1,107 +1,43 @@
 {
-    "dialogues" : [
+    "dialogue_tree" : [
         {
             "id" : 0,
-            "text" : "simple text",
             "background" : 0,
-            "person" : 
-            {
-                "id" : 0,
-                "emotion" : "Anger"
-            },
-            "selection" : false,
-            "branches" : [
+            "bubbles" : [
                 {
+                    "id" : 0,
+                    "shape" : "Round",
+                    "text" : "Simple text",
+                    "side" : "Center",
                     "trigger" : "None",
-                    "text" : "selection text",
-                    "node" : 1
+                    "next_scene" : 0,
+                    "next_type" : "Selection",
+                    "next_id" : 0
                 }
-            ]
-        },
-        {
-            "id" : 1,
-            "text" : "TRTRTRTRTRTRTRTRTRTRTRTRTRTRTRTTRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRTRRRRRRRRRRRRRRRRTTRRTTRRTTRRT",
-            "background" : 1,
-            "person" : 
-            {
-                "id" : 1,
-                "emotion" : "Idle"
-            },
-            "selection" : true,
-            "branches" : [
+            ], 
+            "selections" : [
                 {
-                    "trigger" : "None",
-                    "text" : "Next",
-                    "node" : 2
-                },
-                {
-                    "trigger" : "None",
-                    "text" : "Another way",
-                    "node" : 3
-                }
-            ]
-        },
-        {
-            "id" : 2,
-            "text" : "Maybe restart",
-            "background" : 0,
-            "person" : 
-            {
-                "id" : 1,
-                "emotion" : "Anger"
-            },
-            "selection" : true,
-            "branches" : [
-                {
-                    "trigger" : "None",
-                    "text" : "To node 0",
-                    "node" : 0
-                },
-                {
-                    "trigger" : "None",
-                    "text" : "To node 1",
-                    "node" : 1
-                }
-            ]
-        },
-        {
-            "id" : 3,
-            "text" : "TESTTTTTTSTST FSDFDS FADFFG WFRFWRF",
-            "background" : 2,
-            "person" : 
-            {
-                "id" : 0,
-                "emotion" : "Anger"
-            },
-            "selection" : false,
-            "branches" : [
-                {
-                    "trigger" : "None",
-                    "text" : "Skip",
-                    "node" : 4
-                }
-            ]
-        },
-        {
-            "id" : 4,
-            "text" : "Hm, i need to restart",
-            "background" : 2,
-            "person" : 
-            {
-                "id" : 0,
-                "emotion" : "Idle"
-            },
-            "selection" : true,
-            "branches" : [
-                {
-                    "trigger" : "None",
-                    "text" : "Yes",
-                    "node" : 0
-                },
-                {
-                    "trigger" : "None",
-                    "text" : "No",
-                    "node" : 4
+                    "id" : 0,
+                    "organization" : "Vertical",
+                    "icons" : true,
+                    "variants" : [
+                        {
+                            "icon" : 0,
+                            "text" : "Yes",
+                            "trigger" : "None",
+                            "next_scene" : 0,
+                            "next_type" : "Bubble",
+                            "next_id" : 0
+                        },
+                        {
+                            "icon" : 0,
+                            "text" : "No",
+                            "trigger" : "None",
+                            "next_scene" : 0,
+                            "next_type" : "Bubble",
+                            "next_id" : 0
+                        }
+                    ]
                 }
             ]
         }
