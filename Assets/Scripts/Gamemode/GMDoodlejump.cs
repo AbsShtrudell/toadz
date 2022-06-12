@@ -6,7 +6,7 @@ public class GMDoodlejump : GMTermination, IGameemode
 {
     public void Launch()
     {
-        
+        gameObject.SetActive(true);
     }
 
     public void Load(int code)

@@ -11,7 +11,7 @@ public class GMDialogue : GMTermination, IGameemode
 
     public void Launch()
     {
-        
+        EndGamemode(4);
     }
 
     public void Stop()
