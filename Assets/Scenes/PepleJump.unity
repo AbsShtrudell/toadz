@@ -174,7 +174,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68edf114c2d90394ea8adef05d85d36d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controller: {fileID: 1642440786}
 --- !u!61 &124755743
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -499,8 +498,8 @@ Transform:
   m_GameObject: {fileID: 349980585}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.24156621, y: -0.76, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.55, y: 0.55, z: 0.55}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -550,7 +549,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!114 &349980591
 MonoBehaviour:
@@ -633,6 +632,84 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1011204332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1011204334}
+  - component: {fileID: 1011204333}
+  - component: {fileID: 1011204335}
+  m_Layer: 0
+  m_Name: SceneContext
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1011204333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011204332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89715ad69b973a14899afa2c6730b30b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scriptableObjectInstallers: []
+  _monoInstallers:
+  - {fileID: 1011204335}
+  _installerPrefabs: []
+  _autoRun: 1
+  OnPreInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostInstall:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPreResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  OnPostResolve:
+    m_PersistentCalls:
+      m_Calls: []
+  _parentNewObjectsUnderSceneContext: 0
+  _contractNames: []
+  _parentContractNames: []
+--- !u!4 &1011204334
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011204332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1011204335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1011204332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fbf6a4bc4560474ca1ceb5f1a671b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1642440786}
 --- !u!1 &1642440783
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,13 +755,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformRef: {fileID: 42319790}
-  verticalSpreadMin: 2
-  verticalSpreadMax: 4
-  horizontalSpreadMin: -1.8
-  horizontalSpreadMax: 1.8
-  maxPlatformCount: 7
+  startVerticalSpreadMin: 0.5
+  startVerticalSpreadMax: 1
+  endVerticalSpreadMin: 4
+  endVerticalSpreadMax: 4
+  verticalSpreadMinDelta: 0.005
+  verticalSpreadMaxDelta: 0.005
+  _horizontalSpreadMin: -1.8
+  _horizontalSpreadMax: 1.8
+  maxPlatformCount: 20
   targetRef: {fileID: 1377870027662225878, guid: ee75a31d9aea9b24abbeb2c8a301c9ee, type: 3}
-  numberOfTargetPlatform: 30
+  numberOfTargetPlatform: 100
 --- !u!1 &1883573369
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +873,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3416031760951027432, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416031760951027432, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+      propertyPath: moving
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522005, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_RootOrder
       value: 5
