@@ -10,19 +10,22 @@ public class LimitedPlatformController : PlatformController
 
     protected override void Start()
     {
+        if (maxPlatformCount >= numberOfTargetPlatform)
+            maxPlatformCount = numberOfTargetPlatform - 1;
+
         currentPlatformNumber = maxPlatformCount;
         base.Start();
     }
 
-    public override void SpawnNext(Transform t)
+    public override void SpawnNext(Platform p)
     {
         if (currentPlatformNumber <= numberOfTargetPlatform)
         {
-            base.SpawnNext(t);
+            base.SpawnNext(p);
 
             if (currentPlatformNumber == numberOfTargetPlatform)
             {
-                Instantiate(targetRef, t).transform.localPosition = new Vector3(0f, 1f, 0f);
+                Instantiate(targetRef, p.transform).transform.localPosition = new Vector3(0f, 1f, 0f);
             }
 
             currentPlatformNumber++;

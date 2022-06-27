@@ -8,6 +8,7 @@ public class Peple : MonoBehaviour
     [SerializeField, Min(0f)] private float speed = 5f;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
+    private float horizontalInput = 0f;
 
     void Start()
     {
@@ -17,11 +18,15 @@ public class Peple : MonoBehaviour
 
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal");
-
-        rigidbody.velocity = new Vector2(h * speed, rigidbody.velocity.y);
-        if (h != 0f)
-            sprite.flipX = h > 0f;
+        if (Input.GetButton("Fire1"))
+        {
+            horizontalInput = Input.mousePosition.x < Screen.width / 2 ? -1f : 1f;
+            
+            //if (horizontalInput != 0f)
+                sprite.flipX = horizontalInput > 0f;
+        }
+        else
+            horizontalInput = 0f;
 
         var screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 
@@ -31,9 +36,14 @@ public class Peple : MonoBehaviour
             transform.position = Camera.main.ScreenToWorldPoint(new Vector3(0f, screenPosition.y, screenPosition.z));
     }
 
+    void FixedUpdate()
+    {
+        rigidbody.velocity = new Vector2(horizontalInput * speed, rigidbody.velocity.y);
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.relativeVelocity.y > 0f)
+        if (collision.relativeVelocity.y >= 0f)
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
     }
 }
