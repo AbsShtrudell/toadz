@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 23e06937658027a40a7951340da9aea2
+guid: 743e561603f027f49b7c22323cdad9c4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: layer_06_scene_03_game_0
+      name: clouds_0
       rect:
         serializedVersion: 2
-        x: 605
-        y: 1382
-        width: 333
-        height: 216
+        x: 374
+        y: 340
+        width: 360
+        height: 349
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,8 +130,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1bc70e8df5482eb41a9c5e235f80ead2
-      internalID: 304604202
+      spriteID: edf0ae13c5d92f44aa3555e693c00d0b
+      internalID: 1641999777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clouds_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 380
+        height: 335
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1396683d31af8ba40a3293bf295cb3db
+      internalID: -322043988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: clouds_2
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 0
+        width: 354
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a19c20422e4c07469df47282357b724
+      internalID: -1472086301
       vertices: []
       indices: 
       edges: []
@@ -147,7 +189,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      layer_06_scene_03_game_0: 304604202
+      clouds_1: -322043988
+      clouds_0: 1641999777
+      clouds_2: -1472086301
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
