@@ -5,12 +5,11 @@ using UnityEngine;
 public class Fly : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
-    [Zenject.Inject] private FliesController controller;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
     private Vector2 currentMovement;
 
-    void Start()
+    void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();

@@ -14,6 +14,7 @@ public class PlatformController : MonoBehaviour
     [SerializeField] private float _horizontalSpreadMin = -1.8f;
     [SerializeField] private float _horizontalSpreadMax = 1.8f;
     [SerializeField, Min(1)] protected int maxPlatformCount = 7;
+    [SerializeField] private List<Sprite> _platformSprites;
     [Zenject.Inject] private Zenject.DiContainer container;
     private float currentVerticalSpreadMin;
     private float currentVerticalSpreadMax;
@@ -21,6 +22,7 @@ public class PlatformController : MonoBehaviour
 
     public float horizontalSpreadMin => _horizontalSpreadMin;
     public float horizontalSpreadMax => _horizontalSpreadMax;
+    public List<Sprite> platformSprites => _platformSprites;
 
     protected virtual void Start()
     {
@@ -43,7 +45,14 @@ public class PlatformController : MonoBehaviour
         position.x = Random.Range(horizontalSpreadMin, horizontalSpreadMax);
         p.transform.position = position;
 
-        p.moving = Random.Range(0, 5) == 0;
+        // TODO: nastroit' generatsiyu
+        int r = Random.Range(0, 10);
+        p.type =
+            r == 0
+            ? Platform.Type.Spring
+            : r > 0 && r < 3
+            ? Platform.Type.Fragile
+            : Platform.Type.Normal;
 
         nextY += Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
 

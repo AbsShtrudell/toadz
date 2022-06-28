@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FliesController : MonoBehaviour
 {
-    public System.Action onFliesCountChange;
+    public event System.Action onFliesCountChange;
 
     [SerializeField, Min(0)] private int flyCount = 3;
     [SerializeField] private Fly flyRef;

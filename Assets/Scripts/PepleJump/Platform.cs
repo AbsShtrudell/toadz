@@ -4,28 +4,102 @@ using UnityEngine;
 
 public class Platform : MonoBehaviour
 {
-    [SerializeField] private float speed = 5f;
-    [Zenject.Inject] private PlatformController controller;
-    public bool moving = false;
-    private float targetX;
-
-    void Start()
+    [System.Serializable]
+    public enum Type
     {
-        targetX = controller.horizontalSpreadMax;
+        Normal, Spring, Fragile, Broken
     }
 
-    void Update()
-    {
-        if (moving)
-        {
-            if (transform.position.x == controller.horizontalSpreadMax)
-                targetX = controller.horizontalSpreadMin;
-            else if (transform.position.x == controller.horizontalSpreadMin)
-                targetX = controller.horizontalSpreadMax;
+    private delegate void OnCollisionAction(Collision2D collision);
 
-            var nextPosition = transform.position;
-            nextPosition.x = Mathf.MoveTowards(nextPosition.x, targetX, speed * Time.deltaTime);
-            transform.position = nextPosition;
+    [SerializeField, Min(0f)] private float jumpForceNormal = 20f;
+    [SerializeField, Min(0f)] private float jumpForceSpring = 30f;
+    [SerializeField, Min(0f)] private float fallingSpeed = 5f;
+    [SerializeField] private Type _type = Type.Normal;
+    [Zenject.Inject] private PlatformController controller;
+    private SpriteRenderer spriteRenderer;
+    private OnCollisionAction action;
+
+    public Type type
+    {
+        get => _type;
+        set
+        {
+            _type = value;
+
+            switch (value)
+            {
+                case Type.Normal:
+                    action = NormalAction;
+                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Normal];
+                    break;
+                case Type.Spring:
+                    action = SpringAction;
+                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Spring];
+                    break;
+                case Type.Fragile:
+                    action = FragileAction;
+                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Fragile];
+                    break;
+                case Type.Broken:
+                    action = null;
+                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Broken];
+                    gameObject.layer = LayerMask.NameToLayer("BrokenPlatform");
+                    StartCoroutine(Falling());
+                    break;
+            }
         }
+    }
+
+    void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        action = NormalAction;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        action(collision);
+    }
+
+    void NormalAction(Collision2D collision)
+    {
+        if (collision.relativeVelocity.y <= 0f)
+            collision.collider.GetComponent<Peple>().Jump(jumpForceNormal);
+    }
+
+    void SpringAction(Collision2D collision)
+    {
+        if (collision.relativeVelocity.y <= 0f)
+        {
+            var peple = collision.collider.GetComponent<Peple>();
+
+            if (Mathf.Abs(transform.position.x - peple.transform.position.x) < 0.45f)
+                peple.Jump(jumpForceSpring);
+            else
+                peple.Jump(jumpForceNormal);
+        }
+    }
+
+    void FragileAction(Collision2D collision)
+    {
+        if (collision.relativeVelocity.y <= 0f)
+        {
+            collision.collider.GetComponent<Rigidbody2D>().velocity = collision.relativeVelocity;
+
+            type = Type.Broken;
+        }
+    }
+
+    IEnumerator Falling()
+    {
+        while (type == Type.Broken)
+        {
+            transform.Translate(Vector3.down * fallingSpeed * Time.deltaTime);
+
+            yield return new WaitForEndOfFrame();
+        }
+        
+        gameObject.layer = LayerMask.NameToLayer("Default");
     }
 }

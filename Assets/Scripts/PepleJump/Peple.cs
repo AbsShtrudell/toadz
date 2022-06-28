@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Peple : MonoBehaviour
 {
-    [SerializeField, Min(0f)] private float jumpForce = 10f;
     [SerializeField, Min(0f)] private float speed = 5f;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
@@ -22,8 +21,7 @@ public class Peple : MonoBehaviour
         {
             horizontalInput = Input.mousePosition.x < Screen.width / 2 ? -1f : 1f;
             
-            //if (horizontalInput != 0f)
-                sprite.flipX = horizontalInput > 0f;
+            sprite.flipX = horizontalInput > 0f;
         }
         else
             horizontalInput = 0f;
@@ -41,9 +39,8 @@ public class Peple : MonoBehaviour
         rigidbody.velocity = new Vector2(horizontalInput * speed, rigidbody.velocity.y);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    public void Jump(float jumpForce)
     {
-        if (collision.relativeVelocity.y >= 0f)
-            rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+        rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
     }
 }
