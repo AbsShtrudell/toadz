@@ -8,7 +8,9 @@ public class DScene
     [SerializeField]
     public int id;
     [SerializeField]
-    public int background;
+    public int background_id;
+    [SerializeField]
+    public int bubbles_count;
     [SerializeField]
     public DBubble[] bubbles;
     [SerializeField]

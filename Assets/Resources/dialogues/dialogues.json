@@ -2,40 +2,47 @@
     "dialogue_tree" : [
         {
             "id" : 0,
-            "background" : 0,
+            "background_id" : 0,
+            "bubbles_count" : 2,
             "bubbles" : [
                 {
                     "id" : 0,
-                    "shape" : "Round",
+                    "image" : 0,
+                    "icon" : 0,
                     "text" : "Simple text",
-                    "side" : "Center",
-                    "trigger" : "None",
-                    "next_scene" : 0,
-                    "next_type" : "Selection",
-                    "next_id" : 0
+                    "x_offset" : 10,
+                    "y_number" : 0,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 0
+                    }
                 }
             ], 
             "selections" : [
                 {
                     "id" : 0,
-                    "organization" : "Vertical",
-                    "icons" : true,
                     "variants" : [
                         {
                             "icon" : 0,
                             "text" : "Yes",
-                            "trigger" : "None",
-                            "next_scene" : 0,
-                            "next_type" : "Bubble",
-                            "next_id" : 0
+                            "transition" : {
+                                "trigger" : "None",
+                                "next_scene" : 0,
+                                "next_type" : "Bubble",
+                                "next_id" : 0
+                            }
                         },
                         {
                             "icon" : 0,
                             "text" : "No",
-                            "trigger" : "None",
-                            "next_scene" : 0,
-                            "next_type" : "Bubble",
-                            "next_id" : 0
+                            "transition" : {
+                                "trigger" : "None",
+                                "next_scene" : 0,
+                                "next_type" : "Bubble",
+                                "next_id" : 0
+                            }
                         }
                     ]
                 }

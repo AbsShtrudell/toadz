@@ -63,10 +63,10 @@ public class DialogueController : MonoBehaviour
 
         if (variant < 0 || variant >= currentSelection.variants.Length) return;
 
-        int next_scene = currentSelection.variants[variant].next_scene;
-        int next_node = currentSelection.variants[variant].next_id;
+        int next_scene = currentSelection.variants[variant].transition.next_scene;
+        int next_node = currentSelection.variants[variant].transition.next_id;
 
-        switch (currentSelection.variants[variant].nodeType)
+        switch (currentSelection.variants[variant].transition.nodeType)
         {
             case NodeType.Bubble:
                 if (!(currentScene.id == next_scene))
@@ -81,7 +81,7 @@ public class DialogueController : MonoBehaviour
                     SetSelection(next_scene, next_node);
                 break;
         }
-        TriggersController.CallTrigger(currentSelection.variants[variant].triggerType);
+        TriggersController.CallTrigger(currentSelection.variants[variant].transition.triggerType);
     }
 
     public void MoveOnBubble()
@@ -89,10 +89,10 @@ public class DialogueController : MonoBehaviour
         if (dialogueData == null) return;
         if (currentBubble == null) return;
 
-        int next_scene = currentBubble.next_scene;
-        int next_node = currentBubble.next_id;
+        int next_scene = currentBubble.transition.next_scene;
+        int next_node = currentBubble.transition.next_id;
 
-        switch (currentBubble.nodeType)
+        switch (currentBubble.transition.nodeType)
         {
             case NodeType.Bubble:
                 if (!(currentScene.id == next_scene))
@@ -107,7 +107,7 @@ public class DialogueController : MonoBehaviour
                     SetSelection(next_scene, next_node);
                 break;
         }
-        TriggersController.CallTrigger(currentBubble.triggerType);
+        TriggersController.CallTrigger(currentBubble.transition.triggerType);
     }
 
     //-----------------------------------------------------------------------------//
