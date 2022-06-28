@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class BubblesStorage
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private List<Bubble> bubbles = new List<Bubble>();
 
-    // Update is called once per frame
-    void Update()
+    public Bubble Get(int id)
     {
-        
+        if (id >= 0 && id < bubbles.Count)
+        {
+            return bubbles[id];
+        }
+        return null;
     }
 }

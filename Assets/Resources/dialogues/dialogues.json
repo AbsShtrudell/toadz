@@ -10,8 +10,8 @@
                     "image" : 0,
                     "icon" : 0,
                     "text" : "Simple text",
-                    "x_offset" : 10,
-                    "y_number" : 0,
+                    "x_offset" : 0,
+                    "y_offset" : 0,
                     "transition" : {
                         "trigger" : "None",
                         "next_scene" : 0,

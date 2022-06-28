@@ -16,7 +16,7 @@ public class DBubble
     [SerializeField]
     public int x_offset;
     [SerializeField]
-    public int y_number;
+    public int y_offset;
     [SerializeField]
     public DTransition transition;
 }
