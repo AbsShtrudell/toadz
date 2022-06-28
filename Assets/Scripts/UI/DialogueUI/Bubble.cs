@@ -15,5 +15,13 @@ public class Bubble : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI bubbleText;
 
+    public void SetText(string text)
+    {
+        bubbleText.text = text;
+    }
 
+    public void SetPosition(Vector2 position)
+    {
+        bubbleTransform.localPosition = new Vector3(position.x, position.y, 0);
+    }
 }

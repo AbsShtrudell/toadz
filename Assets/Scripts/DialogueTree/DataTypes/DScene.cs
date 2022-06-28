@@ -12,6 +12,8 @@ public class DScene
     [SerializeField]
     public int bubbles_count;
     [SerializeField]
+    public int bubbles_y_offset;
+    [SerializeField]
     public DBubble[] bubbles;
     [SerializeField]
     public DSelection[] selections;

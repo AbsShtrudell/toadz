@@ -24,7 +24,7 @@ public class DialogueController : MonoBehaviour
     public event Action<DSelection> selectionSetted;
     public event Action<DScene> sceneChanged;
 
-    private void OnEnable()
+    public void Launch(TextAsset dialogueFile)
     {
         if (dialoguesFile != null)
         {
@@ -66,6 +66,8 @@ public class DialogueController : MonoBehaviour
         int next_scene = currentSelection.variants[variant].transition.next_scene;
         int next_node = currentSelection.variants[variant].transition.next_id;
 
+        TriggersController.CallTrigger(currentSelection.variants[variant].transition.triggerType);
+
         switch (currentSelection.variants[variant].transition.nodeType)
         {
             case NodeType.Bubble:
@@ -81,7 +83,6 @@ public class DialogueController : MonoBehaviour
                     SetSelection(next_scene, next_node);
                 break;
         }
-        TriggersController.CallTrigger(currentSelection.variants[variant].transition.triggerType);
     }
 
     public void MoveOnBubble()
@@ -91,6 +92,8 @@ public class DialogueController : MonoBehaviour
 
         int next_scene = currentBubble.transition.next_scene;
         int next_node = currentBubble.transition.next_id;
+
+        TriggersController.CallTrigger(currentBubble.transition.triggerType);
 
         switch (currentBubble.transition.nodeType)
         {
@@ -107,7 +110,6 @@ public class DialogueController : MonoBehaviour
                     SetSelection(next_scene, next_node);
                 break;
         }
-        TriggersController.CallTrigger(currentBubble.transition.triggerType);
     }
 
     //-----------------------------------------------------------------------------//

@@ -9,6 +9,14 @@ public class DUIController : MonoBehaviour
 {
     [Zenject.Inject]
     private DialogueController dialogueController;
+    [Zenject.Inject]
+    private BubblesStorage bubblesStorage;
+
+    [SerializeField]
+    private RectTransform bubblesHolder;
+    [SerializeField]
+    private RectTransform backgroundHolder;
+
     private void OnEnable()
     {
         dialogueController.bubbleChanged += BubbleChanged;
@@ -25,6 +33,16 @@ public class DUIController : MonoBehaviour
 
     private void BubbleChanged(DBubble bubble)
     {
+        if (bubble == null) return;
+
+        Bubble bubble_inst = bubblesStorage.Get(bubble.bubble_id);
+
+        if (bubble_inst == null) return;
+
+        bubble_inst.gameObject.SetActive(true);
+        bubble_inst.SetPosition(new Vector2(bubble.x_offset, -1 * bubble.y_position * dialogueController.currentScene.bubbles_y_offset));
+        bubble_inst.SetText(bubble.text);
+
 
     }
 
@@ -34,6 +52,11 @@ public class DUIController : MonoBehaviour
     }
 
     private void SceneChanged(DScene scene)
+    {
+
+    }
+
+    public void Clear()
     {
 
     }
