@@ -6,6 +6,7 @@ public class Peple : MonoBehaviour
 {
     [SerializeField, Min(0f)] private float speed = 5f;
     [SerializeField, Min(0f)] private float jumpDelay = 0.3f;
+    [SerializeField] private Animator animator;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
     private float horizontalInput = 0f;
@@ -47,6 +48,7 @@ public class Peple : MonoBehaviour
     public void Jump(float jumpForce)
     {
         stopped = true;
+        animator.SetBool("Jump", false);
         rigidbody.velocity = Vector2.zero;
         StartCoroutine(WaitingForJump(jumpForce));
     }
@@ -56,6 +58,7 @@ public class Peple : MonoBehaviour
         yield return new WaitForSeconds(jumpDelay);
 
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+        animator.SetBool("Jump", true);
         stopped = false;
     }
 }
