@@ -17,9 +17,6 @@ public class JoustController : MonoBehaviour
 
     void Start()
     {
-        powerButton = bar.GetComponentInChildren<Button>();
-        powerButton.onClick.AddListener(OnPowerButtonClick);
-
         InitializeMedals();
     }
 
