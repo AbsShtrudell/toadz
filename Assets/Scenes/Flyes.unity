@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c6a15b49d851b46879cb9d1f556dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flyCount: 3
+  _flyCount: 8
   flyRef: {fileID: 619346737}
   flySpawnBottomRightPoint: {x: 4.83, y: -0.25}
   flySpawnHeight: 5.2
@@ -1447,7 +1447,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: b4f9bf2b894019e40bbdfe4d961e5cea, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cdd9d14f4cd94ce4aa2362013622df7c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1702,6 +1702,7 @@ GameObject:
   - component: {fileID: 1511837591}
   - component: {fileID: 1511837593}
   - component: {fileID: 1511837592}
+  - component: {fileID: 1511837594}
   m_Layer: 5
   m_Name: BarFill
   m_TagString: Untagged
@@ -1767,6 +1768,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1511837590}
   m_CullTransparentMesh: 1
+--- !u!114 &1511837594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511837590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1916e41633717b64aa5f5f0d65479e63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1514286717
 GameObject:
   m_ObjectHideFlags: 0

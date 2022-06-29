@@ -6,7 +6,7 @@ public class FliesController : MonoBehaviour
 {
     public event System.Action onFliesCountChange;
 
-    [SerializeField, Min(0)] private int flyCount = 3;
+    [SerializeField, Min(0)] private int _flyCount = 3;
     [SerializeField] private Fly flyRef;
     [SerializeField] private Vector2 flySpawnBottomRightPoint;
     [SerializeField, Min(0f)] private float flySpawnHeight;
@@ -16,6 +16,7 @@ public class FliesController : MonoBehaviour
 
     public bool isTongueThrusted { get; set; } = false;
 
+    public int flyCount => _flyCount;
     public int currentFlies
     {
         get => _currentFlies;

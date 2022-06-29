@@ -19,15 +19,15 @@ public class LimitedPlatformController : PlatformController
 
     public override void SpawnNext(Platform p)
     {
-        if (currentPlatformNumber <= numberOfTargetPlatform)
+        if (currentPlatformNumber < numberOfTargetPlatform)
         {
             base.SpawnNext(p);
-
-            if (currentPlatformNumber == numberOfTargetPlatform)
-            {
-                Instantiate(targetRef, p.transform).transform.localPosition = new Vector3(0f, 1f, 0f);
-            }
-
+            currentPlatformNumber++;
+        }
+        else if (currentPlatformNumber == numberOfTargetPlatform)
+        {
+            p.type = Platform.Type.Target;
+            MovePlatform(p);
             currentPlatformNumber++;
         }
     }

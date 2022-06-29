@@ -52,6 +52,7 @@ public class PlatformController : MonoBehaviour
         }
         else if (r > 0 && r < 3)
         {
+            // TODO: ne rabotait
             if (nextY - lastNormal.transform.position.y > endVerticalSpreadMax)
             {
                 nextY = lastNormal.transform.position.y + endVerticalSpreadMax;

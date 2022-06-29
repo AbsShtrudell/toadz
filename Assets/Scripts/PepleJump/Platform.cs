@@ -47,7 +47,10 @@ public class Platform : MonoBehaviour
                     gameObject.layer = LayerMask.NameToLayer("BrokenPlatform");
                     StartCoroutine(Falling());
                     break;
-                //case Type.Target:
+                case Type.Target:
+                    action = TargetAction;
+                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Target];
+                    break;
 
             }
         }
@@ -89,7 +92,7 @@ public class Platform : MonoBehaviour
 
     void TargetAction(Collision2D collision)
     {
-
+        collision.collider.GetComponent<Peple>().Stop();
     }
 
     IEnumerator Falling()

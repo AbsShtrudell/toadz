@@ -47,10 +47,15 @@ public class Peple : MonoBehaviour
 
     public void Jump(float jumpForce)
     {
+        Stop();
+        StartCoroutine(WaitingForJump(jumpForce));
+    }
+
+    public void Stop()
+    {
         stopped = true;
         animator.SetBool("Jump", false);
         rigidbody.velocity = Vector2.zero;
-        StartCoroutine(WaitingForJump(jumpForce));
     }
 
     IEnumerator WaitingForJump(float jumpForce)

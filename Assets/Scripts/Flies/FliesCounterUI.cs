@@ -8,7 +8,7 @@ public class FliesCounterUI : MonoBehaviour
     [Zenject.Inject] private FliesController controller;
     private TMP_Text text;
 
-    void Start()
+    void Awake()
     {
         text = GetComponent<TMP_Text>();
         controller.onFliesCountChange += OnFliesCountChange;
