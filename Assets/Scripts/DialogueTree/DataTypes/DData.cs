@@ -32,6 +32,8 @@ public class DData
 
         DScene scene = FindScene(sceene_id);
 
+        if(scene == null) return null;
+
         for (int i = 0; i < scene.bubbles.Length; i++)
         {
             if (scene.bubbles[i].id == bubble_id) return scene.bubbles[i];

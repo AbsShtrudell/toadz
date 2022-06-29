@@ -127,6 +127,12 @@ public class GamemodeController : MonoBehaviour
             case 6:
                 SwitchGamemode(joust, 0);
                 break;
+            default:
+                if(code >= 7)
+                    SwitchGamemode(dialogue, code - 7);
+                else 
+                    SwitchGamemode(dialogue, 0);
+                break;
         }
     }
 

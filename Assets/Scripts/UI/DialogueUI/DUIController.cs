@@ -11,13 +11,19 @@ public class DUIController : MonoBehaviour
     private DialogueController dialogueController;
     [Zenject.Inject]
     private BubblesStorage bubblesStorage;
+    [Zenject.Inject]
+    private BackgroundsStorage backgroundsStorage;
 
     [SerializeField]
     private RectTransform bubblesHolder;
     [SerializeField]
     private RectTransform backgroundHolder;
+    [SerializeField]
+    private SelectionController selectionController;
 
-    private void OnEnable()
+    private bool selectionMode = false;
+
+    public void Init()
     {
         dialogueController.bubbleChanged += BubbleChanged;
         dialogueController.selectionSetted += SelectionSetted;
@@ -48,12 +54,16 @@ public class DUIController : MonoBehaviour
 
     private void SelectionSetted(DSelection selection)
     {
-
+        Clear();
+        ShowSelection();
     }
 
     private void SceneChanged(DScene scene)
     {
-
+        Clear();
+        for (int i = 0; i < backgroundsStorage.Count(); i++)
+            backgroundsStorage.Get(i).gameObject.SetActive(false);
+        backgroundsStorage.Get(scene.background_id).SetActive(true);
     }
 
     public void Clear()
@@ -64,6 +74,29 @@ public class DUIController : MonoBehaviour
 
     public void OnUIClicked()
     {
-        dialogueController.MoveOnBubble();
+        if(selectionMode == false)
+            dialogueController.MoveOnBubble();
+    }
+
+    public void Selected1()
+    {
+        dialogueController.MoveOnSelection(0);
+        HideSelection();
+    }
+
+    public void Selected2()
+    {
+        dialogueController.MoveOnSelection(1);
+        HideSelection();
+    }
+
+    public void HideSelection()
+    {
+        selectionMode = false;
+    }
+
+    public void ShowSelection()
+    {
+        selectionMode = true;
     }
 }

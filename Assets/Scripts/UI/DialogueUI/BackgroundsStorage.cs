@@ -20,4 +20,7 @@ public class BackgroundsStorage
         }
         return null;
     }
+
+    public int Count()
+    { return backgrounds.Count; }
 }

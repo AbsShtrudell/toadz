@@ -27,18 +27,28 @@ public class DialogueController : MonoBehaviour
     public event Action<DSelection> selectionSetted;
     public event Action<DScene> sceneChanged;
 
-    public void Launch(TextAsset dialogueFile)
+    public void Init(TextAsset dialogueFile)
+    {
+        if (dialogueFile != null)
+        {
+            LoadDialogue(dialogueFile);
+
+            if (dialogueData == null) return;
+            SetScene(0);
+        }
+    }
+
+    public void Launch()
     {
         if (dialoguesFile != null)
         {
-            LoadDialogue(dialoguesFile);
             StartDialogue();
         }
     }
 
     private void OnDisable()
     {
-
+        dialoguesFile = null;
     }
 
     public void LoadDialogue(TextAsset dialogue)
@@ -49,10 +59,6 @@ public class DialogueController : MonoBehaviour
 
     public void StartDialogue()
     {
-        if (dialogueData == null) return;
-
-        SetScene(0);
-
         if (currentScene != null)
             SetBubble(0, 0);
     }

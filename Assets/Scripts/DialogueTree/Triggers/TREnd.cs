@@ -15,6 +15,6 @@ public class TREnd : ITrigger
 
     public void Call()
     {
-        GMdialogue.EndGamemode(4);
+        GMdialogue.EndGamemode(dialogueController.currentBubble.transition.next_scene + 7);
     }
 }
