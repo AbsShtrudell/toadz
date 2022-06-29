@@ -592,6 +592,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  jumpDelay: 0.3
 --- !u!1 &483739626
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,6 +868,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8e5f543be024f934488f2b47e8fe04bd, type: 3}
   - {fileID: 21300000, guid: 850802b40f1d7914aa2bf77eb1f1c391, type: 3}
   - {fileID: 21300000, guid: 69d97ccec1225c242905311a6c7f9206, type: 3}
+  - {fileID: 21300000, guid: a603f52f39a803a478d9e7e3c0a7276e, type: 3}
   targetRef: {fileID: 1377870027662225878, guid: ee75a31d9aea9b24abbeb2c8a301c9ee, type: 3}
   numberOfTargetPlatform: 100
 --- !u!1 &1883573369

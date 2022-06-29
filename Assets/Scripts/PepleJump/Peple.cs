@@ -5,9 +5,11 @@ using UnityEngine;
 public class Peple : MonoBehaviour
 {
     [SerializeField, Min(0f)] private float speed = 5f;
+    [SerializeField, Min(0f)] private float jumpDelay = 0.3f;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
     private float horizontalInput = 0f;
+    private bool stopped = false;
 
     void Start()
     {
@@ -36,11 +38,24 @@ public class Peple : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (stopped)
+            return;
+
         rigidbody.velocity = new Vector2(horizontalInput * speed, rigidbody.velocity.y);
     }
 
     public void Jump(float jumpForce)
     {
+        stopped = true;
+        rigidbody.velocity = Vector2.zero;
+        StartCoroutine(WaitingForJump(jumpForce));
+    }
+
+    IEnumerator WaitingForJump(float jumpForce)
+    {
+        yield return new WaitForSeconds(jumpDelay);
+
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+        stopped = false;
     }
 }

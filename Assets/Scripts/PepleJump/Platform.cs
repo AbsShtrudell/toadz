@@ -7,7 +7,7 @@ public class Platform : MonoBehaviour
     [System.Serializable]
     public enum Type
     {
-        Normal, Spring, Fragile, Broken
+        Normal, Spring, Fragile, Broken, Target
     }
 
     private delegate void OnCollisionAction(Collision2D collision);
@@ -47,6 +47,8 @@ public class Platform : MonoBehaviour
                     gameObject.layer = LayerMask.NameToLayer("BrokenPlatform");
                     StartCoroutine(Falling());
                     break;
+                //case Type.Target:
+
             }
         }
     }
@@ -59,36 +61,35 @@ public class Platform : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        action(collision);
+        if (collision.relativeVelocity.y <= 0f)
+            action(collision);
     }
 
     void NormalAction(Collision2D collision)
     {
-        if (collision.relativeVelocity.y <= 0f)
-            collision.collider.GetComponent<Peple>().Jump(jumpForceNormal);
+        collision.collider.GetComponent<Peple>().Jump(jumpForceNormal);
     }
 
     void SpringAction(Collision2D collision)
     {
-        if (collision.relativeVelocity.y <= 0f)
-        {
-            var peple = collision.collider.GetComponent<Peple>();
+        var peple = collision.collider.GetComponent<Peple>();
 
-            if (Mathf.Abs(transform.position.x - peple.transform.position.x) < 0.45f)
-                peple.Jump(jumpForceSpring);
-            else
-                peple.Jump(jumpForceNormal);
-        }
+        if (Mathf.Abs(transform.position.x - peple.transform.position.x) < 0.45f)
+            peple.Jump(jumpForceSpring);
+        else
+            peple.Jump(jumpForceNormal);
     }
 
     void FragileAction(Collision2D collision)
     {
-        if (collision.relativeVelocity.y <= 0f)
-        {
-            collision.collider.GetComponent<Rigidbody2D>().velocity = collision.relativeVelocity;
+        collision.collider.GetComponent<Rigidbody2D>().velocity = collision.relativeVelocity;
 
-            type = Type.Broken;
-        }
+        type = Type.Broken;
+    }
+
+    void TargetAction(Collision2D collision)
+    {
+
     }
 
     IEnumerator Falling()
