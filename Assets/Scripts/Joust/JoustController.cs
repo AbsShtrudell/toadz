@@ -3,57 +3,51 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class JoustController : MonoBehaviour
 {
     [SerializeField, Min(1)] private int winAmount = 3;
     [SerializeField] private PowerBar bar;
-    [SerializeField] private Contestant player;
-    [SerializeField] private Contestant enemy;
-    private Button powerButton;
+    [SerializeField] private TMP_Text playerText;
+    [SerializeField] private TMP_Text enemyText;
+    private int playerScore = 0;
+    private int enemyScore = 0;
+    private bool end = false;
 
     public event Action onPlayerWin;
     public event Action onPlayerLose;
 
     void Start()
     {
-        InitializeMedals();
-    }
-
-    private void InitializeMedals()
-    {
-        var playerMedal = player.transform.GetChild(0).GetComponent<RectTransform>();
-        var enemyMedal = enemy.transform.GetChild(0).GetComponent<RectTransform>();
-
-        for (int i = 1; i < winAmount; i++)
-        {
-            var playerMedalPosition = new Vector3(playerMedal.position.x, playerMedal.position.y + playerMedal.rect.height * i, playerMedal.position.z);
-            var enemyMedalPosition = new Vector3(enemyMedal.position.x, enemyMedal.position.y + enemyMedal.rect.height * i, enemyMedal.position.z);
-
-            Instantiate(playerMedal, playerMedalPosition, Quaternion.identity, player.transform);
-            Instantiate(enemyMedal, enemyMedalPosition, Quaternion.identity, enemy.transform);
-        }
+        playerText.text = playerScore.ToString();
+        enemyText.text = enemyScore.ToString();
     }
 
     public void OnPowerButtonClick()
     {
+        if (end)
+            return;
+
         if (bar.currentPower >= bar.minimalPower)
         {
-            player.WinRound();            
+            playerScore++;
+            playerText.text = playerScore.ToString();
         }
         else
         {
-            enemy.WinRound();
+            enemyScore++;
+            enemyText.text = enemyScore.ToString();
         }
 
         bar.ResetPower();
 
-        if (player.currentWins == winAmount)
+        if (playerScore == winAmount)
         {
             onPlayerWin?.Invoke();
             DeinitializeJoust();
         }
-        else if (enemy.currentWins == winAmount)
+        else if (enemyScore == winAmount)
         {
             onPlayerLose?.Invoke();
             DeinitializeJoust();
@@ -62,7 +56,7 @@ public class JoustController : MonoBehaviour
 
     private void DeinitializeJoust()
     {
-        powerButton.onClick.RemoveAllListeners();
         bar.enabled = false;
+        end = true;
     }
 }

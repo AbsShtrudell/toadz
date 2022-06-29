@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PowerBar : MonoBehaviour
 {
     [System.Serializable]
-    public enum Direction : int
+    public enum Direction
     {
         Down = -1, Up = 1 
     }

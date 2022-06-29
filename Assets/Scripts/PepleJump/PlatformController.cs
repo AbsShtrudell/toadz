@@ -42,6 +42,12 @@ public class PlatformController : MonoBehaviour
 
     public virtual void SpawnNext(Platform p)
     {
+        bool aboveMax = nextY - lastNormal.transform.position.y > endVerticalSpreadMax;
+
+        if (aboveMax)
+        {
+            nextY = lastNormal.transform.position.y + endVerticalSpreadMax;
+        }
 
         int r = Random.Range(0, 10);
         if (r == 0)
@@ -53,10 +59,8 @@ public class PlatformController : MonoBehaviour
         else if (r > 0 && r < 3)
         {
             // TODO: ne rabotait
-            if (nextY - lastNormal.transform.position.y > endVerticalSpreadMax)
+            if (aboveMax)
             {
-                nextY = lastNormal.transform.position.y + endVerticalSpreadMax;
-
                 p.type = Platform.Type.Normal;
                 lastNormal = p;
             }

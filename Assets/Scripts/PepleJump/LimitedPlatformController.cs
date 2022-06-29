@@ -28,6 +28,7 @@ public class LimitedPlatformController : PlatformController
         {
             p.type = Platform.Type.Target;
             MovePlatform(p);
+            Camera.main.GetComponent<CameraFollow>().targetY = p.transform.position.y;
             currentPlatformNumber++;
         }
     }
