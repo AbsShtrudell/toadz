@@ -6,6 +6,9 @@ using UnityEngine.EventSystems;
 
 public class DialogueController : MonoBehaviour
 {
+    [Zenject.Inject]
+    private TriggersController triggersController;
+
     [SerializeField]
     private TextAsset dialoguesFile;
 
@@ -66,7 +69,7 @@ public class DialogueController : MonoBehaviour
         int next_scene = currentSelection.variants[variant].transition.next_scene;
         int next_node = currentSelection.variants[variant].transition.next_id;
 
-        TriggersController.CallTrigger(currentSelection.variants[variant].transition.triggerType);
+        triggersController.CallTrigger(currentSelection.variants[variant].transition.triggerType);
 
         switch (currentSelection.variants[variant].transition.nodeType)
         {
@@ -93,7 +96,7 @@ public class DialogueController : MonoBehaviour
         int next_scene = currentBubble.transition.next_scene;
         int next_node = currentBubble.transition.next_id;
 
-        TriggersController.CallTrigger(currentBubble.transition.triggerType);
+        triggersController.CallTrigger(currentBubble.transition.triggerType);
 
         switch (currentBubble.transition.nodeType)
         {

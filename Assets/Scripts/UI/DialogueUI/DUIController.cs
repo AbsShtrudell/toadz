@@ -58,6 +58,12 @@ public class DUIController : MonoBehaviour
 
     public void Clear()
     {
+        for(int i = 0; i < bubblesStorage.Count(); i++)
+            bubblesStorage.Get(i).gameObject.SetActive(false);
+    }
 
+    public void OnUIClicked()
+    {
+        dialogueController.MoveOnBubble();
     }
 }

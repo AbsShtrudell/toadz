@@ -21,4 +21,7 @@ public class BubblesStorage
         }
         return null;
     }
+
+    public int Count()
+    { return bubbles.Count; }
 }

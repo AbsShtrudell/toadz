@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TREnd : ITrigger
+public class TRFly : ITrigger
 {
     private GMDialogue GMdialogue;
-    private DialogueController dialogueController;
 
-    public TREnd(GMDialogue dialogue, DialogueController dialogueController)
+    public TRFly(GMDialogue dialogue)
     {
         GMdialogue = dialogue;
-        this.dialogueController = dialogueController;
     }
 
     public void Call()

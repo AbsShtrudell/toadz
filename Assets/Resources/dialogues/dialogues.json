@@ -3,16 +3,42 @@
         {
             "id" : 0,
             "background_id" : 0,
-            "bubbles_y_offset" : 0,
+            "bubbles_y_offset" : 550,
             "bubbles" : [
                 {
                     "id" : 0,
                     "bubble_id" : 0,
-                    "text" : "Simple text",
-                    "x_offset" : 0,
+                    "text" : "Sample text",
+                    "x_offset" : 100,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 1
+                    }
+                },
+                {
+                    "id" : 1,
+                    "bubble_id" : 1,
+                    "text" : "Yes???",
+                    "x_offset" : -100,
                     "y_position" : 1,
                     "transition" : {
                         "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 2
+                    }
+                },
+                {
+                    "id" : 2,
+                    "bubble_id" : 1,
+                    "text" : "No",
+                    "x_offset" : -100,
+                    "y_position" : 1,
+                    "transition" : {
+                        "trigger" : "Clear",
                         "next_scene" : 0,
                         "next_type" : "Bubble",
                         "next_id" : 0
