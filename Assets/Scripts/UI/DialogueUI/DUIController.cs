@@ -13,6 +13,8 @@ public class DUIController : MonoBehaviour
     private BubblesStorage bubblesStorage;
     [Zenject.Inject]
     private BackgroundsStorage backgroundsStorage;
+    [Zenject.Inject]
+    private ImagesStorage imagesStorage;
 
     [SerializeField]
     private RectTransform bubblesHolder;
@@ -55,6 +57,10 @@ public class DUIController : MonoBehaviour
     private void SelectionSetted(DSelection selection)
     {
         Clear();
+        selectionController.SetIcon1(imagesStorage.Get(selection.variants[0].icon));
+        selectionController.SetIcon2(imagesStorage.Get(selection.variants[1].icon));
+        selectionController.SetVariant1Text(selection.variants[0].text);
+        selectionController.SetVariant2Text(selection.variants[1].text);
         ShowSelection();
     }
 

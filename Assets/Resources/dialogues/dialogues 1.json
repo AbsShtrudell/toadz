@@ -2,7 +2,7 @@
     "dialogue_tree" : [
         {
             "id" : 0,
-            "background_id" : 1,
+            "background_id" : 2,
             "bubbles_y_offset" : 550,
             "bubbles" : [
                 {

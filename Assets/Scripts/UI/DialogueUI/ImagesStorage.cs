@@ -12,7 +12,7 @@ public class ImagesStorage
             selectionIcon = selections;
     }
 
-    public Sprite GetSelectionIcon(int id)
+    public Sprite Get(int id)
     {
         if (id >= 0 && id < selectionIcon.Count)
         {

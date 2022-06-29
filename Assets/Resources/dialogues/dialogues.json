@@ -8,8 +8,8 @@
                 {
                     "id" : 0,
                     "bubble_id" : 0,
-                    "text" : "Sample text",
-                    "x_offset" : 100,
+                    "text" : "Жабс...",
+                    "x_offset" : 70,
                     "y_position" : 0,
                     "transition" : {
                         "trigger" : "None",
@@ -20,9 +20,126 @@
                 },
                 {
                     "id" : 1,
+                    "bubble_id" : 0,
+                    "text" : "Мистер Жаббс!",
+                    "x_offset" : 70,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 2
+                    }
+                },
+                {
+                    "id" : 2,
+                    "bubble_id" : 0,
+                    "text" : "Пришло время решить, кто тебе по душе!",
+                    "x_offset" : 70,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 3
+                    }
+                },
+                {
+                    "id" : 3,
                     "bubble_id" : 1,
-                    "text" : "Yes???",
-                    "x_offset" : -100,
+                    "text" : "Ква-то это? Что тебе ква-надо?!",
+                    "x_offset" : -70,
+                    "y_position" : 1,
+                    "transition" : {
+                        "trigger" : "Clear",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 4
+                    }
+                },
+                {
+                    "id" : 4,
+                    "bubble_id" : 0,
+                    "text" : "Жаббс…",
+                    "x_offset" : 70,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 5
+                    }
+                },
+                {
+                    "id" : 5,
+                    "bubble_id" : 0,
+                    "text" : "Ты должен решить раз и навсегда!",
+                    "x_offset" : 70,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 6
+                    }
+                },
+                {
+                    "id" : 6,
+                    "bubble_id" : 1,
+                    "text" : "Ква-кто ты?!",
+                    "x_offset" : -70,
+                    "y_position" : 1,
+                    "transition" : {
+                        "trigger" : "Clear",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 7
+                    }
+                },
+                {
+                    "id" : 7,
+                    "bubble_id" : 0,
+                    "text" : "Просто реши, с кем ты, Жаббс!",
+                    "x_offset" : 70,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 8
+                    }
+                },
+                {
+                    "id" : 8,
+                    "bubble_id" : 0,
+                    "text" : "Кто тебе ближе? Панки или Бриллианты?",
+                    "x_offset" : 70,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 9
+                    }
+                },
+                {
+                    "id" : 9,
+                    "bubble_id" : 1,
+                    "text" : "Ну, это дело понятное…",
+                    "x_offset" : -70,
+                    "y_position" : 1,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 10
+                    }
+                },
+                {
+                    "id" : 10,
+                    "bubble_id" : 1,
+                    "text" : "Конечно мне больше нравятся",
+                    "x_offset" : -70,
                     "y_position" : 1,
                     "transition" : {
                         "trigger" : "None",
@@ -32,13 +149,39 @@
                     }
                 },
                 {
-                    "id" : 2,
-                    "bubble_id" : 1,
-                    "text" : "No",
-                    "x_offset" : -100,
-                    "y_position" : 1,
+                    "id" : 11,
+                    "bubble_id" : 0,
+                    "text" : "Я так и знал!",
+                    "x_offset" : 70,
+                    "y_position" : 0,
                     "transition" : {
-                        "trigger" : "End",
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 12
+                    }
+                },
+                {
+                    "id" : 12,
+                    "bubble_id" : 0,
+                    "text" : "Я так и знал!",
+                    "x_offset" : 70,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "None",
+                        "next_scene" : 0,
+                        "next_type" : "Bubble",
+                        "next_id" : 13
+                    }
+                },
+                {
+                    "id" : 13,
+                    "bubble_id" : 0,
+                    "text" : "А теперь, мистер Жаббс…",
+                    "x_offset" : 70,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "None",
                         "next_scene" : 1,
                         "next_type" : "Bubble",
                         "next_id" : 0
@@ -51,25 +194,45 @@
                     "variants" : [
                         {
                             "icon" : 0,
-                            "text" : "Yes",
+                            "text" : "Панки",
                             "transition" : {
                                 "trigger" : "None",
                                 "next_scene" : 0,
                                 "next_type" : "Bubble",
-                                "next_id" : 0
+                                "next_id" : 11
                             }
                         },
                         {
-                            "icon" : 0,
-                            "text" : "No",
+                            "icon" : 1,
+                            "text" : "Бриллианты",
                             "transition" : {
                                 "trigger" : "None",
                                 "next_scene" : 0,
                                 "next_type" : "Bubble",
-                                "next_id" : 2
+                                "next_id" : 11
                             }
                         }
                     ]
+                }
+            ]
+        },
+        {
+            "id" : 1,
+            "background_id" : 1,
+            "bubbles_y_offset" : 550,
+            "bubbles" : [
+                {
+                    "id" : 0,
+                    "bubble_id" : 0,
+                    "text" : "ПРОСЫПАЙСЯ!",
+                    "x_offset" : 70,
+                    "y_position" : 0,
+                    "transition" : {
+                        "trigger" : "End",
+                        "next_scene" : 1,
+                        "next_type" : "Bubble",
+                        "next_id" : 0
+                    }
                 }
             ]
         }
