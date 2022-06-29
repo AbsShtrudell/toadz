@@ -27,8 +27,8 @@
                     "transition" : {
                         "trigger" : "None",
                         "next_scene" : 0,
-                        "next_type" : "Bubble",
-                        "next_id" : 2
+                        "next_type" : "Selection",
+                        "next_id" : 0
                     }
                 },
                 {
@@ -64,9 +64,9 @@
                             "text" : "No",
                             "transition" : {
                                 "trigger" : "None",
-                                "next_scene" : 1,
+                                "next_scene" : 0,
                                 "next_type" : "Bubble",
-                                "next_id" : 0
+                                "next_id" : 2
                             }
                         }
                     ]

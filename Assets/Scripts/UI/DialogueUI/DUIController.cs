@@ -93,10 +93,12 @@ public class DUIController : MonoBehaviour
     public void HideSelection()
     {
         selectionMode = false;
+        selectionController.gameObject.SetActive(false);
     }
 
     public void ShowSelection()
     {
         selectionMode = true;
+        selectionController.gameObject.SetActive(true);
     }
 }
