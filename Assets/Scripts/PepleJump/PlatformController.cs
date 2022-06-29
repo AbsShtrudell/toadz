@@ -19,6 +19,7 @@ public class PlatformController : MonoBehaviour
     private float currentVerticalSpreadMin;
     private float currentVerticalSpreadMax;
     private float nextY;
+    private Platform lastNormal;
 
     public float horizontalSpreadMin => _horizontalSpreadMin;
     public float horizontalSpreadMax => _horizontalSpreadMax;
@@ -29,6 +30,7 @@ public class PlatformController : MonoBehaviour
         currentVerticalSpreadMin = startVerticalSpreadMin;
         currentVerticalSpreadMax = startVerticalSpreadMax;
         nextY = platformRef.transform.position.y + Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
+        lastNormal = platformRef.GetComponent<Platform>();
 
         for (int i = 1; i <= maxPlatformCount; i++)
         {
@@ -40,19 +42,42 @@ public class PlatformController : MonoBehaviour
 
     public virtual void SpawnNext(Platform p)
     {
+
+        int r = Random.Range(0, 10);
+        if (r == 0)
+        {
+            p.type = Platform.Type.Spring;
+
+            lastNormal = p;
+        }
+        else if (r > 0 && r < 3)
+        {
+            if (nextY - lastNormal.transform.position.y > endVerticalSpreadMax)
+            {
+                nextY = lastNormal.transform.position.y + endVerticalSpreadMax;
+
+                p.type = Platform.Type.Normal;
+                lastNormal = p;
+            }
+            else
+                p.type = Platform.Type.Fragile;
+        }
+        else
+        {
+            p.type = Platform.Type.Normal;
+
+            lastNormal = p;
+        }
+
+        MovePlatform(p);
+    }
+
+    protected void MovePlatform(Platform p)
+    {
         Vector3 position = p.transform.position;
         position.y = nextY;
         position.x = Random.Range(horizontalSpreadMin, horizontalSpreadMax);
         p.transform.position = position;
-
-        // TODO: nastroit' generatsiyu
-        int r = Random.Range(0, 10);
-        p.type =
-            r == 0
-            ? Platform.Type.Spring
-            : r > 0 && r < 3
-            ? Platform.Type.Fragile
-            : Platform.Type.Normal;
 
         nextY += Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
 
