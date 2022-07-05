@@ -187,7 +187,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.10766029}
+  m_Offset: {x: 0, y: -0.9494469}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -198,7 +198,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 27.2, y: 0.7846794}
+  m_Size: {x: 27.2, y: 2.8988938}
   m_EdgeRadius: 0
 --- !u!50 &124755744
 Rigidbody2D:
@@ -445,6 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 349980587}
+  targetY: 0
 --- !u!1 &349980585
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,6 +1001,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3416031760951027432, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+      propertyPath: jumpForceNormal
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416031760951027432, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+      propertyPath: jumpForceSpring
+      value: 31
+      objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522005, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_RootOrder
       value: 4
