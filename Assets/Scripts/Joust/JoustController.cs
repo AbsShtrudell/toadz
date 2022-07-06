@@ -30,17 +30,19 @@ public class JoustController : MonoBehaviour
     public void Launch()
     {
         slider.Launch();
+        buttonLocked = false;
     }
 
     private void UnlockButton()
     {
-        slider.onRestored -= Launch;
+        slider.onRestored -= UnlockButton;
         buttonLocked = false;
+        Launch();
     }
 
     private void LockButton()
     {
-        slider.onRestored += Launch;
+        slider.onRestored += UnlockButton;
         buttonLocked = true;
     }
 

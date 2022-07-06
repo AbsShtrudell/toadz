@@ -54,9 +54,9 @@ public class Slider : MonoBehaviour
     {
         while (true)
         {
-            float nextLocation = ballLocation - (speed * Time.deltaTime);
+            float nextLocation = ballLocation - (speed * 2 * Time.deltaTime);
 
-            if (Mathf.Abs(nextLocation) > movementBounds)
+            if (nextLocation < -movementBounds)
             {
                 nextLocation = -movementBounds;
                 direction = Direction.Right;
@@ -65,7 +65,7 @@ public class Slider : MonoBehaviour
             }
             else
             {
-                ballLocation = ballLocation + (speed * Time.deltaTime) * (int)direction;
+                ballLocation = nextLocation;
                 yield return new WaitForEndOfFrame();
             }
         }
