@@ -480,7 +480,6 @@ GameObject:
   m_Component:
   - component: {fileID: 537031631}
   - component: {fileID: 537031630}
-  - component: {fileID: 537031629}
   m_Layer: 0
   m_Name: Background
   m_TagString: Untagged
@@ -488,18 +487,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &537031629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 537031628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b03cded576b70cd4796fd70e8427d83a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &537031630
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1349,7 +1336,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ball: {fileID: 606142010}
-  speed: 250
+  speed: 1185
+  speedFactor: 105
   areaOffset: 100
 --- !u!114 &1813547783
 MonoBehaviour:

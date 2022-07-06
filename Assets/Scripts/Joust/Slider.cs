@@ -10,8 +10,10 @@ public class Slider : MonoBehaviour
 
     [SerializeField]
     private RectTransform ball;
-    [SerializeField, Min(0)]
-    private float speed = 20;
+    [SerializeField, Min(0f)]
+    private float speed = 20f;
+    [SerializeField, Min(0f)]
+    private float speedFactor = 80f;
     [SerializeField]
     private float areaOffset = 88;
 
@@ -65,7 +67,11 @@ public class Slider : MonoBehaviour
             }
             else
             {
+<<<<<<< Updated upstream
                 ballLocation = nextLocation;
+=======
+                ballLocation = GetNextLocation();
+>>>>>>> Stashed changes
                 yield return new WaitForEndOfFrame();
             }
         }
@@ -74,7 +80,7 @@ public class Slider : MonoBehaviour
 
     private void Move()
     {
-        float nextLocation = ballLocation + (speed * Time.deltaTime) * (int)direction;
+        float nextLocation = GetNextLocation();
 
         if (Mathf.Abs(nextLocation) > movementBounds)
         {
@@ -83,6 +89,14 @@ public class Slider : MonoBehaviour
         }
 
         ball.localPosition = new Vector2(nextLocation, 0);
+    }
+
+    private float GetNextLocation()
+    {
+        float t = ballLocation / speedFactor;
+        float nextLocation = ballLocation + speed * Mathf.Exp(-0.5f * t * t) * Time.deltaTime * (int)direction;
+
+        return nextLocation;
     }
 
     public void Restore()
