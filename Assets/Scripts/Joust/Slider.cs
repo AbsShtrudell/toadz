@@ -67,7 +67,7 @@ public class Slider : MonoBehaviour
             }
             else
             {
-                ballLocation = GetNextLocation();
+                ballLocation = nextLocation;
                 yield return new WaitForEndOfFrame();
             }
         }
@@ -108,6 +108,6 @@ public class Slider : MonoBehaviour
 
     public bool IsBallInArea()
     {
-        return Mathf.Abs(ballLocation) < (areaOffset - ballHalf);
+        return Mathf.Abs(ballLocation) < (areaOffset);
     }
 }
