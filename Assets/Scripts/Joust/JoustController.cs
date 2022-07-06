@@ -9,12 +9,13 @@ public class JoustController : MonoBehaviour
 {
     [SerializeField, Min(1)] private int winAmount = 3;
     [SerializeField] private Slider slider;
+    [SerializeField] private Enemy enemy;
     [SerializeField] private TMP_Text playerText;
     [SerializeField] private TMP_Text enemyText;
 
     private int playerScore = 0;
     private int enemyScore = 0;
-    private bool end = false;
+
     private bool buttonLocked = true;
 
     public event Action onPlayerWin;
@@ -24,65 +25,90 @@ public class JoustController : MonoBehaviour
     {
         playerText.text = playerScore.ToString();
         enemyText.text = enemyScore.ToString();
+    }
+
+    private void OnEnable()
+    {
+        enemy.onRaundPlayed += EnemyResults;
+
         Launch();
+    }
+
+    private void OnDisable()
+    {
+        enemy.onRaundPlayed -= EnemyResults;
     }
 
     public void Launch()
     {
         slider.Launch();
-        buttonLocked = false;
+        UnlockButton();
     }
 
-    private void UnlockButton()
+    private void StartEnemyRound()
     {
-        slider.onRestored -= UnlockButton;
-        buttonLocked = false;
+        slider.onRestored -= StartEnemyRound;
+        enemy.PlayRound();
+    }
+
+    private void EnemyResults(bool win)
+    {
+        enemyScore += win ? 1 : 0;
+        enemyText.text = enemyScore.ToString();
+
+        if (enemyScore == winAmount)
+        {
+            EndGame(false);
+            return;
+        }
+
+        UnlockButton();
         Launch();
     }
 
-    private void LockButton()
+    private void PlayerResults(bool win)
     {
-        slider.onRestored += UnlockButton;
-        buttonLocked = true;
+        playerScore += win ? 1 : 0;
+        playerText.text = playerScore.ToString();
+
+        slider.Restore();
+        LockButton();
+
+        if (playerScore == winAmount)
+        {
+            EndGame(true);
+            return;
+        }
+
+        slider.onRestored += StartEnemyRound;
+    }
+
+    private void EndGame(bool win)
+    {
+        LockButton();
+        if (win) onPlayerWin?.Invoke();
+        else onPlayerLose?.Invoke();
     }
 
     public void OnPowerButtonClick()
     {
-        if (!buttonLocked )
+        if (!buttonLocked)
         {
-            if (end)
-                return;
-
             if (slider.IsBallInArea())
             {
-                playerScore++;
-                playerText.text = playerScore.ToString();
+                PlayerResults(true);
             }
-            else
-            {
-                enemyScore++;
-                enemyText.text = enemyScore.ToString();
-            }
-
-            LockButton();
-            slider.Restore();
-
-            if (playerScore == winAmount)
-            {
-                onPlayerWin?.Invoke();
-                DeinitializeJoust();
-            }
-            else if (enemyScore == winAmount)
-            {
-                onPlayerLose?.Invoke();
-                DeinitializeJoust();
-            }
+            else PlayerResults(false);
         }
     }
 
-    private void DeinitializeJoust()
+    private void UnlockButton()
     {
-        slider.enabled = false;
-        end = true;
+        buttonLocked = false;
+    }
+
+    private void LockButton()
+    {
+        buttonLocked = true;
     }
 }

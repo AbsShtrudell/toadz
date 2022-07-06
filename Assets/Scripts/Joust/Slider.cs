@@ -25,7 +25,7 @@ public class Slider : MonoBehaviour
     private float ballLocation
     { get { return ball.localPosition.x; } set { ball.localPosition = new Vector3(value, 0); } }
     private float movementBounds
-    { get { return sliderBounds - ballHalf + 5; } }
+    { get { return sliderBounds - ballHalf - 5; } }
 
     public event Action onRestored;
 
@@ -98,6 +98,6 @@ public class Slider : MonoBehaviour
 
     public bool IsBallInArea()
     {
-        return Mathf.Abs(ballLocation) < (areaOffset);
+        return Mathf.Abs(ballLocation) < (areaOffset - ballHalf);
     }
 }
