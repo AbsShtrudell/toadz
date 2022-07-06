@@ -725,7 +725,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -167.23, y: 0}
-  m_SizeDelta: {x: 91.5, y: 76.5}
+  m_SizeDelta: {x: 81.333336, y: 68}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &606142011
 MonoBehaviour:
@@ -1337,7 +1337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ball: {fileID: 606142010}
   speed: 1185
-  speedFactor: 105
+  speedFactor: 80
   areaOffset: 100
 --- !u!114 &1813547783
 MonoBehaviour:
