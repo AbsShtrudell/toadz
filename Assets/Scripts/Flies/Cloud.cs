@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Cloud : MonoBehaviour
 {
-    [Zenject.Inject] private FliesController controller;
     private Tongue tongue;
 
     void Start()
