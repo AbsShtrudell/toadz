@@ -8,12 +8,14 @@ using TMPro;
 public class JoustController : MonoBehaviour
 {
     [SerializeField, Min(1)] private int winAmount = 3;
-    [SerializeField] private PowerBar bar;
+    [SerializeField] private Slider slider;
     [SerializeField] private TMP_Text playerText;
     [SerializeField] private TMP_Text enemyText;
+
     private int playerScore = 0;
     private int enemyScore = 0;
     private bool end = false;
+    private bool buttonLocked = true;
 
     public event Action onPlayerWin;
     public event Action onPlayerLose;
@@ -22,41 +24,63 @@ public class JoustController : MonoBehaviour
     {
         playerText.text = playerScore.ToString();
         enemyText.text = enemyScore.ToString();
+        Launch();
+    }
+
+    public void Launch()
+    {
+        slider.Launch();
+    }
+
+    private void UnlockButton()
+    {
+        slider.onRestored -= Launch;
+        buttonLocked = false;
+    }
+
+    private void LockButton()
+    {
+        slider.onRestored += Launch;
+        buttonLocked = true;
     }
 
     public void OnPowerButtonClick()
     {
-        if (end)
-            return;
+        if (!buttonLocked )
+        {
+            if (end)
+                return;
 
-        if (bar.currentPower >= bar.minimalPower)
-        {
-            playerScore++;
-            playerText.text = playerScore.ToString();
-        }
-        else
-        {
-            enemyScore++;
-            enemyText.text = enemyScore.ToString();
-        }
+            if (slider.IsBallInArea())
+            {
+                playerScore++;
+                playerText.text = playerScore.ToString();
+            }
+            else
+            {
+                enemyScore++;
+                enemyText.text = enemyScore.ToString();
+            }
 
-        bar.ResetPower();
+            LockButton();
+            slider.Restore();
 
-        if (playerScore == winAmount)
-        {
-            onPlayerWin?.Invoke();
-            DeinitializeJoust();
-        }
-        else if (enemyScore == winAmount)
-        {
-            onPlayerLose?.Invoke();
-            DeinitializeJoust();
+            if (playerScore == winAmount)
+            {
+                onPlayerWin?.Invoke();
+                DeinitializeJoust();
+            }
+            else if (enemyScore == winAmount)
+            {
+                onPlayerLose?.Invoke();
+                DeinitializeJoust();
+            }
         }
     }
 
     private void DeinitializeJoust()
     {
-        bar.enabled = false;
+        slider.enabled = false;
         end = true;
     }
 }

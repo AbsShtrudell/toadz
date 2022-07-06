@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Dialogues.UI;
+using Dialogues;
 
 public class GMDialogue : GMTermination, IGameemode
 {
     [SerializeField]
     private DialogueController dialogueController;
     [SerializeField]
-    private DUIController duiController;
+    private UIController duiController;
     [SerializeField]
     private List<TextAsset> dialogues;
 
