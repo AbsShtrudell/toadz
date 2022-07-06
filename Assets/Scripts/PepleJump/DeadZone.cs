@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeadZone : MonoBehaviour
 {
@@ -13,7 +14,8 @@ public class DeadZone : MonoBehaviour
             controller.SpawnNext(p);
         else if (collider.GetComponent<Peple>() != null)
         {
-            Destroy(collider.gameObject);
+            //Destroy(collider.gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
         else if (collider.TryGetComponent<MovingCloud>(out MovingCloud cloud))
         {

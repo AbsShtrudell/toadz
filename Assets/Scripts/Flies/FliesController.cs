@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FliesController : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class FliesController : MonoBehaviour
 
     public bool isTongueThrusted { get; set; } = false;
 
+    public Fly fly => flyRef;
     public int flyCount => _flyCount;
     public int currentFlies
     {
@@ -40,6 +42,7 @@ public class FliesController : MonoBehaviour
         {
             Destroy(flyRef.gameObject);
             currentFlies--;
+            SceneManager.LoadScene("PepleJump");
             return;
         }
 

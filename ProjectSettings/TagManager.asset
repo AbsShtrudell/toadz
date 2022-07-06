@@ -42,3 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Tongue
+    uniqueID: 2407937963
+    locked: 0
+  - name: Eye
+    uniqueID: 1643089679
+    locked: 0

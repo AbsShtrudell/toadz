@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Platform : MonoBehaviour
 {
@@ -64,7 +65,7 @@ public class Platform : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.relativeVelocity.y <= 0f)
+        if (collision.relativeVelocity.y < 0f)
             action(collision);
     }
 
@@ -93,6 +94,8 @@ public class Platform : MonoBehaviour
     void TargetAction(Collision2D collision)
     {
         collision.collider.GetComponent<Peple>().Stop();
+
+        SceneManager.LoadScene("Joust");
     }
 
     IEnumerator Falling()

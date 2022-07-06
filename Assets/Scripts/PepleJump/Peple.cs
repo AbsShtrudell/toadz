@@ -7,21 +7,40 @@ public class Peple : MonoBehaviour
     [SerializeField, Min(0f)] private float speed = 5f;
     [SerializeField, Min(0f)] private float jumpDelay = 0.3f;
     [SerializeField] private Animator animator;
+    [SerializeField] private TransitionHandler handler;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
     private float horizontalInput = 0f;
-    private bool stopped = false;
+    private bool stopped = true;
+    private bool onFirstPlatform = true;
+    private bool fade = true;
 
     void Start()
     {
+        handler.StartFadeIn();
+
+        handler.fadeInFinished += OnFadeInEnd;
+
         rigidbody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+    }
+
+    void OnFadeInEnd()
+    {
+        fade = false;
+        handler.fadeInFinished -= OnFadeInEnd;
     }
 
     void Update()
     {
         if (Input.GetButton("Fire1"))
         {
+            if (onFirstPlatform && !fade)
+            {
+                onFirstPlatform = false;
+                JumpImmediately(21f);
+            }
+
             horizontalInput = Input.mousePosition.x < Screen.width / 2 ? -1f : 1f;
             
             sprite.flipX = horizontalInput > 0f;
@@ -61,7 +80,11 @@ public class Peple : MonoBehaviour
     IEnumerator WaitingForJump(float jumpForce)
     {
         yield return new WaitForSeconds(jumpDelay);
+        JumpImmediately(jumpForce);
+    }
 
+    private void JumpImmediately(float jumpForce)
+    {
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
         animator.SetBool("Jump", true);
         stopped = false;

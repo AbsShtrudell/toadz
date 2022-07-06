@@ -58,7 +58,6 @@ public class PlatformController : MonoBehaviour
         }
         else if (r > 0 && r < 3)
         {
-            // TODO: ne rabotait
             if (aboveMax)
             {
                 p.type = Platform.Type.Normal;
