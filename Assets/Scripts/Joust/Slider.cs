@@ -67,11 +67,7 @@ public class Slider : MonoBehaviour
             }
             else
             {
-<<<<<<< Updated upstream
-                ballLocation = nextLocation;
-=======
                 ballLocation = GetNextLocation();
->>>>>>> Stashed changes
                 yield return new WaitForEndOfFrame();
             }
         }
