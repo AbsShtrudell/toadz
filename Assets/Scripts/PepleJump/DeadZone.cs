@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using System;
 
 public class DeadZone : MonoBehaviour
 {
     [Zenject.Inject] private PlatformController controller;
     [Zenject.Inject] private CloudController cloudController;
+
+    public event Action onPepleInDeadzone;
 
     void OnTriggerEnter2D(Collider2D collider)
     {
@@ -14,8 +16,7 @@ public class DeadZone : MonoBehaviour
             controller.SpawnNext(p);
         else if (collider.GetComponent<Peple>() != null)
         {
-            //Destroy(collider.gameObject);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            onPepleInDeadzone?.Invoke();
         }
         else if (collider.TryGetComponent<MovingCloud>(out MovingCloud cloud))
         {

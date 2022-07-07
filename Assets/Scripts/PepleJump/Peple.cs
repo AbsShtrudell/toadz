@@ -7,28 +7,17 @@ public class Peple : MonoBehaviour
     [SerializeField, Min(0f)] private float speed = 5f;
     [SerializeField, Min(0f)] private float jumpDelay = 0.3f;
     [SerializeField] private Animator animator;
-    [SerializeField] private TransitionHandler handler;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
     private float horizontalInput = 0f;
     private bool stopped = true;
     private bool onFirstPlatform = true;
-    private bool fade = true;
+    public bool fade = true;
 
     void Start()
     {
-        handler.StartFadeIn();
-
-        handler.fadeInFinished += OnFadeInEnd;
-
         rigidbody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
-    }
-
-    void OnFadeInEnd()
-    {
-        fade = false;
-        handler.fadeInFinished -= OnFadeInEnd;
     }
 
     void Update()

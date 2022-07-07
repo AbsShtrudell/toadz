@@ -25,6 +25,8 @@ public class PlatformController : MonoBehaviour
     public float horizontalSpreadMax => _horizontalSpreadMax;
     public List<Sprite> platformSprites => _platformSprites;
 
+    public event System.Action onPepleWon;
+
     protected virtual void Start()
     {
         currentVerticalSpreadMin = startVerticalSpreadMin;
@@ -35,9 +37,14 @@ public class PlatformController : MonoBehaviour
         for (int i = 1; i <= maxPlatformCount; i++)
         {
             var p = container.InstantiatePrefab(platformRef).GetComponent<Platform>();
-
+            p.onPepleWon += Won;
             SpawnNext(p);
         }
+    }
+
+    private void Won()
+    {
+        onPepleWon?.Invoke();
     }
 
     public virtual void SpawnNext(Platform p)

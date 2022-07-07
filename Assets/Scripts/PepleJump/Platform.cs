@@ -21,6 +21,8 @@ public class Platform : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private OnCollisionAction action;
 
+    public event System.Action onPepleWon;
+
     public Type type
     {
         get => _type;
@@ -95,7 +97,7 @@ public class Platform : MonoBehaviour
     {
         collision.collider.GetComponent<Peple>().Stop();
 
-        SceneManager.LoadScene("Joust");
+        onPepleWon?.Invoke();
     }
 
     IEnumerator Falling()
