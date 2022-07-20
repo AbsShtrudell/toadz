@@ -13,13 +13,12 @@ public class Platform : MonoBehaviour
 
     private delegate void OnCollisionAction(Collision2D collision);
 
-    [SerializeField, Min(0f)] private float jumpForceNormal = 20f;
-    [SerializeField, Min(0f)] private float jumpForceSpring = 30f;
-    [SerializeField, Min(0f)] private float fallingSpeed = 5f;
     [SerializeField] private Type _type = Type.Normal;
     [Zenject.Inject] private PlatformController controller;
+    [Zenject.Inject] private PlatformTraits traits;
     private SpriteRenderer spriteRenderer;
     private OnCollisionAction action;
+    private Coroutine horizontalMovement = null;
 
     public event System.Action onPepleWon;
 
@@ -34,25 +33,25 @@ public class Platform : MonoBehaviour
             {
                 case Type.Normal:
                     action = NormalAction;
-                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Normal];
+                    spriteRenderer.sprite = traits.normalPlatform;
                     break;
                 case Type.Spring:
                     action = SpringAction;
-                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Spring];
+                    spriteRenderer.sprite = traits.springPlatform;
                     break;
                 case Type.Fragile:
                     action = FragileAction;
-                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Fragile];
+                    spriteRenderer.sprite = traits.fragilePlatform;
                     break;
                 case Type.Broken:
                     action = null;
-                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Broken];
+                    spriteRenderer.sprite = traits.brokenPlatform;
                     gameObject.layer = LayerMask.NameToLayer("BrokenPlatform");
                     StartCoroutine(Falling());
                     break;
                 case Type.Target:
                     action = TargetAction;
-                    spriteRenderer.sprite = controller.platformSprites[(int)Type.Target];
+                    spriteRenderer.sprite = traits.targetPlatform;
                     break;
 
             }
@@ -73,7 +72,7 @@ public class Platform : MonoBehaviour
 
     void NormalAction(Collision2D collision)
     {
-        collision.collider.GetComponent<Peple>().Jump(jumpForceNormal);
+        collision.collider.GetComponent<Peple>().Jump(traits.jumpForceNormal, transform);
     }
 
     void SpringAction(Collision2D collision)
@@ -81,9 +80,9 @@ public class Platform : MonoBehaviour
         var peple = collision.collider.GetComponent<Peple>();
 
         if (Mathf.Abs(transform.position.x - peple.transform.position.x) < 0.45f)
-            peple.Jump(jumpForceSpring);
+            peple.Jump(traits.jumpForceSpring, transform);
         else
-            peple.Jump(jumpForceNormal);
+            peple.Jump(traits.jumpForceNormal, transform);
     }
 
     void FragileAction(Collision2D collision)
@@ -104,11 +103,44 @@ public class Platform : MonoBehaviour
     {
         while (type == Type.Broken)
         {
-            transform.Translate(Vector3.down * fallingSpeed * Time.deltaTime);
+            transform.Translate(Vector3.down * traits.fallingSpeed * Time.deltaTime);
 
             yield return new WaitForEndOfFrame();
         }
         
         gameObject.layer = LayerMask.NameToLayer("Default");
+    }
+
+    public void StartHorizontalMovement()
+    {
+        horizontalMovement = StartCoroutine(HorizontalMovement());
+    }
+
+    public void StopHorizontalMovement()
+    {
+        if (horizontalMovement != null)
+        {
+            StopCoroutine(horizontalMovement);
+            horizontalMovement = null;
+        }
+    }
+
+    IEnumerator HorizontalMovement()
+    {
+        float targetX = controller.horizontalSpreadMax;
+
+        while (true)
+        {    
+            if (transform.position.x == controller.horizontalSpreadMax)
+                targetX = controller.horizontalSpreadMin;
+            else if (transform.position.x == controller.horizontalSpreadMin)
+                targetX = controller.horizontalSpreadMax;
+
+            var nextPosition = transform.position;
+            nextPosition.x = Mathf.MoveTowards(nextPosition.x, targetX, traits.horizontalSpeed * Time.deltaTime);
+            transform.position = nextPosition;
+
+            yield return new WaitForEndOfFrame();
+        }
     }
 }

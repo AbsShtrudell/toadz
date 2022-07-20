@@ -7,6 +7,7 @@ public class Peple : MonoBehaviour
     [SerializeField, Min(0f)] private float speed = 5f;
     [SerializeField, Min(0f)] private float jumpDelay = 0.3f;
     [SerializeField] private Animator animator;
+    [Zenject.Inject] private PlatformTraits traits;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
     private float horizontalInput = 0f;
@@ -27,7 +28,7 @@ public class Peple : MonoBehaviour
             if (onFirstPlatform && !fade)
             {
                 onFirstPlatform = false;
-                JumpImmediately(21f);
+                JumpImmediately(traits.jumpForceNormal);
             }
 
             horizontalInput = Input.mousePosition.x < Screen.width / 2 ? -1f : 1f;
@@ -53,9 +54,10 @@ public class Peple : MonoBehaviour
         rigidbody.velocity = new Vector2(horizontalInput * speed, rigidbody.velocity.y);
     }
 
-    public void Jump(float jumpForce)
+    public void Jump(float jumpForce, Transform platform)
     {
         Stop();
+        transform.SetParent(platform);
         StartCoroutine(WaitingForJump(jumpForce));
     }
 
@@ -74,6 +76,7 @@ public class Peple : MonoBehaviour
 
     private void JumpImmediately(float jumpForce)
     {
+        transform.SetParent(null);
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
         animator.SetBool("Jump", true);
         stopped = false;

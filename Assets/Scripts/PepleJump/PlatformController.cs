@@ -14,7 +14,6 @@ public class PlatformController : MonoBehaviour
     [SerializeField] private float _horizontalSpreadMin = -1.8f;
     [SerializeField] private float _horizontalSpreadMax = 1.8f;
     [SerializeField, Min(1)] protected int maxPlatformCount = 7;
-    [SerializeField] private List<Sprite> _platformSprites;
     [Zenject.Inject] private Zenject.DiContainer container;
     private float currentVerticalSpreadMin;
     private float currentVerticalSpreadMax;
@@ -23,7 +22,6 @@ public class PlatformController : MonoBehaviour
 
     public float horizontalSpreadMin => _horizontalSpreadMin;
     public float horizontalSpreadMax => _horizontalSpreadMax;
-    public List<Sprite> platformSprites => _platformSprites;
 
     public event System.Action onPepleWon;
 
@@ -49,6 +47,8 @@ public class PlatformController : MonoBehaviour
 
     public virtual void SpawnNext(Platform p)
     {
+        p.StopHorizontalMovement();
+
         bool aboveMax = nextY - lastNormal.transform.position.y > endVerticalSpreadMax;
 
         if (aboveMax)
@@ -78,6 +78,9 @@ public class PlatformController : MonoBehaviour
             p.type = Platform.Type.Normal;
 
             lastNormal = p;
+
+            if (Random.Range(0, 10) < 4)
+                p.StartHorizontalMovement();
         }
 
         MovePlatform(p);
