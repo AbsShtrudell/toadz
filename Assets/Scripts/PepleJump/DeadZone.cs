@@ -22,5 +22,9 @@ public class DeadZone : MonoBehaviour
         {
             cloudController.SpawnNext(cloud);
         }
+        else if (collider.TryGetComponent<ItemPickup>(out ItemPickup item))
+        {
+            item.ReturnToPool();
+        }
     }
 }

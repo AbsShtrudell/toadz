@@ -27,6 +27,7 @@ public class LimitedPlatformController : PlatformController
         else if (currentPlatformNumber == numberOfTargetPlatform)
         {
             p.type = Platform.Type.Target;
+            p.StopHorizontalMovement();
             MovePlatform(p);
             Camera.main.GetComponent<CameraFollow>().targetY = p.transform.position.y;
             currentPlatformNumber++;

@@ -14,10 +14,12 @@ public class PlatformController : MonoBehaviour
     [SerializeField] private float _horizontalSpreadMin = -1.8f;
     [SerializeField] private float _horizontalSpreadMax = 1.8f;
     [SerializeField, Min(1)] protected int maxPlatformCount = 7;
+    [SerializeField] private Transform jetpackPool;
     [Zenject.Inject] private Zenject.DiContainer container;
     private float currentVerticalSpreadMin;
     private float currentVerticalSpreadMax;
     private float nextY;
+    private float nextX;
     private Platform lastNormal;
 
     public float horizontalSpreadMin => _horizontalSpreadMin;
@@ -30,6 +32,7 @@ public class PlatformController : MonoBehaviour
         currentVerticalSpreadMin = startVerticalSpreadMin;
         currentVerticalSpreadMax = startVerticalSpreadMax;
         nextY = platformRef.transform.position.y + Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
+        nextX = Random.Range(horizontalSpreadMin, horizontalSpreadMax);
         lastNormal = platformRef.GetComponent<Platform>();
 
         for (int i = 1; i <= maxPlatformCount; i++)
@@ -80,7 +83,17 @@ public class PlatformController : MonoBehaviour
             lastNormal = p;
 
             if (Random.Range(0, 10) < 4)
+            {
                 p.StartHorizontalMovement();
+            }
+            else if (jetpackPool.childCount > 0 && Random.Range(0, 10) == 0)
+            {
+                var item = jetpackPool.GetChild(0);
+
+                item.SetParent(null);
+                item.position = new Vector2(nextX, nextY + 0.5f);
+                item.gameObject.SetActive(true);
+            }
         }
 
         MovePlatform(p);
@@ -90,10 +103,11 @@ public class PlatformController : MonoBehaviour
     {
         Vector3 position = p.transform.position;
         position.y = nextY;
-        position.x = Random.Range(horizontalSpreadMin, horizontalSpreadMax);
+        position.x = nextX;
         p.transform.position = position;
 
         nextY += Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
+        nextX = Random.Range(horizontalSpreadMin, horizontalSpreadMax);
 
         currentVerticalSpreadMin = Mathf.MoveTowards(currentVerticalSpreadMin, endVerticalSpreadMin, verticalSpreadMinDelta);
         currentVerticalSpreadMax = Mathf.MoveTowards(currentVerticalSpreadMax, endVerticalSpreadMax, verticalSpreadMaxDelta);
