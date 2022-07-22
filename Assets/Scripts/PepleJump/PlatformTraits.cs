@@ -13,6 +13,7 @@ public class PlatformTraits : MonoBehaviour
     [SerializeField] private Sprite _fragilePlatform;
     [SerializeField] private Sprite _brokenPlatform;
     [SerializeField] private Sprite _targetPlatform;
+    [SerializeField] private Sprite _disposablePlatform;
 
     public float jumpForceNormal => _jumpForceNormal;
     public float jumpForceSpring => _jumpForceSpring;
@@ -23,5 +24,6 @@ public class PlatformTraits : MonoBehaviour
     public Sprite fragilePlatform => _fragilePlatform;
     public Sprite brokenPlatform => _brokenPlatform; 
     public Sprite targetPlatform => _targetPlatform;
+    public Sprite disposablePlatform => _disposablePlatform;
 
 }

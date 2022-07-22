@@ -8,7 +8,7 @@ public class Platform : MonoBehaviour
     [System.Serializable]
     public enum Type
     {
-        Normal, Spring, Fragile, Broken, Target
+        Normal, Spring, Fragile, Broken, Target, Disposable
     }
 
     private delegate void OnCollisionAction(Collision2D collision);
@@ -16,6 +16,7 @@ public class Platform : MonoBehaviour
     [SerializeField] private Type _type = Type.Normal;
     [Zenject.Inject] private PlatformController controller;
     [Zenject.Inject] private PlatformTraits traits;
+    [Zenject.Inject] private Peple peple;
     private SpriteRenderer spriteRenderer;
     private OnCollisionAction action;
     private Coroutine horizontalMovement = null;
@@ -53,7 +54,10 @@ public class Platform : MonoBehaviour
                     action = TargetAction;
                     spriteRenderer.sprite = traits.targetPlatform;
                     break;
-
+                case Type.Disposable:
+                    action = DisposableAction;
+                    spriteRenderer.sprite = traits.disposablePlatform;
+                    break;
             }
         }
     }
@@ -72,13 +76,11 @@ public class Platform : MonoBehaviour
 
     void NormalAction(Collision2D collision)
     {
-        collision.collider.GetComponent<Peple>().Jump(traits.jumpForceNormal, transform);
+        peple.Jump(traits.jumpForceNormal, transform);
     }
 
     void SpringAction(Collision2D collision)
     {
-        var peple = collision.collider.GetComponent<Peple>();
-
         if (Mathf.Abs(transform.position.x - peple.transform.position.x) < 0.45f)
             peple.Jump(traits.jumpForceSpring, transform);
         else
@@ -87,16 +89,23 @@ public class Platform : MonoBehaviour
 
     void FragileAction(Collision2D collision)
     {
-        collision.collider.GetComponent<Rigidbody2D>().velocity = collision.relativeVelocity;
+        peple.velocity = collision.relativeVelocity;
 
         type = Type.Broken;
     }
 
     void TargetAction(Collision2D collision)
     {
-        collision.collider.GetComponent<Peple>().Stop();
+        peple.Stop();
 
         onPepleWon?.Invoke();
+    }
+
+    void DisposableAction(Collision2D collision)
+    {
+        NormalAction(collision);
+
+        StartCoroutine(Disposing());
     }
 
     IEnumerator Falling()
@@ -109,6 +118,13 @@ public class Platform : MonoBehaviour
         }
         
         gameObject.layer = LayerMask.NameToLayer("Default");
+    }
+
+    IEnumerator Disposing()
+    {
+        yield return new WaitForSeconds(peple.jumpDelay);
+
+        type = Type.Broken;
     }
 
     public void StartHorizontalMovement()

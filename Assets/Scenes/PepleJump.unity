@@ -818,7 +818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
-  jumpDelay: 0.2
+  _jumpDelay: 0.3
   animator: {fileID: 349980592}
   fade: 1
 --- !u!95 &349980592
@@ -1115,7 +1115,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -37.42}
+  m_AnchoredPosition: {x: 0, y: -37.41992}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &895373360
@@ -1380,6 +1380,7 @@ MonoBehaviour:
   _fragilePlatform: {fileID: 21300000, guid: 850802b40f1d7914aa2bf77eb1f1c391, type: 3}
   _brokenPlatform: {fileID: 21300000, guid: 69d97ccec1225c242905311a6c7f9206, type: 3}
   _targetPlatform: {fileID: 21300000, guid: a603f52f39a803a478d9e7e3c0a7276e, type: 3}
+  _disposablePlatform: {fileID: 21300000, guid: a603f52f39a803a478d9e7e3c0a7276e, type: 3}
 --- !u!1 &1011204332
 GameObject:
   m_ObjectHideFlags: 0
@@ -1732,6 +1733,15 @@ MonoBehaviour:
   _horizontalSpreadMax: 1.8
   maxPlatformCount: 20
   jetpackPool: {fileID: 1878481704}
+  chances:
+  - type: 0
+    value: 7
+  - type: 1
+    value: 1
+  - type: 2
+    value: 2
+  - type: 5
+    value: 2
   targetRef: {fileID: 1377870027662225878, guid: ee75a31d9aea9b24abbeb2c8a301c9ee, type: 3}
   numberOfTargetPlatform: 100
 --- !u!1 &1878481703

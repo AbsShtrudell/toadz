@@ -5,7 +5,7 @@ using UnityEngine;
 public class Peple : MonoBehaviour
 {
     [SerializeField, Min(0f)] private float speed = 5f;
-    [SerializeField, Min(0f)] private float jumpDelay = 0.3f;
+    [SerializeField, Min(0f)] private float _jumpDelay = 0.3f;
     [SerializeField] private Animator animator;
     [Zenject.Inject] private PlatformTraits traits;
     private new Rigidbody2D rigidbody;
@@ -14,6 +14,14 @@ public class Peple : MonoBehaviour
     private bool stopped = true;
     private bool onFirstPlatform = true;
     public bool fade = true;
+
+    public float jumpDelay => _jumpDelay;
+
+    public Vector2 velocity
+    {
+        get => rigidbody.velocity;
+        set => rigidbody.velocity = value;
+    }
 
     void Start()
     {
