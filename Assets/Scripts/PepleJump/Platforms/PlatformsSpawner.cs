@@ -12,6 +12,8 @@ namespace PepleJump
         [Zenject.Inject] private ObjectPool<FragilePlatform> _fragilePlatformPool;
         [Zenject.Inject] private ObjectPool<BrokenPlatform> _brokenPlatformPool;
         [Zenject.Inject] private ObjectPool<DisposingPlatform> _disposingPlatformPool;
+        [Zenject.Inject] private ObjectPool<MovingHorizontallyPlatform> _horizontalPlatformPool;
+
         public IPlatform Spawn(PlatformType type)
         {
             IPlatform platform = null;
@@ -33,6 +35,9 @@ namespace PepleJump
                 case PlatformType.Broken:
                     platform = _brokenPlatformPool.Get();
                     break;
+                case PlatformType.MovingHorizontally:
+                    platform = _horizontalPlatformPool.Get();
+                    break;
                 case PlatformType.Target:
                     return null;
             }
@@ -43,26 +48,21 @@ namespace PepleJump
 
         public int InGame(PlatformType type)
         {
-            int result = 0;
-
             switch (type)
             {
                 case PlatformType.Normal:
-                    result = _normalPlatformPool.CountActive;
-                    break;
+                    return _normalPlatformPool.CountActive;
                 case PlatformType.Spring:
-                    result = _springPlatformPool.CountActive;
-                    break;
+                    return _springPlatformPool.CountActive;
                 case PlatformType.Fragile:
-                    result = _fragilePlatformPool.CountActive;
-                    break;
+                    return _fragilePlatformPool.CountActive;
                 case PlatformType.Disposable:
-                    result = _disposingPlatformPool.CountActive;
-                    break;
-                case PlatformType.Target:
-                    break;
+                    return _disposingPlatformPool.CountActive;
+                case PlatformType.MovingHorizontally:
+                    return _horizontalPlatformPool.CountActive;
+                default:
+                    return 0;
             }
-            return result;
         }
 
         private void Despawn(IPlatform platform)
@@ -85,6 +85,9 @@ namespace PepleJump
                     break;
                 case PlatformType.Broken:
                     _brokenPlatformPool.Release((BrokenPlatform)platform);
+                    break;
+                case PlatformType.MovingHorizontally:
+                    _horizontalPlatformPool.Release((MovingHorizontallyPlatform)platform);
                     break;
                 case PlatformType.Target:
                     break;

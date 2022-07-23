@@ -13,18 +13,37 @@ public class PlatformsInstaller : MonoInstaller
     [SerializeField] FragilePlatform fragilePlatform;
     [SerializeField] BrokenPlatform brokenPlatform;
     [SerializeField] DisposingPlatform disposingPlatform;
+    [SerializeField] MovingHorizontallyPlatform movingHorizontallyPlatform;
 
     public override void InstallBindings()
     {
-        Container.Bind<ObjectPool<NormalPlatform>>().FromInstance(InitPool<NormalPlatform>(normalPlatform)).AsSingle();
-        Container.Bind<ObjectPool<SpringPlatform>>().FromInstance(InitPool<SpringPlatform>(springPlatform)).AsSingle();
-        Container.Bind<ObjectPool<FragilePlatform>>().FromInstance(InitPool<FragilePlatform>(fragilePlatform)).AsSingle();
-        Container.Bind<ObjectPool<BrokenPlatform>>().FromInstance(InitPool<BrokenPlatform>(brokenPlatform)).AsSingle();
-        Container.Bind<ObjectPool<DisposingPlatform>>().FromInstance(InitPool<DisposingPlatform>(disposingPlatform)).AsSingle();
+        Container.Bind<ObjectPool<NormalPlatform>>()
+            .FromInstance(InitPool<NormalPlatform>(normalPlatform))
+            .AsSingle();
 
-        Container.Bind<PlatformsSpawner>().FromInstance(platformsSpawner);
-        Container.Bind<PlatformController>().FromInstance(platformController);
-        Container.Bind<PlatformTraits>().FromInstance(platformTraits);
+        Container.Bind<ObjectPool<SpringPlatform>>()
+            .FromInstance(InitPool<SpringPlatform>(springPlatform))
+            .AsSingle();
+
+        Container.Bind<ObjectPool<FragilePlatform>>()
+            .FromInstance(InitPool<FragilePlatform>(fragilePlatform))
+            .AsSingle();
+
+        Container.Bind<ObjectPool<BrokenPlatform>>()
+            .FromInstance(InitPool<BrokenPlatform>(brokenPlatform))
+            .AsSingle();
+
+        Container.Bind<ObjectPool<DisposingPlatform>>()
+            .FromInstance(InitPool<DisposingPlatform>(disposingPlatform))
+            .AsSingle();
+            
+        Container.Bind<ObjectPool<MovingHorizontallyPlatform>>()
+            .FromInstance(InitPool<MovingHorizontallyPlatform>(movingHorizontallyPlatform))
+            .AsSingle();
+
+        Container.Bind<PlatformsSpawner>().FromInstance(platformsSpawner).AsSingle();
+        Container.Bind<PlatformController>().FromInstance(platformController).AsSingle();
+        Container.Bind<PlatformTraits>().FromInstance(platformTraits).AsSingle();
     }
 
     private ObjectPool<T> InitPool<T>(T platform) where T : IPlatform

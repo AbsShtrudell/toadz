@@ -991,12 +991,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16171c7cabb088345beb42b0c252d72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startVerticalSpreadMin: 0.5
+  startVerticalSpreadMin: 0.2
   startVerticalSpreadMax: 1
   endVerticalSpreadMin: 4
   endVerticalSpreadMax: 4
-  verticalSpreadMinDelta: 0.1
-  verticalSpreadMaxDelta: 0.1
+  verticalSpreadMinDelta: 0.03
+  verticalSpreadMaxDelta: 0.03
   _horizontalSpreadMin: -1.8
   _horizontalSpreadMax: 1.8
   maxPlatformCount: 20

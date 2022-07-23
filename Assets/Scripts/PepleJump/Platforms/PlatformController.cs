@@ -7,7 +7,7 @@ namespace PepleJump
 {
     public enum PlatformType
     {
-        Normal, Spring, Fragile, Broken, Target, Disposable
+        Normal, Spring, Fragile, Broken, Target, Disposable, MovingHorizontally
     }
 
     public class PlatformController : MonoBehaviour
@@ -39,6 +39,7 @@ namespace PepleJump
         private List<IPlatform> platformsInGame = new List<IPlatform>();
         private IPlatform lastPlatform
         { get { if (platformsInGame.Count == 0) return null; else return platformsInGame[platformsInGame.Count - 1]; } }
+        private IPlatform lastNonFragile;
 
 
         protected virtual void Start()
@@ -47,6 +48,7 @@ namespace PepleJump
             currentVerticalSpreadMax = startVerticalSpreadMax;
             nextY = startPlatform.transform.position.y + Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
             nextX = Random.Range(horizontalSpreadMin, horizontalSpreadMax);
+            lastNonFragile = startPlatform;
 
             platformsInGame.Add(startPlatform);
 
@@ -58,11 +60,11 @@ namespace PepleJump
 
         public virtual void SpawnNext()
         {
-            aboveMax = nextY - lastPlatform.transform.position.y > endVerticalSpreadMax;
+            aboveMax = nextY - lastNonFragile.transform.position.y > endVerticalSpreadMax;
 
             if (aboveMax)
             {
-                nextY = lastPlatform.transform.position.y + endVerticalSpreadMax;
+                nextY = lastNonFragile.transform.position.y + endVerticalSpreadMax;
             }
 
             MovePlatform(GetNextPaltform());
@@ -86,19 +88,32 @@ namespace PepleJump
         {
             IPlatform platform = null;
 
-            for(int i = 0; i < platformTraits.spawnRules.Count; i++)
+            foreach (var rule in platformTraits.spawnRules)
             {
-                PlatformType type = platformTraits.spawnRules[i].type;
+                PlatformType type = rule.type;
 
-                if (spawner.InGame(type) >= platformTraits.spawnRules[i].maxInGame) continue;
-                if (PlatformsInRow(type) >= platformTraits.spawnRules[i].maxInRow) continue;
-                if(Random.Range(0, 100) >= platformTraits.spawnRules[i].spawnChance) continue;
+                if (spawner.InGame(type) >= rule.maxInGame) continue;
+                if (PlatformsInRow(type) >= rule.maxInRow) continue;
+                if (Random.Range(0, 100) >= rule.spawnChance) continue;
 
-                platform = spawner.Spawn(type);
+                if (type != PlatformType.Fragile)
+                {
+                    platform = spawner.Spawn(type);
+
+                    lastNonFragile = platform;
+                }
+                else if (!aboveMax)
+                    platform = spawner.Spawn(type);
+                
                 break;
             }
 
-            if (platform == null) platform = spawner.Spawn(PlatformType.Normal);
+            if (platform == null)
+            {
+                platform = spawner.Spawn(PlatformType.Normal);
+
+                lastNonFragile = platform;
+            }
 
             platform.onDespawned += (IPlatform platform1) => { platformsInGame.Remove(platform1); };
 
