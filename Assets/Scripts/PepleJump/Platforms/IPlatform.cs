@@ -23,6 +23,7 @@ namespace PepleJump
         public abstract void Action(Peple peple);
 
         public abstract PlatformType GetPlatformType();
+
         public void Despawn()
         {
             onDespawned?.Invoke(this);

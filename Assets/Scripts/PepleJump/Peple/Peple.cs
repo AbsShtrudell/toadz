@@ -37,7 +37,7 @@ public class Peple : MonoBehaviour
             if (onFirstPlatform && !fade)
             {
                 onFirstPlatform = false;
-                //JumpImmediately(21); // inject jump force
+                JumpImmediately(21); // inject jump force
             }
 
             horizontalInput = Input.mousePosition.x < Screen.width / 2 ? -1f : 1f;
@@ -64,6 +64,18 @@ public class Peple : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (rigidbody.velocity.y > 0) return;
+
+        IPlatform platform;
+
+        if (collision.gameObject.TryGetComponent<IPlatform>(out platform))
+        {
+            platform.Action(this);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (rigidbody.velocity.y > 0) return;
 
