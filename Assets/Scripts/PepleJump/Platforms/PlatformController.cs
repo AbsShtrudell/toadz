@@ -136,7 +136,6 @@ namespace PepleJump
             return maxResult;
         }
     }
-
 }
 
 //public class PlatformController : MonoBehaviour
