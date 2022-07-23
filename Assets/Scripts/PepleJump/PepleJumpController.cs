@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using PepleJump;
 
 public class PepleJumpController : MonoBehaviour
 {
@@ -23,7 +24,6 @@ public class PepleJumpController : MonoBehaviour
 
         handler.fadeInFinished += OnFadeInEnd;
         deadZone.onPepleInDeadzone += OnPepleInDeadZone;
-        platformController.onPepleWon += OnWon;
     }
 
     private void OnPepleInDeadZone()
@@ -45,7 +45,7 @@ public class PepleJumpController : MonoBehaviour
 
     private void NextScene()
     {
-        SceneManager.LoadScene("Joust");
+        Restart();
     }
 
     private void OnFadeInEnd()

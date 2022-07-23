@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using PepleJump;
 
 public class Peple : MonoBehaviour
 {
@@ -36,7 +37,7 @@ public class Peple : MonoBehaviour
             if (onFirstPlatform && !fade)
             {
                 onFirstPlatform = false;
-                JumpImmediately(traits.jumpForceNormal);
+                //JumpImmediately(21); // inject jump force
             }
 
             horizontalInput = Input.mousePosition.x < Screen.width / 2 ? -1f : 1f;
@@ -60,6 +61,18 @@ public class Peple : MonoBehaviour
             return;
 
         rigidbody.velocity = new Vector2(horizontalInput * speed, rigidbody.velocity.y);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (rigidbody.velocity.y > 0) return;
+
+        IPlatform platform;
+
+        if (collision.gameObject.TryGetComponent<IPlatform>(out platform))
+        {
+            platform.Action(this);
+        }
     }
 
     public void Jump(float jumpForce, Transform platform)
