@@ -37,7 +37,6 @@ public class Peple : MonoBehaviour
             if (onFirstPlatform && !fade)
             {
                 onFirstPlatform = false;
-                JumpImmediately(21); // inject jump force
             }
 
             horizontalInput = Input.mousePosition.x < Screen.width / 2 ? -1f : 1f;
