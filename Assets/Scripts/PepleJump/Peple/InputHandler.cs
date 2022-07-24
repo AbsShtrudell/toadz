@@ -22,8 +22,6 @@ public class InputHandler : MonoBehaviour
         {
             ActiveInput = ActiveInput | TouchSector(Input.GetTouch(i));
         }
-
-        //Debug.Log(ActiveInput.ToString());
     }
 
     private Type TouchSector(Touch touch)

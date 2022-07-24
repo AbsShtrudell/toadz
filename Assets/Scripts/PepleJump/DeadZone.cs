@@ -29,7 +29,7 @@ namespace PepleJump
             }
             else if (collider.TryGetComponent<ItemPickup>(out ItemPickup item))
             {
-                item.ReturnToPool();
+                item.Despawn();
             }
         }
     }

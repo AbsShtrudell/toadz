@@ -5,19 +5,22 @@ using TMPro;
 
 public class PepleScoreUI : MonoBehaviour
 {
-    [Zenject.Inject] private Peple peple;
+    [Zenject.Inject] private ScoreController score;
+
     private TMP_Text text;
-    private int currentScore = 0;
+
+    private void Awake()
+    {
+        score.onScoreChanged += ChangeTetx;
+    }
 
     void Start()
     {
         text = GetComponent<TMP_Text>();
     }
 
-    void Update()
+    private void ChangeTetx(int value)
     {
-        currentScore = Mathf.Max(currentScore, (int)(peple.transform.position.y * 10f));
-
-        text.text = currentScore.ToString();
+        text.text = value.ToString();
     }
 }

@@ -5,9 +5,11 @@ using UnityEngine.Pool;
 
 public class PlatformsInstaller : MonoInstaller
 {
+    [Header("Controllers")]
     [SerializeField] PlatformController platformController;
     [SerializeField] PlatformsSpawner platformsSpawner;
     [SerializeField] PlatformTraits platformTraits;
+    [Header("Platform Refs")]
     [SerializeField] NormalPlatform normalPlatform;
     [SerializeField] SpringPlatform springPlatform;
     [SerializeField] FragilePlatform fragilePlatform;

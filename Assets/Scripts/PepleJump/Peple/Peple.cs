@@ -5,17 +5,16 @@ using PepleJump;
 
 public class Peple : MonoBehaviour
 {
+    [Zenject.Inject] private InputHandler inputHandler;
+
     [SerializeField, Min(0f)] private float speed = 5f;
     [SerializeField, Min(0f)] private float _jumpDelay = 0.3f;
     [SerializeField] private Animator animator;
-    [Zenject.Inject] private InputHandler inputHandler;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
-    private float horizontalInput = 0f;
     private bool stopped = true;
-    private bool onFirstPlatform = true;
     public bool fade = true;
-
+    
     public float jumpDelay => _jumpDelay;
 
     private Coroutine jumpCoroutine;
