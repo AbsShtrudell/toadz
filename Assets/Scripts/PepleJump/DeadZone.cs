@@ -17,7 +17,6 @@ namespace PepleJump
             if (collider.TryGetComponent<IPlatform>(out IPlatform p))
             {
                 p.Despawn();
-                controller.SpawnNext();
             }
             else if (collider.GetComponent<Peple>() != null)
             {

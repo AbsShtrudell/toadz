@@ -33,7 +33,10 @@ namespace PepleJump
         private float currentVerticalSpreadMin;
         private float currentVerticalSpreadMax;
         private float nextY;
+        private float previousNextY;
         private float nextX;
+        private int leftSideFactor = 0;
+        private int rightSideFactor = 1;
         private bool aboveMax = false;
 
         private List<IPlatform> platformsInGame = new List<IPlatform>();
@@ -41,13 +44,13 @@ namespace PepleJump
         { get { if (platformsInGame.Count == 0) return null; else return platformsInGame[platformsInGame.Count - 1]; } }
         private IPlatform lastNonFragile;
 
-
         protected virtual void Start()
         {
             currentVerticalSpreadMin = startVerticalSpreadMin;
             currentVerticalSpreadMax = startVerticalSpreadMax;
-            nextY = startPlatform.transform.position.y + Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
-            nextX = Random.Range(horizontalSpreadMin, horizontalSpreadMax);
+            nextY = startPlatform.transform.position.y + endVerticalSpreadMax; //Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
+            previousNextY = startPlatform.transform.position.y;
+            nextX = GetXPosition();
             lastNonFragile = startPlatform;
 
             platformsInGame.Add(startPlatform);
@@ -58,33 +61,50 @@ namespace PepleJump
             }
         }
 
+        private float GetXPosition()
+        {
+            int temp = leftSideFactor;
+            leftSideFactor = rightSideFactor;
+            rightSideFactor = temp;
+
+            return Random.Range(horizontalSpreadMin * leftSideFactor, horizontalSpreadMax * rightSideFactor);
+        }
+
         public virtual void SpawnNext()
         {
-            aboveMax = nextY - lastNonFragile.transform.position.y > endVerticalSpreadMax;
+            SpawnFillerPlatforms();
 
-            if (aboveMax)
-            {
-                nextY = lastNonFragile.transform.position.y + endVerticalSpreadMax;
-            }
-
-            MovePlatform(GetNextPaltform());
+            MovePlatform(GetNextMainPlatform());
         }
 
-        protected void MovePlatform(IPlatform platform)
+        protected void SpawnFillerPlatforms()
         {
-            Vector3 position = platform.transform.position;
-            position.y = nextY;
-            position.x = nextX;
-            platform.transform.position = position;
+            float nextFillerY = previousNextY + currentVerticalSpreadMin;
 
-            nextY += Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
-            nextX = Random.Range(horizontalSpreadMin, horizontalSpreadMax);
+            while (nextFillerY <= nextY - currentVerticalSpreadMin)
+            {
+                var platform = GetPlatform();
 
-            currentVerticalSpreadMin = Mathf.MoveTowards(currentVerticalSpreadMin, endVerticalSpreadMin, verticalSpreadMinDelta);
-            currentVerticalSpreadMax = Mathf.MoveTowards(currentVerticalSpreadMax, endVerticalSpreadMax, verticalSpreadMaxDelta);
+                void onDespawned(IPlatform platform1)
+                {
+                    platformsInGame.Remove(platform1);
+                    platform.onDespawned -= onDespawned;
+                };
+                platform.onDespawned += onDespawned;
+
+                Vector3 position = Vector3.zero;
+                position.x = GetXPosition();
+                position.y = nextFillerY;
+                platform.transform.position = position;
+
+                nextFillerY += Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
+
+                //currentVerticalSpreadMin = Mathf.MoveTowards(currentVerticalSpreadMin, endVerticalSpreadMin, verticalSpreadMinDelta);
+                //currentVerticalSpreadMax = Mathf.MoveTowards(currentVerticalSpreadMax, endVerticalSpreadMax, verticalSpreadMaxDelta);
+            }
         }
 
-        protected IPlatform GetNextPaltform()
+        protected IPlatform GetPlatform()
         {
             IPlatform platform = null;
 
@@ -96,14 +116,7 @@ namespace PepleJump
                 if (PlatformsInRow(type) >= rule.maxInRow) continue;
                 if (Random.Range(0, 100) >= rule.spawnChance) continue;
 
-                if (type != PlatformType.Fragile)
-                {
-                    platform = spawner.Spawn(type);
-
-                    lastNonFragile = platform;
-                }
-                else if (!aboveMax)
-                    platform = spawner.Spawn(type);
+                platform = spawner.Spawn(type);
                 
                 break;
             }
@@ -115,9 +128,44 @@ namespace PepleJump
                 lastNonFragile = platform;
             }
 
-            platform.onDespawned += (IPlatform platform1) => { platformsInGame.Remove(platform1); };
-
             platformsInGame.Add(platform);
+
+            return platform;
+        }
+
+        protected void MovePlatform(IPlatform platform)
+        {
+            Vector3 position = platform.transform.position;
+            position.y = nextY;
+            position.x = nextX;
+            platform.transform.position = position;
+
+            previousNextY = nextY;
+            nextY += endVerticalSpreadMax; //Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
+            nextX = GetXPosition();
+
+            currentVerticalSpreadMin = Mathf.MoveTowards(currentVerticalSpreadMin, endVerticalSpreadMin, verticalSpreadMinDelta);
+            currentVerticalSpreadMax = Mathf.MoveTowards(currentVerticalSpreadMax, endVerticalSpreadMax, verticalSpreadMaxDelta);
+        }
+
+        protected IPlatform GetNextMainPlatform()
+        {
+            var platform = GetPlatform();
+
+            if (platform.GetPlatformType() == PlatformType.Fragile)
+            {
+                platform.Despawn();
+                platform = spawner.Spawn(PlatformType.Normal);
+            }
+
+            void onDespawned(IPlatform platform1)
+            {
+                platformsInGame.Remove(platform1);
+                SpawnNext();
+
+                platform.onDespawned -= onDespawned;
+            };
+            platform.onDespawned += onDespawned;
 
             return platform;
         }

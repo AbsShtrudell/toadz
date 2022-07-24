@@ -815,8 +815,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startVerticalSpreadMin: 0.2
   startVerticalSpreadMax: 1
-  endVerticalSpreadMin: 2
-  endVerticalSpreadMax: 2
+  endVerticalSpreadMin: 2.5
+  endVerticalSpreadMax: 4
   verticalSpreadMinDelta: 0.03
   verticalSpreadMaxDelta: 0.03
   _horizontalSpreadMin: -1.8
