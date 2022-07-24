@@ -51,9 +51,12 @@ public class PlatformsInstaller : MonoInstaller
         ObjectPool<T> pool = new ObjectPool<T>(() =>
         {
             var go = Container.InstantiatePrefab(platform);
+            var p = go.GetComponent<T>();
+
             go.SetActive(false);
             go.transform.localPosition = new Vector3(10, -10, 0);
-            return go.GetComponent<T>();
+
+            return p;
         }, pl =>
         {
             pl.gameObject.SetActive(true);
