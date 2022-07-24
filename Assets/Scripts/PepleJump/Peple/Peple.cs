@@ -8,7 +8,7 @@ public class Peple : MonoBehaviour
     [SerializeField, Min(0f)] private float speed = 5f;
     [SerializeField, Min(0f)] private float _jumpDelay = 0.3f;
     [SerializeField] private Animator animator;
-    [Zenject.Inject] private PlatformTraits traits;
+    [Zenject.Inject] private InputHandler inputHandler;
     private new Rigidbody2D rigidbody;
     private SpriteRenderer sprite;
     private float horizontalInput = 0f;
@@ -17,6 +17,8 @@ public class Peple : MonoBehaviour
     public bool fade = true;
 
     public float jumpDelay => _jumpDelay;
+
+    private Coroutine jumpCoroutine;
 
     public Vector2 velocity
     {
@@ -32,19 +34,7 @@ public class Peple : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetButton("Fire1"))
-        {
-            if (onFirstPlatform && !fade)
-            {
-                onFirstPlatform = false;
-            }
-
-            horizontalInput = Input.mousePosition.x < Screen.width / 2 ? -1f : 1f;
-            
-            sprite.flipX = horizontalInput > 0f;
-        }
-        else
-            horizontalInput = 0f;
+        Move();
 
         var screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 
@@ -52,14 +42,6 @@ public class Peple : MonoBehaviour
             transform.position = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width - 1, screenPosition.y, screenPosition.z));
         else if (screenPosition.x > Screen.width)
             transform.position = Camera.main.ScreenToWorldPoint(new Vector3(0f, screenPosition.y, screenPosition.z));
-    }
-
-    void FixedUpdate()
-    {
-        if (stopped)
-            return;
-
-        rigidbody.velocity = new Vector2(horizontalInput * speed, rigidbody.velocity.y);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -86,11 +68,30 @@ public class Peple : MonoBehaviour
         }
     }
 
+    private void Move()
+    {
+        if (stopped)
+            return;
+        if (inputHandler.ActiveInput.HasFlag(InputHandler.Type.None))
+            rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
+        if (inputHandler.ActiveInput.HasFlag(InputHandler.Type.Move_Left))
+        {
+            rigidbody.velocity = new Vector2(-1 * speed, rigidbody.velocity.y);
+            sprite.flipX = false;
+        }
+        if (inputHandler.ActiveInput.HasFlag(InputHandler.Type.Move_Right))
+        {
+            rigidbody.velocity = new Vector2(speed, rigidbody.velocity.y);
+            sprite.flipX = true;
+        }
+    }
+
     public void Jump(float jumpForce, Transform platform)
     {
         Stop();
         transform.SetParent(platform);
-        StartCoroutine(WaitingForJump(jumpForce));
+        if(jumpCoroutine != null) StopCoroutine(jumpCoroutine);
+        jumpCoroutine = StartCoroutine(WaitingForJump(jumpForce));
     }
 
     public void Stop()

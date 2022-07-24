@@ -16,7 +16,7 @@ public class PepleScoreUI : MonoBehaviour
 
     void Update()
     {
-        currentScore = Mathf.Max(currentScore, (int)(peple.transform.position.y * 100f));
+        currentScore = Mathf.Max(currentScore, (int)(peple.transform.position.y * 10f));
 
         text.text = currentScore.ToString();
     }
