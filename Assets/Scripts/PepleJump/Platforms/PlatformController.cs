@@ -14,6 +14,7 @@ namespace PepleJump
     {
         [Zenject.Inject] private PlatformsSpawner spawner;
         [Zenject.Inject] private PlatformTraits platformTraits;
+        [Zenject.Inject] private PowerupSpawner powerupSpawner;
 
         [SerializeField, Min(0f)] private float startVerticalSpreadMin = 0.5f;
         [SerializeField, Min(0f)] private float startVerticalSpreadMax = 1f;
@@ -130,7 +131,16 @@ namespace PepleJump
             }
 
             if (platform == null)
+            {
                 platform = spawner.Spawn(PlatformType.Normal);
+
+                //if (Random.Range(0, 100) < 100)
+                //{
+                //    var powerup = powerupSpawner.Spawn(PowerUp.Type.Jetpack);
+                //    powerup.transform.parent = platform.transform;
+                //    powerup.transform.localPosition = Vector3.up;
+                //}
+            }
 
             platformsInGame.Add(platform);
 
