@@ -7,6 +7,7 @@ namespace PepleJump
     public class VoidHole : IPlatform
     {
         [Zenject.Inject] private PepleJumpController pepleJumpController;
+        [Zenject.Inject] private Peple peple;
 
         public override void Action(Peple peple)
         {
@@ -32,6 +33,26 @@ namespace PepleJump
 
                 pepleJumpController.OnPepleInDeadZone();
             }
+        }
+
+        void Update()
+        {
+            Vector2 vec = transform.position - peple.transform.position;
+            float magnitude = vec.magnitude;
+
+            if (magnitude <= traits.voidGravityRadius)
+            {
+                float newMagnitude = traits.voidGravityRadius - magnitude;
+
+                peple.transform.Translate(vec.normalized * newMagnitude * traits.voidGravityForce * Time.deltaTime);
+            }
+        }
+
+        void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+
+            Gizmos.DrawWireSphere(transform.position, traits.voidGravityRadius);
         }
     }
 }
