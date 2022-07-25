@@ -75,6 +75,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VoidHole
       objectReference: {fileID: 0}
+    - target: {fileID: 4145222153367522009, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522010, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_Sprite
       value: 

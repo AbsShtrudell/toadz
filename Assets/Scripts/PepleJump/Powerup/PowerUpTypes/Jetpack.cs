@@ -12,7 +12,16 @@ public class Jetpack : PowerUp
     private new Rigidbody2D rigidbody;
 
     public override void Action(Peple peple)
-    {
+    {   
+        peple.gameObject.layer = LayerMask.NameToLayer("Invincible");
+
+        void OnDespawn(PowerUp p)
+        {
+            peple.gameObject.layer = LayerMask.NameToLayer("Peple");
+            onDespawn -= OnDespawn;
+        }
+        onDespawn += OnDespawn;
+
         StartCoroutine(Move());
     }
 

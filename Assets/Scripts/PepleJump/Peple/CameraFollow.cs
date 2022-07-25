@@ -12,7 +12,7 @@ public class CameraFollow : MonoBehaviour
         targetY = Mathf.Infinity;
     }
 
-    void Update()
+    void LateUpdate()
     {
         transform.position = new Vector3(transform.position.x,
             Mathf.Min(Mathf.Max(player.position.y, transform.position.y), targetY),
