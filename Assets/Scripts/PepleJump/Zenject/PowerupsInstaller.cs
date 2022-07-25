@@ -2,41 +2,45 @@ using UnityEngine;
 using Zenject;
 using UnityEngine.Pool;
 
-
-public class PowerupsInstaller : MonoInstaller
+namespace PepleJump
 {
-    [Header("Controllers")]
-    [SerializeField] private PowerupSpawner spawner;
-    [Header("Pickup Refs")]
-    [SerializeField] private ItemPickup pickupJetpack;
-
-    public override void InstallBindings()
+    public class PowerupsInstaller : MonoInstaller
     {
-        Container.BindInstance<ObjectPool<ItemPickup>>(InitPool(pickupJetpack)).WithId("JetpackPool");
+        [SerializeField] private PowerupTraits traits;
+        [Header("Controllers")]
+        [SerializeField] private PowerupSpawner spawner;
+        [Header("Pickup Refs")]
+        [SerializeField] private ItemPickup pickupJetpack;
 
-        Container.BindInstance<PowerupSpawner>(spawner);
-    }
+        public override void InstallBindings()
+        {
+            Container.BindInstance<ObjectPool<ItemPickup>>(InitPool(pickupJetpack)).WithId("JetpackPool");
 
-    private ObjectPool<ItemPickup> InitPool(ItemPickup itemPickup)
-    {
-        ObjectPool<ItemPickup> pool = null;
+            Container.BindInstance<PowerupSpawner>(spawner);
+            Container.BindInstance<PowerupTraits>(traits);
+        }
 
-        pool = new ObjectPool<ItemPickup>(() =>
+        private ObjectPool<ItemPickup> InitPool(ItemPickup itemPickup)
         {
-            ItemPickup item = Container.InstantiatePrefab(itemPickup).GetComponent<ItemPickup>();
-            item.onDespawn += pool.Release;
-            return item;
-        }, pl =>
-        {
-            pl.gameObject.SetActive(true);
-        }, pl =>
-        {
-            pl.gameObject.SetActive(false);
-        }, pl =>
-        {
-            Destroy(pl);
-        }, true, 5, 10);
+            ObjectPool<ItemPickup> pool = null;
 
-        return pool;
+            pool = new ObjectPool<ItemPickup>(() =>
+            {
+                ItemPickup item = Container.InstantiatePrefab(itemPickup).GetComponent<ItemPickup>();
+                item.onDespawn += pool.Release;
+                return item;
+            }, pl =>
+            {
+                pl.gameObject.SetActive(true);
+            }, pl =>
+            {
+                pl.gameObject.SetActive(false);
+            }, pl =>
+            {
+                Destroy(pl);
+            }, true, 5, 10);
+
+            return pool;
+        }
     }
 }

@@ -14,6 +14,7 @@ namespace PepleJump
         [Zenject.Inject] private ObjectPool<DisposingPlatform> _disposingPlatformPool;
         [Zenject.Inject] private ObjectPool<MovingHorizontallyPlatform> _horizontalPlatformPool;
         [Zenject.Inject] private ObjectPool<VoidHole> _voidHolePool;
+        [Zenject.Inject] private ObjectPool<ExplosivePlatform> _explosivePlatformPool;
 
         public IPlatform Spawn(PlatformType type)
         {
@@ -42,6 +43,9 @@ namespace PepleJump
                 case PlatformType.VoidHole:
                     platform = _voidHolePool.Get();
                     break;
+                case PlatformType.Explosive:
+                    platform = _explosivePlatformPool.Get();
+                    break;
                 case PlatformType.Target:
                     return null;
             }
@@ -66,6 +70,8 @@ namespace PepleJump
                     return _horizontalPlatformPool.CountActive;
                 case PlatformType.VoidHole:
                     return _voidHolePool.CountActive;
+                case PlatformType.Explosive:
+                    return _explosivePlatformPool.CountActive;
                 default:
                     return 0;
             }
@@ -97,6 +103,9 @@ namespace PepleJump
                     break;
                 case PlatformType.VoidHole:
                     _voidHolePool.Release((VoidHole)platform);
+                    break;
+                case PlatformType.Explosive:
+                    _explosivePlatformPool.Release((ExplosivePlatform)platform);
                     break;
                 case PlatformType.Target:
                     break;

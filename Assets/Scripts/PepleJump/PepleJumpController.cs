@@ -26,7 +26,7 @@ public class PepleJumpController : MonoBehaviour
         deadZone.onPepleInDeadzone += OnPepleInDeadZone;
     }
 
-    private void OnPepleInDeadZone()
+    public void OnPepleInDeadZone()
     {
         handler.StartFadeOut();
         handler.fadeOutFinished += Restart;

@@ -763,6 +763,9 @@ MonoBehaviour:
   _jumpForceSpring: 31
   _horizontalSpeed: 5
   _fallingSpeed: 5
+  _explosiveActiveColor: {r: 1, g: 0, b: 0, a: 1}
+  _explosiveInactiveColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  _explosiveScoreLoss: 100
   _spawnRules:
   - type: 0
     maxInGame: 20
@@ -794,6 +797,11 @@ MonoBehaviour:
     maxInRow: 1
     spawnChance: 50
     prioty: 6
+  - type: 129
+    maxInGame: 3
+    maxInRow: 10
+    spawnChance: 50
+    prioty: 5
 --- !u!114 &465944900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -818,8 +826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16171c7cabb088345beb42b0c252d72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startVerticalSpreadMin: 0.4
-  startVerticalSpreadMax: 0.8
+  startVerticalSpreadMin: 0.26
+  startVerticalSpreadMax: 0.68
   endVerticalSpreadMin: 0.8
   endVerticalSpreadMax: 3
   verticalSpreadMinDelta: 0.005
@@ -972,6 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2f5ba913962744ebdfad75719d5c97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traits: {fileID: 1120185786}
   spawner: {fileID: 1120185785}
   pickupJetpack: {fileID: 6857716887468697136, guid: 78db89283e121d64b94b3b4b77ff8199, type: 3}
 --- !u!1 &895373358
@@ -1222,6 +1231,7 @@ MonoBehaviour:
   inputHandler: {fileID: 349980593}
   shootController: {fileID: 349980594}
   scoreController: {fileID: 3359161809070890236}
+  pepleJumpController: {fileID: 1946487311}
 --- !u!114 &1095751991 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -3782935572336661965, guid: cafd19c57be5a8c43992095850923fa7, type: 3}
@@ -1325,6 +1335,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1120185784}
   - component: {fileID: 1120185785}
+  - component: {fileID: 1120185786}
   m_Layer: 0
   m_Name: PowerupsController
   m_TagString: Untagged
@@ -1359,6 +1370,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f04597dffaae945b9d9b28f95c1add, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1120185786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1120185783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe12e22547e13ae4da0e4350e8748223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rules:
+  - type: 0
+    maxInGame: 1
+    maxInRow: 0
+    spawnChance: 20
+    prioty: 1
 --- !u!1 &1211727929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,6 +1674,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2637201370001104983, guid: a9ddc4b95f0088445a18e6317cc7de80, type: 3}
   m_PrefabInstance: {fileID: 1946487309}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1946487311 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2637201370001104982, guid: a9ddc4b95f0088445a18e6317cc7de80, type: 3}
+  m_PrefabInstance: {fileID: 1946487309}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 422de281fc5a80e44b189a3c8487bb32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2108760836
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,6 +1774,7 @@ MonoBehaviour:
   disposingPlatform: {fileID: 6276573731737594650, guid: ff5d64a6dd54ca04c8c2b2c239ebd787, type: 3}
   movingHorizontallyPlatform: {fileID: -4797937263044672761, guid: 47fc6499f880aeb439e057d2cd0c87f5, type: 3}
   voidHole: {fileID: -1297290431010209238, guid: b35cece4e2fc6ee468553cfab88bf016, type: 3}
+  explosivePlatform: {fileID: 405734843963440429, guid: 316ddca8640d7ac4eb81b12ffcce6558, type: 3}
 --- !u!1001 &3359161809070890235
 PrefabInstance:
   m_ObjectHideFlags: 0

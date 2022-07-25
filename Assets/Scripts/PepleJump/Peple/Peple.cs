@@ -106,7 +106,7 @@ public class Peple : MonoBehaviour
         JumpImmediately(jumpForce);
     }
 
-    private void JumpImmediately(float jumpForce)
+    public void JumpImmediately(float jumpForce)
     {
         transform.SetParent(null);
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);

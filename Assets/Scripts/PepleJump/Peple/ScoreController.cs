@@ -22,7 +22,7 @@ public class ScoreController : MonoBehaviour
 
     public void AddScore(int value)
     {
-        _additionalScore = value;
+        _additionalScore += value;
 
         onScoreChanged?.Invoke(value);
     }

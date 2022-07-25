@@ -10,6 +10,10 @@ namespace PepleJump
         [SerializeField, Min(0f)] private float _jumpForceSpring = 31f;
         [SerializeField, Min(0f)] private float _horizontalSpeed = 5f;
         [SerializeField, Min(0f)] private float _fallingSpeed = 5f;
+        [SerializeField] private Color _explosiveActiveColor = Color.red;
+        [SerializeField] private Color _explosiveInactiveColor = Color.yellow;
+        [SerializeField] private int _explosiveScoreLoss = 100;
+
 
         [SerializeField] private List<SpawnRule> _spawnRules;
 
@@ -17,6 +21,9 @@ namespace PepleJump
         public float jumpForceSpring => _jumpForceSpring;
         public float horizontalSpeed => _horizontalSpeed;
         public float fallingSpeed => _fallingSpeed;
+        public Color explosiveActiveColor => _explosiveActiveColor;
+        public Color explosiveInactiveColor => _explosiveInactiveColor;
+        public int explosiveScoreLoss => _explosiveScoreLoss;
         public List<SpawnRule> spawnRules => _spawnRules;
 
         private void Awake()

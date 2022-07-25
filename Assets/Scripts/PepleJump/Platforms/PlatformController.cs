@@ -7,7 +7,7 @@ namespace PepleJump
 {
     public enum PlatformType
     {
-        Normal = 1, Spring = 2, Fragile = 4, Broken = 8, Target = 16, Disposable = 32, MovingHorizontally = 64, VoidHole = 128
+        Normal = 1, Spring = 2, Fragile = 4, Broken = 8, Target = 16, Disposable = 32, MovingHorizontally = 64, VoidHole = 128, Explosive
     }
 
     public class PlatformController : MonoBehaviour
@@ -15,6 +15,7 @@ namespace PepleJump
         [Zenject.Inject] private PlatformsSpawner spawner;
         [Zenject.Inject] private PlatformTraits platformTraits;
         [Zenject.Inject] private PowerupSpawner powerupSpawner;
+        [Zenject.Inject] private PowerupTraits powerupTraits;
 
         [SerializeField, Min(0f)] private float startVerticalSpreadMin = 0.5f;
         [SerializeField, Min(0f)] private float startVerticalSpreadMax = 1f;
@@ -77,7 +78,7 @@ namespace PepleJump
         {
             SpawnFillerPlatforms();
 
-            MovePlatform(GetNextMainPlatform(), false);
+            MovePlatform(GetNextMainPlatform(), true);
         }
 
         protected void SpawnFillerPlatforms()
@@ -132,20 +133,34 @@ namespace PepleJump
 
             if (platform == null)
             {
-                platform = spawner.Spawn(PlatformType.Normal);
-
-                //if (Random.Range(0, 100) < 100)
-                //{
-                //    var powerup = powerupSpawner.Spawn(PowerUp.Type.Jetpack);
-                //    powerup.transform.parent = platform.transform;
-                //    powerup.transform.localPosition = Vector3.up;
-                //}
+                platform = SpawnNormal();
             }
 
             platformsInGame.Add(platform);
 
             if (platform.GetPlatformType() != PlatformType.Fragile)
                 lastNonFragile = platform;
+
+            return platform;
+        }
+
+        private IPlatform SpawnNormal()
+        {
+            IPlatform platform = spawner.Spawn(PlatformType.Normal);
+
+            foreach (var rule in powerupTraits.rules)
+            {
+                var type = rule.type;
+
+                if (powerupSpawner.InGame(type) >= rule.maxInGame) continue;
+                if (Random.Range(0, 100) >= rule.spawnChance) continue;
+
+                var powerup = powerupSpawner.Spawn(PowerUp.Type.Jetpack);
+                powerup.transform.parent = platform.transform;
+                powerup.transform.localPosition = Vector3.up;
+
+                break;
+            }
 
             return platform;
         }
@@ -176,7 +191,14 @@ namespace PepleJump
 
         protected IPlatform GetNextMainPlatform()
         {
-            var platform = GetNextPlatform(PlatformType.Fragile);
+            var platform = GetNextPlatform(PlatformType.Fragile | PlatformType.VoidHole | PlatformType.Target);
+
+            //var type = platform.GetPlatformType();
+            //if (type == PlatformType.Fragile || type == PlatformType.VoidHole)
+            //{
+            //    platform.Despawn();
+            //    platform = SpawnNormal();
+            //}
 
             void onDespawned(IPlatform platform1)
             {
