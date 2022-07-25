@@ -24,7 +24,7 @@ namespace PepleJump
             {
                 collider.transform.SetParent(transform);
                 collider.transform.localPosition = Vector3.zero;
-
+                collider.GetComponent<Peple>().isDead = true;
                 var rb = collider.GetComponent<Rigidbody2D>();
 
                 rb.isKinematic = true;

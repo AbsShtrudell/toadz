@@ -14,7 +14,9 @@ public class Peple : MonoBehaviour
     private SpriteRenderer sprite;
     private bool stopped = true;
     public bool fade = true;
-    
+
+    public bool isDead =  false;
+
     public float jumpDelay => _jumpDelay;
 
     private Coroutine jumpCoroutine;
@@ -31,10 +33,13 @@ public class Peple : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    void Update()
+    private void FixedUpdate()
     {
         Move();
+    }
 
+    void Update()
+    {
         var screenPosition = Camera.main.WorldToScreenPoint(transform.position);
 
         if (screenPosition.x < 0)
@@ -69,7 +74,7 @@ public class Peple : MonoBehaviour
 
     private void Move()
     {
-        if (stopped)
+        if (stopped || isDead)
             return;
         if (inputHandler.ActiveInput.HasFlag(InputHandler.Type.None))
             rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);

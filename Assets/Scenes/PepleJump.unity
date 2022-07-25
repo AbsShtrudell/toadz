@@ -826,8 +826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16171c7cabb088345beb42b0c252d72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startVerticalSpreadMin: 0.26
-  startVerticalSpreadMax: 0.68
+  startVerticalSpreadMin: 0.5
+  startVerticalSpreadMax: 1
   endVerticalSpreadMin: 0.8
   endVerticalSpreadMax: 3
   verticalSpreadMinDelta: 0.005
@@ -1386,7 +1386,7 @@ MonoBehaviour:
   - type: 0
     maxInGame: 1
     maxInRow: 0
-    spawnChance: 20
+    spawnChance: 5
     prioty: 1
 --- !u!1 &1211727929
 GameObject:
