@@ -7,11 +7,14 @@ namespace PepleJump
 {
     public enum PlatformType
     {
-        Normal, Spring, Fragile, Broken, Target, Disposable, MovingHorizontally
+        Normal = 1, Spring = 2, Fragile = 4, Broken = 8, Target = 16, Disposable = 32, MovingHorizontally = 64, VoidHole = 128
     }
 
     public class PlatformController : MonoBehaviour
     {
+        [Zenject.Inject] private PlatformsSpawner spawner;
+        [Zenject.Inject] private PlatformTraits platformTraits;
+
         [SerializeField, Min(0f)] private float startVerticalSpreadMin = 0.5f;
         [SerializeField, Min(0f)] private float startVerticalSpreadMax = 1f;
         [SerializeField, Min(0f)] private float endVerticalSpreadMin = 4f;
@@ -21,19 +24,17 @@ namespace PepleJump
         [SerializeField] private float _horizontalSpreadMin = -1.8f;
         [SerializeField] private float _horizontalSpreadMax = 1.8f;
         [SerializeField, Min(1)] protected int maxPlatformCount = 7;
-
+        [Space]
         [SerializeField] NormalPlatform startPlatform;
 
         public float horizontalSpreadMin => _horizontalSpreadMin;
         public float horizontalSpreadMax => _horizontalSpreadMax;
 
-        [Zenject.Inject] private PlatformsSpawner spawner;
-        [Zenject.Inject] private PlatformTraits platformTraits;
-
         private float currentVerticalSpreadMin;
         private float currentVerticalSpreadMax;
         private float nextY;
         private float previousNextY;
+        private float previousNextX;
         private float nextX;
         private int leftSideFactor = 0;
         private int rightSideFactor = 1;
@@ -68,13 +69,14 @@ namespace PepleJump
             rightSideFactor = temp;
 
             return Random.Range(horizontalSpreadMin * leftSideFactor, horizontalSpreadMax * rightSideFactor);
+            //return Random.Range(horizontalSpreadMin, horizontalSpreadMax);
         }
 
         public virtual void SpawnNext()
         {
             SpawnFillerPlatforms();
 
-            MovePlatform(GetNextMainPlatform());
+            MovePlatform(GetNextMainPlatform(), false);
         }
 
         protected void SpawnFillerPlatforms()
@@ -83,7 +85,7 @@ namespace PepleJump
 
             while (nextFillerY <= nextY - currentVerticalSpreadMin)
             {
-                var platform = GetPlatform();
+                var platform = GetNextPlatform();
 
                 void onDespawned(IPlatform platform1)
                 {
@@ -93,8 +95,14 @@ namespace PepleJump
                 platform.onDespawned += onDespawned;
 
                 Vector3 position = Vector3.zero;
-                position.x = GetXPosition();
                 position.y = nextFillerY;
+
+                for (int i = 0; i <= 60; i++)
+                {
+                    position.x = GetXPosition();
+                    if (!IsInSpawnFreeArea(platform, position)) break;
+                }
+
                 platform.transform.position = position;
 
                 nextFillerY += Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
@@ -104,7 +112,7 @@ namespace PepleJump
             }
         }
 
-        protected IPlatform GetPlatform()
+        protected IPlatform GetNextPlatform(PlatformType ignoreTypes = PlatformType.Target)
         {
             IPlatform platform = null;
 
@@ -112,51 +120,53 @@ namespace PepleJump
             {
                 PlatformType type = rule.type;
 
+                if (ignoreTypes.HasFlag(type)) continue;
                 if (spawner.InGame(type) >= rule.maxInGame) continue;
                 if (PlatformsInRow(type) >= rule.maxInRow) continue;
                 if (Random.Range(0, 100) >= rule.spawnChance) continue;
 
                 platform = spawner.Spawn(type);
-                
                 break;
             }
 
             if (platform == null)
-            {
                 platform = spawner.Spawn(PlatformType.Normal);
 
-                lastNonFragile = platform;
-            }
-
             platformsInGame.Add(platform);
+
+            if (platform.GetPlatformType() != PlatformType.Fragile)
+                lastNonFragile = platform;
 
             return platform;
         }
 
-        protected void MovePlatform(IPlatform platform)
+        protected void MovePlatform(IPlatform platform, bool changeSpread)
         {
             Vector3 position = platform.transform.position;
             position.y = nextY;
-            position.x = nextX;
+
+            for(int i = 0; i <= 60; i++)
+            {
+                position.x = GetXPosition();
+                if (!IsInSpawnFreeArea(platform, position)) break;
+            }
+
             platform.transform.position = position;
 
             previousNextY = nextY;
             nextY += endVerticalSpreadMax; //Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
             nextX = GetXPosition();
 
-            currentVerticalSpreadMin = Mathf.MoveTowards(currentVerticalSpreadMin, endVerticalSpreadMin, verticalSpreadMinDelta);
-            currentVerticalSpreadMax = Mathf.MoveTowards(currentVerticalSpreadMax, endVerticalSpreadMax, verticalSpreadMaxDelta);
+            if (changeSpread)
+            {
+                currentVerticalSpreadMin = Mathf.MoveTowards(currentVerticalSpreadMin, endVerticalSpreadMin, verticalSpreadMinDelta);
+                currentVerticalSpreadMax = Mathf.MoveTowards(currentVerticalSpreadMax, endVerticalSpreadMax, verticalSpreadMaxDelta);
+            }
         }
 
         protected IPlatform GetNextMainPlatform()
         {
-            var platform = GetPlatform();
-
-            if (platform.GetPlatformType() == PlatformType.Fragile)
-            {
-                platform.Despawn();
-                platform = spawner.Spawn(PlatformType.Normal);
-            }
+            var platform = GetNextPlatform(PlatformType.Fragile);
 
             void onDespawned(IPlatform platform1)
             {
@@ -168,6 +178,26 @@ namespace PepleJump
             platform.onDespawned += onDespawned;
 
             return platform;
+        }
+
+        protected bool IsInSpawnFreeArea(IPlatform platform, Vector2 position)
+        {
+            Vector2 pos = position + platform.Offset;
+            float minX = pos.x - platform.SpawnFree.x;
+            float maxX = pos.x + platform.SpawnFree.x;
+            float minY = pos.y - platform.SpawnFree.y;
+            float maxY = pos.y + platform.SpawnFree.y;
+
+            int startPlatform = platformsInGame.Count - 2;
+            int endPlatform = startPlatform - 3;
+
+            for (int i = startPlatform; i >= 0 && i >= endPlatform; i--)
+            {
+                if((minX >= platformsInGame[i].transform.position.x - platformsInGame[i].SpawnFree.x && maxX <= platformsInGame[i].transform.position.x + platformsInGame[i].SpawnFree.x) &&
+                   (minY >= platformsInGame[i].transform.position.y - platformsInGame[i].SpawnFree.y && maxY <= platformsInGame[i].transform.position.y + platformsInGame[i].SpawnFree.y))
+                   return true;
+            }
+            return false;
         }
 
         protected int PlatformsInRow(PlatformType type)

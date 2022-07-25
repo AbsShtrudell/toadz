@@ -18,17 +18,22 @@ public class InputHandler : MonoBehaviour
     {
         ActiveInput = Type.None;
 
+        if(Input.GetButton("Fire1"))
+        {
+            ActiveInput = ActiveInput | TouchSector((Vector2)Input.mousePosition);
+        }
+
         for (int i =0; i < Input.touchCount; i++)
         {
-            ActiveInput = ActiveInput | TouchSector(Input.GetTouch(i));
+            ActiveInput = ActiveInput | TouchSector(Input.GetTouch(i).position);
         }
     }
 
-    private Type TouchSector(Touch touch)
+    private Type TouchSector(Vector2 position)
     {
-        if (touch.position.y > Screen.height / 5)
+        if (position.y > Screen.height / 5)
         {
-            if(touch.position.x < Screen.width / 2 ) return Type.Move_Left;
+            if(position.x < Screen.width / 2 ) return Type.Move_Left;
             else return Type.Move_Right;
         }
         else return Type.Shoot;

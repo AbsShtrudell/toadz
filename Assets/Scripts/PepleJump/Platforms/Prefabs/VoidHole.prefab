@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6510732423119432178
+--- !u!1001 &694216745865067440
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -10,6 +10,18 @@ PrefabInstance:
     - target: {fileID: 4145222153367522005, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145222153367522005, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145222153367522005, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145222153367522005, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522005, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -52,10 +64,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522008, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
-      propertyPath: m_Size.y
-      value: 0.54
-      objectReference: {fileID: 0}
-    - target: {fileID: 4145222153367522008, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
@@ -63,55 +71,58 @@ PrefabInstance:
       propertyPath: m_UsedByEffector
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4145222153367522008, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 5.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 4145222153367522008, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
-      propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 5.12
-      objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522009, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_Name
-      value: FragilePlatform
+      value: VoidHole
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522010, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 09e20006e2a810f46972bfcb0c15529d, type: 3}
+      objectReference: {fileID: 21300000, guid: c3066af24b0f5e84a930eb4be93c664d, type: 3}
     - target: {fileID: 4145222153367522010, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
-      propertyPath: m_Color.b
-      value: 0.20420024
-      objectReference: {fileID: 0}
-    - target: {fileID: 4145222153367522010, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
-      propertyPath: m_Color.g
-      value: 0.6132076
-      objectReference: {fileID: 0}
-    - target: {fileID: 4145222153367522010, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
-      propertyPath: m_Color.r
-      value: 0.130162
+      propertyPath: m_SortingOrder
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522011, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4145222153367522011, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+    - {fileID: 4145222153367522008, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
---- !u!1 &7195640816070288171 stripped
+--- !u!1 &3469060228109513065 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4145222153367522009, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
-  m_PrefabInstance: {fileID: 6510732423119432178}
+  m_PrefabInstance: {fileID: 694216745865067440}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7368335537746677340
+--- !u!58 &2400604240860288392
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3469060228109513065}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.19
+--- !u!114 &-1297290431010209238
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7195640816070288171}
+  m_GameObject: {fileID: 3469060228109513065}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eebb1f08dec1be849b5bdd1f34c9adab, type: 3}
+  m_Script: {fileID: 11500000, guid: 887c4deb9bd6ade499e5ab6fb9eeeca9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnFree: {x: 1.14, y: 2.78}
+  spawnFree: {x: 1.31, y: 1.16}
+  offset: {x: 0, y: 0}

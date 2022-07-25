@@ -11,7 +11,13 @@ namespace PepleJump
         [Zenject.Inject] protected PlatformController controller;
         [Zenject.Inject] protected PlatformTraits traits;
 
+        [SerializeField] protected Vector2 spawnFree;
+        [SerializeField] protected Vector2 offset;
+
         protected SpriteRenderer _spriteRenderer;
+
+        public Vector2 SpawnFree => spawnFree;
+        public Vector2 Offset => offset;
 
         public event Action<IPlatform> onDespawned;
 
@@ -27,6 +33,12 @@ namespace PepleJump
         public void Despawn()
         {
             onDespawned?.Invoke(this);
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(transform.position + (Vector3)offset, SpawnFree);
         }
     }
 }

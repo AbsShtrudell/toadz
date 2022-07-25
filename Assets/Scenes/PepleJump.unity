@@ -769,7 +769,7 @@ MonoBehaviour:
     maxInRow: 20
     spawnChance: 0
     prioty: 10
-  - type: 1
+  - type: 4
     maxInGame: 3
     maxInRow: 1
     spawnChance: 100
@@ -779,16 +779,21 @@ MonoBehaviour:
     maxInRow: 2
     spawnChance: 30
     prioty: 8
-  - type: 5
+  - type: 32
     maxInGame: 3
     maxInRow: 3
     spawnChance: 40
     prioty: 7
-  - type: 6
+  - type: 64
     maxInGame: 3
     maxInRow: 3
     spawnChance: 100
     prioty: 11
+  - type: 128
+    maxInGame: 1
+    maxInRow: 1
+    spawnChance: 50
+    prioty: 6
 --- !u!114 &465944900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -813,15 +818,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16171c7cabb088345beb42b0c252d72c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startVerticalSpreadMin: 0.2
-  startVerticalSpreadMax: 1
-  endVerticalSpreadMin: 2.5
-  endVerticalSpreadMax: 4
-  verticalSpreadMinDelta: 0.03
-  verticalSpreadMaxDelta: 0.03
+  startVerticalSpreadMin: 0.4
+  startVerticalSpreadMax: 0.8
+  endVerticalSpreadMin: 0.8
+  endVerticalSpreadMax: 3
+  verticalSpreadMinDelta: 0.005
+  verticalSpreadMaxDelta: 0.01
   _horizontalSpreadMin: -1.8
   _horizontalSpreadMax: 1.8
-  maxPlatformCount: 20
+  maxPlatformCount: 5
   startPlatform: {fileID: 1095751991}
 --- !u!1 &534307993
 GameObject:
@@ -1728,6 +1733,7 @@ MonoBehaviour:
   brokenPlatform: {fileID: -3307880512197041954, guid: c08d6222b986eb94aaea02d926c16827, type: 3}
   disposingPlatform: {fileID: 6276573731737594650, guid: ff5d64a6dd54ca04c8c2b2c239ebd787, type: 3}
   movingHorizontallyPlatform: {fileID: -4797937263044672761, guid: 47fc6499f880aeb439e057d2cd0c87f5, type: 3}
+  voidHole: {fileID: -1297290431010209238, guid: b35cece4e2fc6ee468553cfab88bf016, type: 3}
 --- !u!1001 &3359161809070890235
 PrefabInstance:
   m_ObjectHideFlags: 0

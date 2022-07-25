@@ -90,3 +90,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b48d2c6c6008d244ad9addb97ad38ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnFree: {x: 0, y: 0}

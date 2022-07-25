@@ -16,6 +16,7 @@ public class PlatformsInstaller : MonoInstaller
     [SerializeField] BrokenPlatform brokenPlatform;
     [SerializeField] DisposingPlatform disposingPlatform;
     [SerializeField] MovingHorizontallyPlatform movingHorizontallyPlatform;
+    [SerializeField] VoidHole voidHole;
 
     public override void InstallBindings()
     {
@@ -41,6 +42,10 @@ public class PlatformsInstaller : MonoInstaller
             
         Container.Bind<ObjectPool<MovingHorizontallyPlatform>>()
             .FromInstance(InitPool<MovingHorizontallyPlatform>(movingHorizontallyPlatform))
+            .AsSingle();
+
+        Container.Bind<ObjectPool<VoidHole>>()
+            .FromInstance(InitPool<VoidHole>(voidHole))
             .AsSingle();
 
         Container.Bind<PlatformsSpawner>().FromInstance(platformsSpawner).AsSingle();
