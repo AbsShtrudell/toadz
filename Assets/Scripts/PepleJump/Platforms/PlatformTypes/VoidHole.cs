@@ -37,6 +37,8 @@ namespace PepleJump
 
         void Update()
         {
+            if (peple.transform.parent != null) return;
+
             Vector2 vec = transform.position - peple.transform.position;
             float magnitude = vec.magnitude;
 
@@ -52,7 +54,7 @@ namespace PepleJump
         {
             Gizmos.color = Color.red;
 
-            Gizmos.DrawWireSphere(transform.position, traits.voidGravityRadius);
+            Gizmos.DrawWireSphere(transform.position, 1);
         }
     }
 }

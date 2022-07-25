@@ -6,7 +6,7 @@ public class InputHandler : MonoBehaviour
 {
     [Zenject.Inject] Peple peple;
 
-    [SerializeField, Min(1)] float _shootSector = 5;
+    [SerializeField, Min(1)] float _shootSector = 7;
     public float shootSector => _shootSector;
 
     [System.Flags] public enum Type

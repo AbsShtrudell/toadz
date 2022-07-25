@@ -175,6 +175,7 @@ MonoBehaviour:
   _jumpDelay: 0.3
   animator: {fileID: 3359161809266727755}
   fade: 1
+  isDead: 0
 --- !u!114 &3359161809266727753
 MonoBehaviour:
   m_ObjectHideFlags: 0

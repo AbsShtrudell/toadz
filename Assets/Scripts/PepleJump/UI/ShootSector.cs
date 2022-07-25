@@ -6,7 +6,7 @@ public class ShootSector : MonoBehaviour
 {
     [Zenject.Inject] InputHandler inputHandler;
 
-    private void Awake()
+    private void OnEnable()
     {
         GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.width, Screen.height / inputHandler.shootSector);
     }

@@ -76,6 +76,10 @@ PrefabInstance:
       value: FragilePlatform
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522010, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4145222153367522010, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 09e20006e2a810f46972bfcb0c15529d, type: 3}
@@ -114,4 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eebb1f08dec1be849b5bdd1f34c9adab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnFree: {x: 1.14, y: 2.78}
+  spawnFree: {x: 1.14, y: 3}
+  offset: {x: 0, y: 0}
