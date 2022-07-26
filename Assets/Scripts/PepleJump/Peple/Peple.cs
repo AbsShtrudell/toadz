@@ -103,6 +103,7 @@ public class Peple : MonoBehaviour
         stopped = true;
         animator.SetBool("Jump", false);
         rigidbody.velocity = Vector2.zero;
+        rigidbody.isKinematic = true;
     }
 
     IEnumerator WaitingForJump(float jumpForce)
@@ -114,6 +115,7 @@ public class Peple : MonoBehaviour
     public void JumpImmediately(float jumpForce)
     {
         transform.SetParent(null);
+        rigidbody.isKinematic = false;
         rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
         animator.SetBool("Jump", true);
         stopped = false;
