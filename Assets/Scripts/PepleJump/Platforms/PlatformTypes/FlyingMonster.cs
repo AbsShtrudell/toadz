@@ -6,8 +6,6 @@ namespace PepleJump
 {
     public class FlyingMonster : MovingHorizontallyPlatform, IMonster
     {
-        [Zenject.Inject] private PepleJumpController pepleJumpController;
-
         void Start()
         {
             return;
@@ -38,15 +36,7 @@ namespace PepleJump
                     return;
                 }
 
-                peple.transform.SetParent(transform);
-                peple.transform.localPosition = Vector3.zero;
-                peple.isDead = true;
-
-                var rb = peple.GetComponent<Rigidbody2D>();
-                rb.isKinematic = true;
-                rb.velocity = Vector2.zero;
-
-                pepleJumpController.OnPepleInDeadZone();
+                peple.Die(transform);
             }
         }
 

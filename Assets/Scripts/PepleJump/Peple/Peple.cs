@@ -6,6 +6,7 @@ using PepleJump;
 public class Peple : MonoBehaviour
 {
     [Zenject.Inject] private InputHandler inputHandler;
+    [Zenject.Inject] private PepleJumpController pepleJumpController;
 
     [SerializeField, Min(0f)] private float speed = 5f;
     [SerializeField, Min(0f)] private float _jumpDelay = 0.3f;
@@ -126,5 +127,17 @@ public class Peple : MonoBehaviour
             multi += 20f * Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public void Die(Transform кто)
+    {
+        transform.SetParent(кто);
+        transform.localPosition = Vector3.zero;
+        isDead = true;
+
+        rigidbody.isKinematic = true;
+        rigidbody.velocity = Vector2.zero;
+
+        pepleJumpController.OnPepleInDeadZone();
     }
 }

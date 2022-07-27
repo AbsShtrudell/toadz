@@ -6,7 +6,6 @@ namespace PepleJump
 {
     public class VoidHole : IPlatform
     {
-        [Zenject.Inject] private PepleJumpController pepleJumpController;
         [Zenject.Inject] private Peple peple;
 
         public override void Action(Peple peple)
@@ -23,15 +22,7 @@ namespace PepleJump
         {
             if (collider.GetComponent<Peple>() != null)
             {
-                collider.transform.SetParent(transform);
-                collider.transform.localPosition = Vector3.zero;
-                collider.GetComponent<Peple>().isDead = true;
-                var rb = collider.GetComponent<Rigidbody2D>();
-
-                rb.isKinematic = true;
-                rb.velocity = Vector2.zero;
-
-                pepleJumpController.OnPepleInDeadZone();
+                peple.Die(transform);
             }
         }
 
