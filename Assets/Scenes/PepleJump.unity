@@ -658,41 +658,65 @@ MonoBehaviour:
     maxInGame: 3
     maxInRow: 2
     spawnChance: 70
+    startSpawnChance: 23
+    endSpawnChance: 69.4
+    spawnChanceDelta: 0.3
     prioty: 10
   - type: 2
     maxInGame: 3
     maxInRow: 1
     spawnChance: 30
+    startSpawnChance: 0
+    endSpawnChance: 30.8
+    spawnChanceDelta: 0.1
     prioty: 9
   - type: 32
     maxInGame: 5
     maxInRow: 3
     spawnChance: 40
+    startSpawnChance: 0
+    endSpawnChance: 40.4
+    spawnChanceDelta: 0.2
     prioty: 7
   - type: 64
     maxInGame: 3
     maxInRow: 2
     spawnChance: 70
+    startSpawnChance: 0
+    endSpawnChance: 70.7
+    spawnChanceDelta: 1
     prioty: 11
   - type: 128
     maxInGame: 1
     maxInRow: 1
     spawnChance: 10
+    startSpawnChance: 0
+    endSpawnChance: 10.1
+    spawnChanceDelta: 0.1
     prioty: 6
   - type: 256
     maxInGame: 5
     maxInRow: 10
     spawnChance: 50
+    startSpawnChance: 0
+    endSpawnChance: 50.8
+    spawnChanceDelta: 1
     prioty: 8
   - type: 512
     maxInGame: 1
     maxInRow: 1
     spawnChance: 30
+    startSpawnChance: 0
+    endSpawnChance: 30
+    spawnChanceDelta: 0.1
     prioty: 1
   - type: 1024
     maxInGame: 1
     maxInRow: 1
     spawnChance: 30
+    startSpawnChance: 0
+    endSpawnChance: 30
+    spawnChanceDelta: 0.1
     prioty: 1
 --- !u!114 &465944900
 MonoBehaviour:

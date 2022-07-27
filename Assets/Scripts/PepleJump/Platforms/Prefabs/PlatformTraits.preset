@@ -86,7 +86,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _spawnRules.Array.size
-    value: 6
+    value: 8
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _spawnRules.Array.data[0].type
@@ -190,7 +190,7 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _spawnRules.Array.data[5].type
-    value: 129
+    value: 256
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _spawnRules.Array.data[5].maxInGame
@@ -207,5 +207,45 @@ Preset:
   - target: {fileID: 0}
     propertyPath: _spawnRules.Array.data[5].prioty
     value: 8
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[6].type
+    value: 512
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[6].maxInGame
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[6].maxInRow
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[6].spawnChance
+    value: 30
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[6].prioty
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[7].type
+    value: 1024
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[7].maxInGame
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[7].maxInRow
+    value: 1
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[7].spawnChance
+    value: 30
+    objectReference: {fileID: 0}
+  - target: {fileID: 0}
+    propertyPath: _spawnRules.Array.data[7].prioty
+    value: 1
     objectReference: {fileID: 0}
   m_ExcludedProperties: []

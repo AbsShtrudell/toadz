@@ -32,6 +32,11 @@ namespace PepleJump
 
         private void Awake()
         {
+            foreach (var rule in _spawnRules)
+            {
+                rule.spawnChance = rule.startSpawnChance;
+            }
+
             _spawnRules.Sort((SpawnRule sr1, SpawnRule sr2) => { 
                 if (sr1.prioty == sr2.prioty) return 0; 
                 if (sr1.prioty > sr2.prioty) return -1; 
@@ -41,12 +46,15 @@ namespace PepleJump
     }
 
     [System.Serializable]
-    public struct SpawnRule
+    public class SpawnRule
     {
         public PlatformType type;
         [Min(0)] public int maxInGame;
         [Min(0)] public int maxInRow;
-        [Range(0, 100)] public int spawnChance; // 0 - 100
+        [Range(0f, 100f)] public float spawnChance;
+        [Range(0f, 100f)] public float startSpawnChance;
+        [Range(0f, 100f)] public float endSpawnChance;
+        public float spawnChanceDelta;
         public int prioty;
     }
 }
