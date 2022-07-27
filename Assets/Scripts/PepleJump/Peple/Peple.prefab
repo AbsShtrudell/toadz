@@ -171,8 +171,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b2ba972c18cdaf49a19218dcac4d3d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  _jumpDelay: 0.3
+  speed: 5.5
+  _jumpDelay: 0
   animator: {fileID: 3359161809266727755}
   fade: 1
   isDead: 0

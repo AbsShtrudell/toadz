@@ -18,6 +18,13 @@ public class PepleJumpController : MonoBehaviour
 
     private bool restart = false;
 
+    private Web web = new Web();
+
+    private void Awake()
+    {
+        //StartCoroutine(web.InitGame(1234));
+    }
+
     void Start()
     {
         handler.StartFadeIn();
@@ -31,6 +38,8 @@ public class PepleJumpController : MonoBehaviour
         peple.StopAllCoroutines();
         handler.StartFadeOut();
         handler.fadeOutFinished += Restart;
+
+        //StartCoroutine(web.EndGame(1234, 1222));
     }
 
     private void OnWon()

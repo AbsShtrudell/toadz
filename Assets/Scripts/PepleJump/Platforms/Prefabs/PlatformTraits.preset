@@ -26,11 +26,11 @@ Preset:
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _jumpForceNormal
-    value: 21
+    value: 18
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _jumpForceSpring
-    value: 31
+    value: 27
     objectReference: {fileID: 0}
   - target: {fileID: 0}
     propertyPath: _horizontalSpeed

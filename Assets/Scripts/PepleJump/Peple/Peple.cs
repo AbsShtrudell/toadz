@@ -120,4 +120,15 @@ public class Peple : MonoBehaviour
         animator.SetBool("Jump", true);
         stopped = false;
     }
+
+    IEnumerator JumpVelocity(float jumpForce)
+    {
+        float multi = 0.2f;
+        while (multi < 1)
+        {
+            rigidbody.velocity = new Vector2(rigidbody.velocity.x, Mathf.Clamp(jumpForce * multi, 0, jumpForce));
+            multi += 20f * Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
 }

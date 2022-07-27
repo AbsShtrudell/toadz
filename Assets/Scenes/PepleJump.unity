@@ -645,7 +645,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpForceNormal: 21
-  _jumpForceSpring: 31
+  _jumpForceSpring: 35
   _horizontalSpeed: 5
   _fallingSpeed: 5
   _voidGravityRadius: 1.5
@@ -1768,6 +1768,14 @@ PrefabInstance:
     - target: {fileID: 3359161809266727762, guid: 9a6dd3ed8e075844b900f62a979fb2e2, type: 3}
       propertyPath: m_Name
       value: Peple
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359161809266727764, guid: 9a6dd3ed8e075844b900f62a979fb2e2, type: 3}
+      propertyPath: speed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3359161809266727764, guid: 9a6dd3ed8e075844b900f62a979fb2e2, type: 3}
+      propertyPath: _jumpDelay
+      value: 0.105
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9a6dd3ed8e075844b900f62a979fb2e2, type: 3}
