@@ -23,7 +23,10 @@ public class Web
     public IEnumerator InitGame(int gameId)
     {
         WWWForm form = new WWWForm();
-        form.AddField("chat_id", 89368230);
+        string chat_id;
+        ParamParse.GetBrowserParameters().TryGetValue("chat_id", out chat_id);
+
+        form.AddField("chat_id", chat_id);
 
         using (UnityWebRequest www = UnityWebRequest.Post("https://punk-verse.thesmartnik.com/platformer_games", form))
         {
@@ -57,6 +60,8 @@ public class Web
 
         using (UnityWebRequest www = UnityWebRequest.Put("https://punk-verse.thesmartnik.com/platformer_games/" + game_id, myData))
         {
+            www.uploadHandler.contentType = "application/json";
+
             yield return www.SendWebRequest();
 
             if (www.result != UnityWebRequest.Result.Success)
