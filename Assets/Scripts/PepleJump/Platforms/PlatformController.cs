@@ -46,7 +46,6 @@ namespace PepleJump
         private List<IPlatform> platformsInGame = new List<IPlatform>();
         private IPlatform lastPlatform
         { get { if (platformsInGame.Count == 0) return null; else return platformsInGame[platformsInGame.Count - 1]; } }
-        private IPlatform lastNonFragile;
 
         protected virtual void Start()
         {
@@ -55,7 +54,6 @@ namespace PepleJump
             nextY = startPlatform.transform.position.y + endVerticalSpreadMax; //Random.Range(currentVerticalSpreadMin, currentVerticalSpreadMax);
             previousNextY = startPlatform.transform.position.y;
             nextX = GetXPosition();
-            lastNonFragile = startPlatform;
 
             platformsInGame.Add(startPlatform);
 
@@ -126,7 +124,7 @@ namespace PepleJump
                 if (ignoreTypes.HasFlag(type)) continue;
                 if (spawner.InGame(type) >= rule.maxInGame) continue;
                 if (PlatformsInRow(type) >= rule.maxInRow) continue;
-                if (Random.Range(0, 100) >= rule.spawnChance) continue;
+                if (Random.Range(0f, 100f) >= rule.spawnChance) continue;
 
                 platform = spawner.Spawn(type);
                 break;
@@ -139,8 +137,10 @@ namespace PepleJump
 
             platformsInGame.Add(platform);
 
-            if (platform.GetPlatformType() != PlatformType.Fragile)
-                lastNonFragile = platform;
+            foreach (var rule in platformTraits.spawnRules)
+            {
+                rule.spawnChance = Mathf.MoveTowards(rule.spawnChance, rule.endSpawnChance, rule.spawnChanceDelta);
+            }
 
             return platform;
         }
