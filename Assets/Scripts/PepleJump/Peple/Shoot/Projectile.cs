@@ -11,6 +11,9 @@ public class Projectile : MonoBehaviour
 
     public event System.Action<Projectile> onDespawn;
 
+    
+    private float time = 0;
+
     private void OnEnable()
     {
         StartCoroutine(Move());
@@ -18,12 +21,12 @@ public class Projectile : MonoBehaviour
 
     private void OnDisable()
     {
+        time = 0;
         StopAllCoroutines();
     }
 
     private IEnumerator Move()
     {
-        float time = 0;
         while(time < lifetime)
         {
             transform.Translate(direction * speed * Time.deltaTime);
@@ -33,6 +36,15 @@ public class Projectile : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         Despawn();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.TryGetComponent<IMonster>(out var monster))
+        {
+            monster.Die();
+            time = lifetime;
+        }
     }
 
     public void Despawn()

@@ -6,19 +6,29 @@ namespace PepleJump
 {
     public class MovingHorizontallyPlatform : NormalPlatform
     {
-        private float targetX;
+        protected float targetX;
+        protected float positionA;
+        protected float positionB;
 
         void Start()
         {
+            positionA = controller.horizontalSpreadMin;
+            positionB = controller.horizontalSpreadMax;
+            
             targetX = controller.horizontalSpreadMin;
         }
 
         void Update()
         {
-            if (transform.position.x == controller.horizontalSpreadMax)
-                targetX = controller.horizontalSpreadMin;
-            else if (transform.position.x == controller.horizontalSpreadMin)
-                targetX = controller.horizontalSpreadMax;
+            Move();
+        }
+
+        protected void Move()
+        {
+            if (transform.position.x == positionA)
+                targetX = positionB;
+            else if (transform.position.x == positionB)
+                targetX = positionA;
 
             var nextPosition = transform.position;
             nextPosition.x = Mathf.MoveTowards(nextPosition.x, targetX, traits.horizontalSpeed * Time.deltaTime);

@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using PepleJump;
 
 namespace PepleJump
 {
     public enum PlatformType
     {
-        Normal = 1, Spring = 2, Fragile = 4, Broken = 8, Target = 16, Disposable = 32, MovingHorizontally = 64, VoidHole = 128, Explosive
+        Normal = 1, Spring = 2, Fragile = 4, Broken = 8,
+        Target = 16, Disposable = 32, MovingHorizontally = 64, VoidHole = 128,
+        Explosive = 256, SittingMonster = 512, FlyingMonster = 1024
     }
 
     public class PlatformController : MonoBehaviour
@@ -191,7 +192,7 @@ namespace PepleJump
 
         protected IPlatform GetNextMainPlatform()
         {
-            var platform = GetNextPlatform(PlatformType.Fragile | PlatformType.VoidHole | PlatformType.Target);
+            var platform = GetNextPlatform(PlatformType.Fragile | PlatformType.VoidHole | PlatformType.Target | PlatformType.FlyingMonster);
 
             //var type = platform.GetPlatformType();
             //if (type == PlatformType.Fragile || type == PlatformType.VoidHole)

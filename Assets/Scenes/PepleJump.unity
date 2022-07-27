@@ -659,11 +659,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jumpForceNormal: 18
-  _jumpForceSpring: 30
+  _jumpForceSpring: 27
   _horizontalSpeed: 5
   _fallingSpeed: 5
-  _voidGravityRadius: 1.5
-  _voidGravityForce: 4
+  _voidGravityRadius: 1
+  _voidGravityForce: 5
   _explosiveActiveColor: {r: 1, g: 0, b: 0, a: 1}
   _explosiveInactiveColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _explosiveScoreLoss: 100
@@ -686,18 +686,28 @@ MonoBehaviour:
   - type: 64
     maxInGame: 3
     maxInRow: 2
-    spawnChance: 60
+    spawnChance: 70
     prioty: 11
   - type: 128
     maxInGame: 1
     maxInRow: 1
     spawnChance: 10
     prioty: 6
-  - type: 129
+  - type: 256
     maxInGame: 5
     maxInRow: 10
     spawnChance: 50
     prioty: 8
+  - type: 512
+    maxInGame: 1
+    maxInRow: 1
+    spawnChance: 30
+    prioty: 1
+  - type: 1024
+    maxInGame: 1
+    maxInRow: 1
+    spawnChance: 30
+    prioty: 1
 --- !u!114 &465944900
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1671,6 +1681,8 @@ MonoBehaviour:
   movingHorizontallyPlatform: {fileID: -4797937263044672761, guid: 47fc6499f880aeb439e057d2cd0c87f5, type: 3}
   voidHole: {fileID: -1297290431010209238, guid: b35cece4e2fc6ee468553cfab88bf016, type: 3}
   explosivePlatform: {fileID: 405734843963440429, guid: 316ddca8640d7ac4eb81b12ffcce6558, type: 3}
+  sittingMonster: {fileID: -1898495681940169386, guid: 0f694e5e10355284f9f4186f706b1291, type: 3}
+  flyingMonster: {fileID: 8555847073080149653, guid: f3522b139e50f54488e7b65b7b885386, type: 3}
 --- !u!1001 &2669629753228727038
 PrefabInstance:
   m_ObjectHideFlags: 0
