@@ -52,9 +52,7 @@ public class Peple : MonoBehaviour
     {
         if (rigidbody.velocity.y > 0) return;
 
-        IPlatform platform;
-
-        if (collision.gameObject.TryGetComponent<IPlatform>(out platform))
+        if (collision.gameObject.TryGetComponent<IPlatform>(out var platform))
         {
             platform.Action(this);
         }
@@ -64,9 +62,7 @@ public class Peple : MonoBehaviour
     {
         if (rigidbody.velocity.y > 0) return;
 
-        IPlatform platform;
-
-        if (collision.gameObject.TryGetComponent<IPlatform>(out platform))
+        if (collision.gameObject.TryGetComponent<IPlatform>(out var platform))
         {
             platform.Action(this);
         }

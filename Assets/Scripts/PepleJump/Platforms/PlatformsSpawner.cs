@@ -15,6 +15,8 @@ namespace PepleJump
         [Zenject.Inject] private ObjectPool<MovingHorizontallyPlatform> _horizontalPlatformPool;
         [Zenject.Inject] private ObjectPool<VoidHole> _voidHolePool;
         [Zenject.Inject] private ObjectPool<ExplosivePlatform> _explosivePlatformPool;
+        [Zenject.Inject] private ObjectPool<SittingMonster> _sittingMonsterPool;
+        [Zenject.Inject] private ObjectPool<FlyingMonster> _flyingMonsterPool;
 
         public IPlatform Spawn(PlatformType type)
         {
@@ -46,6 +48,12 @@ namespace PepleJump
                 case PlatformType.Explosive:
                     platform = _explosivePlatformPool.Get();
                     break;
+                case PlatformType.SittingMonster:
+                    platform = _sittingMonsterPool.Get();
+                    break;
+                case PlatformType.FlyingMonster:
+                    platform = _flyingMonsterPool.Get();
+                    break;
                 case PlatformType.Target:
                     return null;
             }
@@ -72,6 +80,10 @@ namespace PepleJump
                     return _voidHolePool.CountActive;
                 case PlatformType.Explosive:
                     return _explosivePlatformPool.CountActive;
+                case PlatformType.SittingMonster:
+                    return _sittingMonsterPool.CountActive;
+                case PlatformType.FlyingMonster:
+                    return _flyingMonsterPool.CountActive;
                 default:
                     return 0;
             }
@@ -106,6 +118,12 @@ namespace PepleJump
                     break;
                 case PlatformType.Explosive:
                     _explosivePlatformPool.Release((ExplosivePlatform)platform);
+                    break;
+                case PlatformType.SittingMonster:
+                    _sittingMonsterPool.Release((SittingMonster)platform);
+                    break;
+                case PlatformType.FlyingMonster:
+                    _flyingMonsterPool.Release((FlyingMonster)platform);
                     break;
                 case PlatformType.Target:
                     break;

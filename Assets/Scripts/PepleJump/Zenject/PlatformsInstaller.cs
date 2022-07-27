@@ -18,6 +18,8 @@ public class PlatformsInstaller : MonoInstaller
     [SerializeField] MovingHorizontallyPlatform movingHorizontallyPlatform;
     [SerializeField] VoidHole voidHole;
     [SerializeField] ExplosivePlatform explosivePlatform;
+    [SerializeField] SittingMonster sittingMonster;
+    [SerializeField] FlyingMonster flyingMonster;
 
     public override void InstallBindings()
     {
@@ -51,6 +53,14 @@ public class PlatformsInstaller : MonoInstaller
 
         Container.Bind<ObjectPool<ExplosivePlatform>>()
             .FromInstance(InitPool<ExplosivePlatform>(explosivePlatform))
+            .AsSingle();
+
+        Container.Bind<ObjectPool<SittingMonster>>()
+            .FromInstance(InitPool<SittingMonster>(sittingMonster))
+            .AsSingle();
+
+        Container.Bind<ObjectPool<FlyingMonster>>()
+            .FromInstance(InitPool<FlyingMonster>(flyingMonster))
             .AsSingle();
 
         Container.Bind<PlatformsSpawner>().FromInstance(platformsSpawner).AsSingle();
