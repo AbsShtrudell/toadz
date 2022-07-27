@@ -10,7 +10,8 @@ namespace PepleJump
 
         public override void Action(Peple peple)
         {
-            return;
+            peple.JumpImmediately(traits.jumpForceNormal);
+            Die();
         }
 
         private void OnTriggerEnter2D(Collider2D collider)

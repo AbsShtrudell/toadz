@@ -57,15 +57,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522008, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_Size.y
-      value: 1.4322529
+      value: 0.29168963
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522008, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_Offset.x
-      value: -0.023230165
+      value: -0.023230195
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522008, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_Offset.y
-      value: -0.56831086
+      value: -1.1385926
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522008, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_IsTrigger
@@ -83,8 +83,7 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a8e1d72771ecf7549aa58e585872b44d, type: 3}
-    m_RemovedComponents:
-    - {fileID: 4145222153367522011, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
 --- !u!1 &5140759548193008559 stripped
 GameObject:
@@ -105,3 +104,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnFree: {x: 1.24, y: -1.03}
   offset: {x: 0, y: 0}
+--- !u!61 &7373865081031862276
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5140759548193008559}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 1
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.31}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 5.12}
+    newSize: {x: 1.46, y: 0.48}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.59, y: 0.04}
+  m_EdgeRadius: 0

@@ -51,7 +51,7 @@ public class Peple : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (rigidbody.velocity.y > 0) return;
+        if (rigidbody.velocity.y > 0 || isDead) return;
 
         if (collision.gameObject.TryGetComponent<IPlatform>(out var platform))
         {
@@ -61,7 +61,7 @@ public class Peple : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (rigidbody.velocity.y > 0) return;
+        if (rigidbody.velocity.y > 0 || isDead) return;
 
         if (collision.gameObject.TryGetComponent<IPlatform>(out var platform))
         {
