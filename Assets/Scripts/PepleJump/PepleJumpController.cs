@@ -22,7 +22,9 @@ public class PepleJumpController : MonoBehaviour
 
     private void Awake()
     {
-        //StartCoroutine(web.InitGame(1234));
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            StartCoroutine(web.InitGame(1234));
+        #endif
     }
 
     void Start()
@@ -39,7 +41,9 @@ public class PepleJumpController : MonoBehaviour
         handler.StartFadeOut();
         handler.fadeOutFinished += Restart;
 
-        //StartCoroutine(web.EndGame(1234, 1222));
+        #if UNITY_WEBGL && !UNITY_EDITOR
+            StartCoroutine(web.EndGame(1234, 1222));
+        #endif
     }
 
     private void OnWon()

@@ -17,4 +17,5 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Joust.unity
     guid: 6dc8360ad503fde4eb90361e516f8c9e
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 11f66c4a96aebb545ba4b917a81d5f9a, type: 2}
