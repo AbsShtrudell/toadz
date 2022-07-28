@@ -16,15 +16,11 @@ public class PepleJumpController : MonoBehaviour
     [SerializeField]
     private TransitionHandler handler;
 
-    private bool restart = false;
-
     private Web web = new Web();
 
     private void Awake()
     {
-        #if UNITY_WEBGL && !UNITY_EDITOR
-            StartCoroutine(web.InitGame(1234));
-        #endif
+            StartCoroutine(web.InitGame());
     }
 
     void Start()
@@ -41,9 +37,7 @@ public class PepleJumpController : MonoBehaviour
         handler.StartFadeOut();
         handler.fadeOutFinished += Restart;
 
-        #if UNITY_WEBGL && !UNITY_EDITOR
-            StartCoroutine(web.EndGame(1234, 1222));
-        #endif
+        StartCoroutine(web.EndGame(peple.GetComponent<ScoreController>().score));
     }
 
     private void OnWon()

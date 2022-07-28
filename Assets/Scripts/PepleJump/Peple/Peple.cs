@@ -77,7 +77,7 @@ public class Peple : MonoBehaviour
             rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
         if (inputHandler.ActiveInput.HasFlag(InputHandler.Type.Move_Left))
         {
-            rigidbody.velocity = new Vector2(-1 * speed, rigidbody.velocity.y);
+            rigidbody.velocity = new Vector2(-1 * speed , rigidbody.velocity.y);
             sprite.flipX = false;
         }
         if (inputHandler.ActiveInput.HasFlag(InputHandler.Type.Move_Right))

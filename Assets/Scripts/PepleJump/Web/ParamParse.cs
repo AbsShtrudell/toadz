@@ -18,6 +18,8 @@ public class ParamParse
         // Use the .NET class Uri to parse the link and get the query portion for us
         string url = Application.absoluteURL;
 
+        if (!url.Contains('?')) return null;
+
         System.Uri uri = new System.Uri(url);
 
         string linkParams = uri.Query;

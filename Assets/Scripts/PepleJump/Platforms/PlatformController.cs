@@ -192,7 +192,7 @@ namespace PepleJump
 
         protected IPlatform GetNextMainPlatform()
         {
-            var platform = GetNextPlatform(PlatformType.Fragile | PlatformType.VoidHole | PlatformType.Target | PlatformType.FlyingMonster);
+            var platform = GetNextPlatform(PlatformType.Fragile | PlatformType.VoidHole | PlatformType.Target | PlatformType.FlyingMonster | PlatformType.SittingMonster);
 
             //var type = platform.GetPlatformType();
             //if (type == PlatformType.Fragile || type == PlatformType.VoidHole)
