@@ -26,21 +26,6 @@ namespace PepleJump
             }
         }
 
-        void Update()
-        {
-            //    if (peple.transform.parent != null) return;
-
-            //    Vector2 vec = transform.position - peple.transform.position;
-            //    float magnitude = vec.magnitude;
-
-            //    if (magnitude <= traits.voidGravityRadius)
-            //    {
-            //        float newMagnitude = traits.voidGravityRadius - magnitude;
-
-            //        peple.transform.Translate(vec.normalized * newMagnitude * traits.voidGravityForce * Time.deltaTime);
-            //    }
-        }
-
         void OnDrawGizmos()
         {
             Gizmos.color = Color.red;

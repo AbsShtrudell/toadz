@@ -24,8 +24,9 @@ namespace PepleJump
         {
             yield return new WaitForSeconds(timer);
 
-            var brokenPlatform = spawner.Spawn(PlatformType.Broken);
+            var brokenPlatform = spawner.Spawn(PlatformType.Broken) as BrokenPlatform;
             brokenPlatform.transform.position = transform.position;
+            brokenPlatform.Init(PlatformType.Disposable);
 
             Despawn();
         }

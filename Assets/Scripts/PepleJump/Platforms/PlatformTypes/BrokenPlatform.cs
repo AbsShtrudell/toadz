@@ -18,6 +18,20 @@ namespace PepleJump
             StopAllCoroutines();
         }
 
+        public void Init(PlatformType type)
+        {
+            switch(type)
+            {
+                case PlatformType.Disposable:
+                    GetComponent<SpriteRenderer>().color = Color.white;
+                    break;
+                case PlatformType.Fragile:
+                    GetComponent<SpriteRenderer>().color = new Color(125f/ 255f,72f / 255f, 32f / 255f);
+                    break;
+
+            }
+        }
+
         public override void Action(Peple peple)
         {
         }

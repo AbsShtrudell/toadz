@@ -98,7 +98,7 @@ namespace PepleJump
                 Vector3 position = Vector3.zero;
                 position.y = nextFillerY;
 
-                for (int i = 0; i <= 60; i++)
+                for (int i = 0; i <= 15; i++)
                 {
                     position.x = GetXPosition();
                     if (!IsInSpawnFreeArea(platform, position)) break;
@@ -171,7 +171,7 @@ namespace PepleJump
             Vector3 position = platform.transform.position;
             position.y = nextY;
 
-            for(int i = 0; i <= 60; i++)
+            for(int i = 0; i <= 15; i++)
             {
                 position.x = GetXPosition();
                 if (!IsInSpawnFreeArea(platform, position)) break;
