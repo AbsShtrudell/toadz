@@ -32,6 +32,25 @@ public class PowerUp : MonoBehaviour
         onDespawn += OnDespawn;
     }
 
+    private void Update()
+    {
+        if (clock <= _lifetime)
+        {
+            Affect();
+
+            clock += Time.deltaTime;
+        }
+        else
+        {
+            Despawn();
+        }
+    }
+
+    protected virtual void Affect()
+    {
+        return;
+    }
+
     public void Despawn()
     {
         onDespawn?.Invoke(this);
