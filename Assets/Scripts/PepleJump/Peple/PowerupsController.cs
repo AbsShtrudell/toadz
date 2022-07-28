@@ -12,6 +12,9 @@ public class PowerupsController : MonoBehaviour
 
     public void ChangePowerup(PowerUp powerup)
     {
+        if (_activePowerup != null)
+            Destroy(_activePowerup.gameObject);
+
         _activePowerup = powerup;
         _activePowerup.onDespawn += DeattachPowerup;
         _activePowerup.Action(peple);

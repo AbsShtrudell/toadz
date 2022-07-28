@@ -2,23 +2,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PowerUp : MonoBehaviour
+public class PowerUp : MonoBehaviour
 {
     public enum Type
-    { Jetpack, Hat, Boots }
+    { Jetpack, Hat, Boots, Shield }
 
     [SerializeField] protected float _lifetime = 2f;
     [SerializeField] protected Type _type;
+    [SerializeField] protected string triggerName;
+    protected float clock = 0f;
 
     public Type type => _type;
 
     public event System.Action<PowerUp> onDespawn;
 
-    public abstract void Action(Peple peple);
+    public virtual void Action(Peple peple)
+    {
+        peple.gameObject.layer = LayerMask.NameToLayer("Invincible");
+        
+        var animator = peple.GetComponent<Animator>();
+        animator.SetTrigger(triggerName);
+
+        void OnDespawn(PowerUp p)
+        {
+            peple.gameObject.layer = LayerMask.NameToLayer("Peple");
+            animator.SetTrigger("ItemLoss");
+            onDespawn -= OnDespawn;
+        }
+        onDespawn += OnDespawn;
+    }
 
     public void Despawn()
     {
         onDespawn?.Invoke(this);
         Destroy(gameObject);
+    }
+
+    public void Reset()
+    {
+        clock = 0f;
     }
 }

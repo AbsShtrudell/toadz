@@ -15,6 +15,7 @@ namespace PepleJump
         [SerializeField] private Color _explosiveActiveColor = Color.red;
         [SerializeField] private Color _explosiveInactiveColor = Color.yellow;
         [SerializeField] private int _explosiveScoreLoss = 100;
+        [SerializeField] private int _monsterScoreBonus = 100;
 
 
         [SerializeField] private List<SpawnRule> _spawnRules;
@@ -28,6 +29,7 @@ namespace PepleJump
         public Color explosiveActiveColor => _explosiveActiveColor;
         public Color explosiveInactiveColor => _explosiveInactiveColor;
         public int explosiveScoreLoss => _explosiveScoreLoss;
+        public int monsterScoreBonus => _monsterScoreBonus;
         public List<SpawnRule> spawnRules => _spawnRules;
 
         private void Awake()

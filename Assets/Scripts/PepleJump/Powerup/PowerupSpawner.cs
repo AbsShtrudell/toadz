@@ -7,38 +7,30 @@ using UnityEngine.Pool;
 
 public class PowerupSpawner : MonoBehaviour
 {
-    [Zenject.Inject(Id = "JetpackPool")] ObjectPool<ItemPickup> jetpackPool;
+    [Zenject.Inject(Id = PowerUp.Type.Jetpack)] ObjectPool<ItemPickup> jetpackPool;
+    [Zenject.Inject(Id = PowerUp.Type.Hat)] ObjectPool<ItemPickup> hatPool;
+    [Zenject.Inject(Id = PowerUp.Type.Boots)] ObjectPool<ItemPickup> bootsPool;
+    [Zenject.Inject(Id = PowerUp.Type.Shield)] ObjectPool<ItemPickup> shieldPool;
 
     public ItemPickup Spawn(PowerUp.Type type)
     {
-        ItemPickup item = null;
-
         switch (type)
         {
             case PowerUp.Type.Jetpack:
-                item = jetpackPool.Get();
-                break;
+                return jetpackPool.Get();
             case PowerUp.Type.Boots:
-                break;
+                return bootsPool.Get();
             case PowerUp.Type.Hat:
-                break;
+                return hatPool.Get();
+            case PowerUp.Type.Shield:
+                return shieldPool.Get();
+            default:
+                return null;
         }
-
-        return item;
     }
 
-    public int InGame(PowerUp.Type type)
+    public int InGame()
     {
-        switch (type)
-        {
-            case PowerUp.Type.Jetpack:
-                return jetpackPool.CountActive;
-            case PowerUp.Type.Boots:
-                return 0;
-            case PowerUp.Type.Hat:
-                return 0;
-            default:
-                return 0;
-        }
+        return jetpackPool.CountActive + hatPool.CountActive + bootsPool.CountActive + shieldPool.CountActive;
     }
 }

@@ -153,10 +153,10 @@ namespace PepleJump
             {
                 var type = rule.type;
 
-                if (powerupSpawner.InGame(type) >= rule.maxInGame) continue;
+                if (powerupSpawner.InGame() >= powerupTraits.maxInGame) continue;
                 if (Random.Range(0, 100) >= rule.spawnChance) continue;
 
-                var powerup = powerupSpawner.Spawn(PowerUp.Type.Jetpack);
+                var powerup = powerupSpawner.Spawn(type);
                 powerup.transform.parent = platform.transform;
                 powerup.transform.localPosition = Vector3.up;
 

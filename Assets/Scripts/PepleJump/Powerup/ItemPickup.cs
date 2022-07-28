@@ -14,14 +14,18 @@ public class ItemPickup : MonoBehaviour
     {
         if (other.GetComponent<Peple>() != null)        
         {
-            PowerUp item = container.InstantiatePrefab(this.item).GetComponent<PowerUp>();
+            var controller = other.GetComponent<PowerupsController>();
 
-            item.transform.SetParent(other.transform);
-            item.transform.localPosition = Vector3.zero;
-            item.gameObject.SetActive(true);
-
-            other.GetComponent<PowerupsController>().ChangePowerup(item);
-
+            if (controller.ActivePowerup?.type == item.type)
+            {
+                controller.ActivePowerup.Reset();
+            }
+            else
+            {
+                PowerUp powerUpInstance = container.InstantiatePrefab(item).GetComponent<PowerUp>();
+                controller.ChangePowerup(powerUpInstance);            
+            }
+            
             Despawn();
         }
     }

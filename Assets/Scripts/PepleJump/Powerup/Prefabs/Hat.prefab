@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6310257303256367158}
   - component: {fileID: 6310257303256367152}
   m_Layer: 0
-  m_Name: Jetpack
+  m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f8291ebfd387b24cb2941e04cf2273d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _lifetime: 2
-  _type: 0
-  triggerName: Jetpack
-  force: 127.65
-  speed: 20
+  _lifetime: 3.5
+  _type: 1
+  triggerName: Hat
+  force: 88.6
+  speed: 10.7
