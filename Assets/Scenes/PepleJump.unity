@@ -751,7 +751,7 @@ MonoBehaviour:
   verticalSpreadMaxDelta: 0.01
   _horizontalSpreadMin: -1.8
   _horizontalSpreadMax: 1.8
-  maxPlatformCount: 5
+  maxPlatformCount: 7
   startPlatform: {fileID: 1095751991}
 --- !u!1 &534307993
 GameObject:
