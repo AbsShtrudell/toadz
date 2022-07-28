@@ -17,7 +17,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522005, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.0288427
+      value: -3.037
       objectReference: {fileID: 0}
     - target: {fileID: 4145222153367522005, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -94,20 +94,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4145222153367522009, guid: 959a51cbcda38804994c55266a8c08c7, type: 3}
   m_PrefabInstance: {fileID: 4204890929040642595}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &-1898495681940169386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 278114403410761978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45c16e82d0442584fa4126315b641a66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spawnFree: {x: 1.41, y: 1.22}
-  offset: {x: 0, y: 0.29}
 --- !u!61 &1433773314247417028
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134,3 +120,17 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.35, y: 0.04}
   m_EdgeRadius: 0
+--- !u!114 &-1898495681940169386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 278114403410761978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45c16e82d0442584fa4126315b641a66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnFree: {x: 1.41, y: 1.22}
+  offset: {x: 0, y: 0.29}
