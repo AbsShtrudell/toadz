@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 124755740}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -6.11, z: 0}
+  m_LocalPosition: {x: 0, y: -5.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -667,6 +667,7 @@ MonoBehaviour:
   _explosiveActiveColor: {r: 1, g: 0, b: 0, a: 1}
   _explosiveInactiveColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   _explosiveScoreLoss: 100
+  _monsterScoreBonus: 100
   _spawnRules:
   - type: 4
     maxInGame: 3
@@ -913,6 +914,9 @@ MonoBehaviour:
   traits: {fileID: 1120185786}
   spawner: {fileID: 1120185785}
   pickupJetpack: {fileID: 6857716887468697136, guid: 78db89283e121d64b94b3b4b77ff8199, type: 3}
+  pickupHat: {fileID: 6857716887468697136, guid: fe2128637097f334d8db831c5e94833b, type: 3}
+  pickupBoots: {fileID: 6857716887468697136, guid: afbc50aacee84a340bf790c361ba135b, type: 3}
+  pickupShield: {fileID: 6857716887468697136, guid: 815614e33084e2347aa1e0a9948d18c7, type: 3}
 --- !u!1 &895373358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1314,10 +1318,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rules:
   - type: 0
-    maxInGame: 1
-    maxInRow: 0
-    spawnChance: 5
-    prioty: 1
+    spawnChance: 2
+  - type: 1
+    spawnChance: 2
+  - type: 2
+    spawnChance: 2
+  - type: 3
+    spawnChance: 2
+  maxInGame: 1
 --- !u!1 &1211727929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,6 +1722,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 407754399}
     m_Modifications:
+    - target: {fileID: 2669629753339112658, guid: d5ed3d83ef5e2604d900714228e4c7a0, type: 3}
+      propertyPath: m_Size.y
+      value: 0.29589957
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669629753339112658, guid: d5ed3d83ef5e2604d900714228e4c7a0, type: 3}
+      propertyPath: m_Offset.y
+      value: 0.3770502
+      objectReference: {fileID: 0}
     - target: {fileID: 2669629753339112661, guid: d5ed3d83ef5e2604d900714228e4c7a0, type: 3}
       propertyPath: m_RootOrder
       value: 1

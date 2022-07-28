@@ -7,6 +7,7 @@ namespace PepleJump
     public class PowerupTraits : MonoBehaviour
     {
         [SerializeField] private PowerupSpawnRule[] _rules;
+        [SerializeField, Min(0)] public int maxInGame;
 
         public PowerupSpawnRule[] rules => _rules;
     }
@@ -15,9 +16,6 @@ namespace PepleJump
     public struct PowerupSpawnRule
     {
         public PowerUp.Type type;
-        [Min(0)] public int maxInGame;
-        [Min(0)] public int maxInRow;
-        [Range(0, 100)] public int spawnChance; // 0 - 100
-        public int prioty;
+        [Range(0, 100)] public int spawnChance;
     }
 }

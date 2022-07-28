@@ -6,6 +6,8 @@ namespace PepleJump
 {
     public class FlyingMonster : MovingHorizontallyPlatform, IMonster
     {
+        [Zenject.Inject] private ScoreController scoreController;
+
         void Start()
         {
             return;
@@ -13,10 +15,10 @@ namespace PepleJump
 
         void OnEnable()
         {
-            float pos = Random.Range(controller.horizontalSpreadMin, controller.horizontalSpreadMax);
+            float pos = Random.Range(controller.horizontalSpreadMin + 1f, controller.horizontalSpreadMax - 1f);
 
-            positionA = Mathf.Max(pos - 1f, controller.horizontalSpreadMin);
-            positionB = Mathf.Min(pos + 1f, controller.horizontalSpreadMax);
+            positionA = pos - 1f;
+            positionB = pos + 1f;
 
             targetX = positionA;
         }
@@ -48,6 +50,7 @@ namespace PepleJump
 
         public void Die()
         {
+            scoreController.AddScore(traits.monsterScoreBonus);
             Despawn();
         }
     }

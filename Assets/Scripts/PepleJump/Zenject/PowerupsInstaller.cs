@@ -7,14 +7,22 @@ namespace PepleJump
     public class PowerupsInstaller : MonoInstaller
     {
         [SerializeField] private PowerupTraits traits;
+
         [Header("Controllers")]
         [SerializeField] private PowerupSpawner spawner;
+
         [Header("Pickup Refs")]
         [SerializeField] private ItemPickup pickupJetpack;
+        [SerializeField] private ItemPickup pickupHat;
+        [SerializeField] private ItemPickup pickupBoots;
+        [SerializeField] private ItemPickup pickupShield;
 
         public override void InstallBindings()
         {
-            Container.BindInstance<ObjectPool<ItemPickup>>(InitPool(pickupJetpack)).WithId("JetpackPool");
+            Container.BindInstance<ObjectPool<ItemPickup>>(InitPool(pickupJetpack)).WithId(PowerUp.Type.Jetpack);
+            Container.BindInstance<ObjectPool<ItemPickup>>(InitPool(pickupHat)).WithId(PowerUp.Type.Hat);
+            Container.BindInstance<ObjectPool<ItemPickup>>(InitPool(pickupBoots)).WithId(PowerUp.Type.Boots);
+            Container.BindInstance<ObjectPool<ItemPickup>>(InitPool(pickupShield)).WithId(PowerUp.Type.Shield);
 
             Container.BindInstance<PowerupSpawner>(spawner);
             Container.BindInstance<PowerupTraits>(traits);

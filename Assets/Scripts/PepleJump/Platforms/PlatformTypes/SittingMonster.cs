@@ -6,6 +6,7 @@ namespace PepleJump
 {
     public class SittingMonster : IPlatform, IMonster
     {
+        [Zenject.Inject] private ScoreController scoreController;
         [Zenject.Inject] private PlatformsSpawner spawner;
 
         public override void Action(Peple peple)
@@ -38,6 +39,7 @@ namespace PepleJump
             var normalPlatform = spawner.Spawn(PlatformType.Normal);
             normalPlatform.transform.position = transform.position;
 
+            scoreController.AddScore(traits.monsterScoreBonus);
             Despawn();
         }
     }

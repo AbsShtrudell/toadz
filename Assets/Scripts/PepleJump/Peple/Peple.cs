@@ -12,6 +12,7 @@ public class Peple : MonoBehaviour
     [SerializeField, Min(0f)] private float _jumpDelay = 0.3f;
     [SerializeField] private Animator animator;
     private new Rigidbody2D rigidbody;
+    private PowerupsController powerupsController;
     private SpriteRenderer sprite;
     private bool stopped = true;
     public bool fade = true;
@@ -32,6 +33,7 @@ public class Peple : MonoBehaviour
     {
         rigidbody = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        powerupsController = GetComponent<PowerupsController>();
     }
 
     private void FixedUpdate()
@@ -91,7 +93,16 @@ public class Peple : MonoBehaviour
     {
         Stop();
         transform.SetParent(platform);
-        if(jumpCoroutine != null) StopCoroutine(jumpCoroutine);
+
+        if (powerupsController.ActivePowerup?.type == PowerUp.Type.Boots)
+        {
+            var boots = powerupsController.ActivePowerup as BootsPowerup;
+            jumpForce *= boots.multiplier;
+        }
+
+        if (jumpCoroutine != null)
+            StopCoroutine(jumpCoroutine);
+
         jumpCoroutine = StartCoroutine(WaitingForJump(jumpForce));
     }
 
