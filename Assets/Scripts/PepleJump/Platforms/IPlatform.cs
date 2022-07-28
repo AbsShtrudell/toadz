@@ -35,7 +35,7 @@ namespace PepleJump
             onDespawned?.Invoke(this);
         }
 
-        private void OnDrawGizmos()
+        protected void OnDrawGizmos()
         {
             Gizmos.color = Color.green;
             Gizmos.DrawWireCube(transform.position + (Vector3)offset, SpawnFree);

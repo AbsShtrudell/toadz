@@ -41,8 +41,10 @@ namespace PepleJump
             //    }
         }
 
-        void OnDrawGizmos()
+        new void OnDrawGizmos()
         {
+            base.OnDrawGizmos();
+
             Gizmos.color = Color.red;
 
             Gizmos.DrawWireSphere(transform.position, 1);

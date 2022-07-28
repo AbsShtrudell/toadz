@@ -13,12 +13,15 @@ public class ShootController : MonoBehaviour
     [SerializeField] private float shootDelay = 2f;
     [SerializeField] private Vector2 offset = Vector2.zero;
     [SerializeField] private float projectilesSpeed = 10f;
+    private Peple peple;
 
     private Coroutine shootCoroutine = null;
     private bool canShoot = true;
 
     private void Awake()
     {
+        peple = GetComponent<Peple>();
+
         Init();
     }
 
@@ -31,6 +34,9 @@ public class ShootController : MonoBehaviour
 
     public void Shoot()
     {
+        if (peple.isDead)
+            return;
+
         Projectile pr = projectilesPool.Get();
         pr.transform.position = transform.position + (Vector3)offset;
         pr.direction = Vector2.up;
