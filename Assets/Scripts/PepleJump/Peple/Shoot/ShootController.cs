@@ -22,13 +22,6 @@ public class ShootController : MonoBehaviour
         Init();
     }
 
-    void Update()
-    {
-        if (!inputHandler.ActiveInput.HasFlag(InputHandler.Type.Shoot)) return;
-
-        Shoot();
-    }
-
     private IEnumerator ShootDelay()
     {
         yield return new WaitForSeconds(shootDelay);
@@ -36,18 +29,12 @@ public class ShootController : MonoBehaviour
         canShoot = true;
     }
 
-    private void Shoot()
+    public void Shoot()
     {
-        if (canShoot)
-        {
-            canShoot = false;
-            Projectile pr = projectilesPool.Get();
-            pr.transform.position = transform.position + (Vector3)offset;
-            pr.direction = Vector2.up;
-            pr.speed = projectilesSpeed;
-
-            StartCoroutine(ShootDelay());
-        }
+        Projectile pr = projectilesPool.Get();
+        pr.transform.position = transform.position + (Vector3)offset;
+        pr.direction = Vector2.up;
+        pr.speed = projectilesSpeed;
     }
 
     private void Init()
