@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameOverController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private GameObject playAgainUI;
+    [SerializeField] private TMP_Text score;
+    [Zenject.Inject] private PepleJumpController pepleJumpController;
+    [Zenject.Inject] private ScoreController scoreController;
+
+    void Awake()
     {
-        
+        pepleJumpController.onGameOver += GameOver;
     }
 
-    // Update is called once per frame
-    void Update()
+    void GameOver()
     {
-        
+        playAgainUI.SetActive(true);
+        score.text = scoreController.score.ToString();
+    }
+
+    public void Restart()
+    {
+        pepleJumpController.Restart();
     }
 }

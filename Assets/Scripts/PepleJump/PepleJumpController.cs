@@ -7,6 +7,8 @@ using PepleJump;
 
 public class PepleJumpController : MonoBehaviour
 {
+    public event Action onGameOver;
+
     [SerializeField]
     private PlatformController platformController;
     [SerializeField]
@@ -20,7 +22,7 @@ public class PepleJumpController : MonoBehaviour
 
     private void Awake()
     {
-            StartCoroutine(web.InitGame());
+        StartCoroutine(web.InitGame());
     }
 
     void Start()
@@ -35,7 +37,8 @@ public class PepleJumpController : MonoBehaviour
     {
         peple.StopAllCoroutines();
         handler.StartFadeOut();
-        handler.fadeOutFinished += Restart;
+        //handler.fadeOutFinished += Restart;
+        onGameOver?.Invoke();
 
         StartCoroutine(web.EndGame(peple.GetComponent<ScoreController>().score));
     }
@@ -46,7 +49,7 @@ public class PepleJumpController : MonoBehaviour
         handler.fadeOutFinished += NextScene;
     }
 
-    private void Restart()
+    public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
