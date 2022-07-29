@@ -1472,6 +1472,17 @@ MonoBehaviour:
   - type: 3
     spawnChance: 2
   maxInGame: 1
+--- !u!114 &1165347306 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2281283443914467475, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
+  m_PrefabInstance: {fileID: 2281283444547396230}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1211727929
 GameObject:
   m_ObjectHideFlags: 0
@@ -1830,6 +1841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playAgainUI: {fileID: 2281283444547396231}
+  score: {fileID: 1165347306}
 --- !u!1001 &1946487309
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2027,14 +2039,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1883573373}
     m_Modifications:
-    - target: {fileID: 2281283443914467475, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: fcda31917dbb4f84a90d2b0a7d4a4b50, type: 2}
-    - target: {fileID: 2281283443914467475, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 1790824504549513722, guid: fcda31917dbb4f84a90d2b0a7d4a4b50, type: 2}
     - target: {fileID: 2281283444487329976, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2125,16 +2129,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2281283444487329979, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2281283444639248045, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: fcda31917dbb4f84a90d2b0a7d4a4b50, type: 2}
-    - target: {fileID: 2281283444639248045, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 1790824504549513722, guid: fcda31917dbb4f84a90d2b0a7d4a4b50, type: 2}
     - target: {fileID: 8153241904880573341, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
