@@ -98,10 +98,36 @@ namespace PepleJump
                 Vector3 position = Vector3.zero;
                 position.y = nextFillerY;
 
-                for (int i = 0; i <= 15; i++)
+                //for (int i = 0; i <= 15; i++)
+                //{
+                //    position.x = GetXPosition();
+                //    if (!IsInSpawnFreeArea(platform, position)) break;
+                //}
+
+                position.x = GetXPosition();
+                float defaultX = position.x;
+                while (IsInSpawnFreeArea(platform, position))
                 {
-                    position.x = GetXPosition();
-                    if (!IsInSpawnFreeArea(platform, position)) break;
+                    position.x -= 0.01f;
+    
+                    if (position.x < horizontalSpreadMin)
+                    {
+                        position.x = defaultX;
+                        break;
+                    }
+    
+                }
+    
+                while (IsInSpawnFreeArea(platform, position))
+                {
+                    position.x += 0.01f;
+    
+                    if (position.x > horizontalSpreadMax)
+                    {
+                        position.x = horizontalSpreadMax;
+                        break;
+                    }
+    
                 }
 
                 platform.transform.position = position;
@@ -171,10 +197,36 @@ namespace PepleJump
             Vector3 position = platform.transform.position;
             position.y = nextY;
 
-            for(int i = 0; i <= 15; i++)
+            //for(int i = 0; i <= 15; i++)
+            //{
+            //    position.x = GetXPosition();
+            //    if (!IsInSpawnFreeArea(platform, position)) break;
+            //}
+
+            position.x = GetXPosition();
+            float defaultX = position.x;
+            while (IsInSpawnFreeArea(platform, position))
             {
-                position.x = GetXPosition();
-                if (!IsInSpawnFreeArea(platform, position)) break;
+                position.x -= 0.01f;
+
+                if (position.x < horizontalSpreadMin)
+                {
+                   // position.x = defaultX;
+                    break;
+                }
+
+            }
+
+            while (IsInSpawnFreeArea(platform, position))
+            {
+                position.x += 0.01f;
+
+                if (position.x > horizontalSpreadMax)
+                {
+                    position.x = horizontalSpreadMax;
+                    break;
+                }
+
             }
 
             platform.transform.position = position;
@@ -193,13 +245,6 @@ namespace PepleJump
         protected IPlatform GetNextMainPlatform()
         {
             var platform = GetNextPlatform(PlatformType.Fragile | PlatformType.VoidHole | PlatformType.Target | PlatformType.FlyingMonster | PlatformType.SittingMonster);
-
-            //var type = platform.GetPlatformType();
-            //if (type == PlatformType.Fragile || type == PlatformType.VoidHole)
-            //{
-            //    platform.Despawn();
-            //    platform = SpawnNormal();
-            //}
 
             void onDespawned(IPlatform platform1)
             {
@@ -226,8 +271,8 @@ namespace PepleJump
 
             for (int i = startPlatform; i >= 0 && i >= endPlatform; i--)
             {
-                if((minX >= platformsInGame[i].transform.position.x - platformsInGame[i].SpawnFree.x && maxX <= platformsInGame[i].transform.position.x + platformsInGame[i].SpawnFree.x) &&
-                   (minY >= platformsInGame[i].transform.position.y - platformsInGame[i].SpawnFree.y && maxY <= platformsInGame[i].transform.position.y + platformsInGame[i].SpawnFree.y))
+                if((minX >= platformsInGame[i].spawnFreeCenter.x - platformsInGame[i].SpawnFree.x && maxX <= platformsInGame[i].spawnFreeCenter.x + platformsInGame[i].SpawnFree.x) &&
+                   (minY >= platformsInGame[i].spawnFreeCenter.y - platformsInGame[i].SpawnFree.y && maxY <= platformsInGame[i].spawnFreeCenter.y + platformsInGame[i].SpawnFree.y))
                    return true;
             }
             return false;

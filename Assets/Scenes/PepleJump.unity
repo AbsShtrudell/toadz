@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 349980587}
+  speed: 10
   targetY: 0
 --- !u!1001 &242803459
 PrefabInstance:
@@ -646,7 +647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jumpForceNormal: 17
   _jumpForceSpring: 25
-  _horizontalSpeed: 5
+  _horizontalSpeed: 3.06
   _fallingSpeed: 5
   _voidGravityRadius: 1
   _voidGravityForce: 5
@@ -2039,6 +2040,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1883573373}
     m_Modifications:
+    - target: {fileID: 2281283443511133088, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2281283444487329976, guid: 9f828ec5ec2240a41b1e586de4e0a7be, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

@@ -18,6 +18,7 @@ namespace PepleJump
 
         public Vector2 SpawnFree => spawnFree;
         public Vector2 Offset => offset;
+        public Vector2 spawnFreeCenter => (Vector2)transform.position + offset;
 
         public event Action<IPlatform> onDespawned;
 

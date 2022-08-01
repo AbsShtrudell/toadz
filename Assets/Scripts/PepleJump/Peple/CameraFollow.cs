@@ -5,6 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     [SerializeField] private Transform player;
+    [SerializeField] private float speed = 10f;
     public float targetY;
 
     private Vector3 targetLocation;
@@ -14,12 +15,15 @@ public class CameraFollow : MonoBehaviour
         targetY = Mathf.Infinity;
     }
 
-    void LateUpdate()
+    void Update()
     {
-        transform.position = new Vector3(transform.position.x,
+        targetLocation = new Vector3(transform.position.x,
             Mathf.Min(Mathf.Max(player.position.y, transform.position.y), targetY),
             transform.position.z);
+    }
 
-            //transform.position = Vector3.Lerp(transform.position, targetLocation, 10 * Time.deltaTime);
+    void FixedUpdate()
+    {
+        transform.position = Vector3.Lerp(transform.position, targetLocation, speed * Time.deltaTime);
     }
 }

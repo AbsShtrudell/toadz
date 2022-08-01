@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eebb1f08dec1be849b5bdd1f34c9adab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnFree: {x: 1.14, y: 3}
-  offset: {x: 0, y: 0}
+  spawnFree: {x: 1.14, y: 1.71}
+  offset: {x: 0, y: -0.57}
