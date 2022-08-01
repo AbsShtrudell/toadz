@@ -15,18 +15,15 @@ public class ItemPickup : MonoBehaviour
         if (other.GetComponent<Peple>() != null)        
         {
             var controller = other.GetComponent<PowerupsController>();
-
-            if (controller.ActivePowerup?.type == item.type)
-            {
-                controller.ActivePowerup.Reset();
-            }
-            else
+            
+            if (controller.ActivePowerup == null)
             {
                 PowerUp powerUpInstance = container.InstantiatePrefab(item).GetComponent<PowerUp>();
                 controller.ChangePowerup(powerUpInstance);            
+
+
+                Despawn();
             }
-            
-            Despawn();
         }
     }
 
