@@ -15,21 +15,11 @@ public class ShootController : MonoBehaviour
     [SerializeField] private float projectilesSpeed = 10f;
     private Peple peple;
 
-    private Coroutine shootCoroutine = null;
-    private bool canShoot = true;
-
     private void Awake()
     {
         peple = GetComponent<Peple>();
 
         Init();
-    }
-
-    private IEnumerator ShootDelay()
-    {
-        yield return new WaitForSeconds(shootDelay);
-
-        canShoot = true;
     }
 
     public void Shoot()

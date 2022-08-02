@@ -26,7 +26,7 @@ public class InputHandler : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             if (joystick.Direction.x < 0) ActiveInput = ActiveInput | Type.Move_Left;
-            else ActiveInput = ActiveInput | Type.Move_Right;
+            else  if(joystick.Direction.x > 0) ActiveInput = ActiveInput | Type.Move_Right;
         }
     }
 }
