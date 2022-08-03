@@ -17,6 +17,7 @@ namespace PepleJump
         [Zenject.Inject] private PlatformTraits platformTraits;
         [Zenject.Inject] private PowerupSpawner powerupSpawner;
         [Zenject.Inject] private PowerupTraits powerupTraits;
+        [Zenject.Inject] private PowerupsController powerupsController;
 
         [SerializeField, Min(0f)] private float startVerticalSpreadMin = 0.5f;
         [SerializeField, Min(0f)] private float startVerticalSpreadMax = 1f;
@@ -98,36 +99,10 @@ namespace PepleJump
                 Vector3 position = Vector3.zero;
                 position.y = nextFillerY;
 
-                //for (int i = 0; i <= 15; i++)
-                //{
-                //    position.x = GetXPosition();
-                //    if (!IsInSpawnFreeArea(platform, position)) break;
-                //}
-
-                position.x = GetXPosition();
-                float defaultX = position.x;
-                while (IsInSpawnFreeArea(platform, position))
+                for (int i = 0; i <= 15; i++)
                 {
-                    position.x -= 0.01f;
-    
-                    if (position.x < horizontalSpreadMin)
-                    {
-                        position.x = defaultX;
-                        break;
-                    }
-    
-                }
-    
-                while (IsInSpawnFreeArea(platform, position))
-                {
-                    position.x += 0.01f;
-    
-                    if (position.x > horizontalSpreadMax)
-                    {
-                        position.x = horizontalSpreadMax;
-                        break;
-                    }
-    
+                    position.x = GetXPosition();
+                    if (!IsInSpawnFreeArea(platform, position)) break;
                 }
 
                 platform.transform.position = position;
@@ -175,18 +150,20 @@ namespace PepleJump
         {
             IPlatform platform = spawner.Spawn(PlatformType.Normal);
 
-            foreach (var rule in powerupTraits.rules)
+            if (powerupsController.ActivePowerup == null && powerupSpawner.InGame() < powerupTraits.maxInGame)
             {
-                var type = rule.type;
+                foreach (var rule in powerupTraits.rules)
+                {
+                    var type = rule.type;
 
-                if (powerupSpawner.InGame() >= powerupTraits.maxInGame) continue;
-                if (Random.Range(0, 100) >= rule.spawnChance) continue;
+                    if (Random.Range(0, 100) >= rule.spawnChance) continue;
 
-                var powerup = powerupSpawner.Spawn(type);
-                powerup.transform.parent = platform.transform;
-                powerup.transform.localPosition = Vector3.up;
+                    var powerup = powerupSpawner.Spawn(type);
+                    powerup.transform.parent = platform.transform;
+                    powerup.transform.localPosition = Vector3.up;
 
-                break;
+                    break;
+                }
             }
 
             return platform;
@@ -197,36 +174,10 @@ namespace PepleJump
             Vector3 position = platform.transform.position;
             position.y = nextY;
 
-            //for(int i = 0; i <= 15; i++)
-            //{
-            //    position.x = GetXPosition();
-            //    if (!IsInSpawnFreeArea(platform, position)) break;
-            //}
-
-            position.x = GetXPosition();
-            float defaultX = position.x;
-            while (IsInSpawnFreeArea(platform, position))
+            for(int i = 0; i <= 15; i++)
             {
-                position.x -= 0.01f;
-
-                if (position.x < horizontalSpreadMin)
-                {
-                   // position.x = defaultX;
-                    break;
-                }
-
-            }
-
-            while (IsInSpawnFreeArea(platform, position))
-            {
-                position.x += 0.01f;
-
-                if (position.x > horizontalSpreadMax)
-                {
-                    position.x = horizontalSpreadMax;
-                    break;
-                }
-
+                position.x = GetXPosition();
+                if (!IsInSpawnFreeArea(platform, position)) break;
             }
 
             platform.transform.position = position;
