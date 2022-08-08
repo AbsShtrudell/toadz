@@ -47,5 +47,7 @@ MonoBehaviour:
   _lifetime: 2
   _type: 0
   triggerName: Jetpack
+  visualEffect: {fileID: 6117654351114619836, guid: bcf5bb9d1d433524783435594cdf5ef9, type: 3}
+  visualEffectOffset: {x: 0, y: 0}
   force: 127.65
   speed: 20

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class FlyingPowerup : PowerUp
 {
+    [SerializeField] private GameObject visualEffect;
+    [SerializeField] private Vector2 visualEffectOffset;
+
     [Header("Movement")]
     [SerializeField] private float force = 100f;
     [SerializeField] private float speed = 20f;
@@ -12,6 +15,17 @@ public class FlyingPowerup : PowerUp
     public override void Action(Peple peple)
     {   
         rigidbody = peple.GetComponent<Rigidbody2D>();
+
+        var effect = Instantiate(visualEffect, peple.transform);
+        effect.transform.localPosition = visualEffectOffset;
+
+        void OnDespawn(PowerUp p)
+        {
+            Destroy(effect);
+            onDespawn -= OnDespawn;
+        }
+        onDespawn += OnDespawn;
+
         base.Action(peple);
     }
 

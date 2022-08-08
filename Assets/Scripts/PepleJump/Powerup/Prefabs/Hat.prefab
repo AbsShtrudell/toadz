@@ -47,5 +47,7 @@ MonoBehaviour:
   _lifetime: 3.5
   _type: 1
   triggerName: Hat
+  visualEffect: {fileID: 4253145598890952397, guid: 58b8ed6312525df4cafb63c95a8f2178, type: 3}
+  visualEffectOffset: {x: 0, y: 0}
   force: 88.6
   speed: 10.7
