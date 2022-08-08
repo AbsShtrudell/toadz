@@ -7,6 +7,7 @@ namespace PepleJump
     public class PowerupsInstaller : MonoInstaller
     {
         [SerializeField] private PowerupTraits traits;
+        [SerializeField] private PowerupsController controller;
 
         [Header("Controllers")]
         [SerializeField] private PowerupSpawner spawner;
@@ -26,6 +27,7 @@ namespace PepleJump
 
             Container.BindInstance<PowerupSpawner>(spawner);
             Container.BindInstance<PowerupTraits>(traits);
+            Container.BindInstance<PowerupsController>(controller);
         }
 
         private ObjectPool<ItemPickup> InitPool(ItemPickup itemPickup)

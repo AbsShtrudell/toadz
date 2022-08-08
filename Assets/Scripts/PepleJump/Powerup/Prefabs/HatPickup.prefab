@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6857716887468697142}
   - component: {fileID: 6857716887468697137}
   - component: {fileID: 6857716887468697136}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: HatPickup
   m_TagString: Untagged
   m_Icon: {fileID: 0}

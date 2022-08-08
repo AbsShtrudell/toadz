@@ -761,6 +761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   traits: {fileID: 1120185786}
+  controller: {fileID: 3359161809070890243}
   spawner: {fileID: 1120185785}
   pickupJetpack: {fileID: 6857716887468697136, guid: 78db89283e121d64b94b3b4b77ff8199, type: 3}
   pickupHat: {fileID: 6857716887468697136, guid: fe2128637097f334d8db831c5e94833b, type: 3}
@@ -1388,6 +1389,7 @@ GameObject:
   - component: {fileID: 1865347843}
   - component: {fileID: 1865347845}
   - component: {fileID: 1865347846}
+  - component: {fileID: 1865347842}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1415,6 +1417,62 @@ RectTransform:
   m_AnchoredPosition: {x: 50, y: 50}
   m_SizeDelta: {x: 322, y: 316}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1865347842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865347840}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 1865347843}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 349980594}
+        m_TargetAssemblyTypeName: ShootController, Assembly-CSharp
+        m_MethodName: Shoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1865347843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2071,5 +2129,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2a24c00cc55169042b49bde80d27a276, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3359161809070890243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -1893897550275284220, guid: 9a6dd3ed8e075844b900f62a979fb2e2, type: 3}
+  m_PrefabInstance: {fileID: 3359161809070890235}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72a5151f6274a1348b1b38d695aa5e28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
