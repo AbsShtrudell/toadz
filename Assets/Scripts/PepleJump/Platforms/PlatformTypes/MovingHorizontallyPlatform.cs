@@ -18,7 +18,7 @@ namespace PepleJump
             targetX = controller.horizontalSpreadMin;
         }
 
-        void Update()
+        protected virtual void Update()
         {
             Move();
         }

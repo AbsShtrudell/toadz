@@ -8,6 +8,8 @@ namespace PepleJump
     {
         [Zenject.Inject] private ScoreController scoreController;
 
+        private bool Dead = false;
+
         void Start()
         {
             return;
@@ -21,6 +23,29 @@ namespace PepleJump
             positionB = pos + 1f;
 
             targetX = positionA;
+
+            Dead = false;
+
+            foreach (var collider in GetComponents<BoxCollider>())
+            {
+                collider.enabled = true;
+            }
+        }
+
+        private void OnDisable()
+        {
+            Dead = false;
+
+            foreach (var collider in GetComponents<BoxCollider>())
+            {
+                collider.enabled = true;
+            }
+        }
+
+        protected override void Update()
+        {
+            if(!Dead)
+                base.Update();
         }
 
         public override void Action(Peple peple)
@@ -31,7 +56,7 @@ namespace PepleJump
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.TryGetComponent<Peple>(out var peple))
+            if (collider.TryGetComponent<Peple>(out var peple) && !Dead)
             {
                 if (peple.gameObject.layer == LayerMask.NameToLayer("Invincible"))
                 {
@@ -50,8 +75,20 @@ namespace PepleJump
 
         public void Die()
         {
+            if (Dead) return;
+
             scoreController.AddScore(traits.monsterScoreBonus);
-            Despawn();
+
+            Animator animator;
+            if (TryGetComponent<Animator>(out animator))
+                animator.SetTrigger("Die");
+
+            foreach(var collider in GetComponents<BoxCollider>())
+            {
+                collider.enabled = false;
+            }
+
+            Dead = true;
         }
     }
 }

@@ -9,6 +9,30 @@ namespace PepleJump
         [Zenject.Inject] private ScoreController scoreController;
         [Zenject.Inject] private PlatformsSpawner spawner;
 
+        [SerializeField] Transform spawnPlatform;
+
+        private bool Dead = false;
+
+        private void OnEnable()
+        {
+            Dead = false;
+
+            foreach (var collider in GetComponents<BoxCollider>())
+            {
+                collider.enabled = true;
+            }
+        }
+
+        private void OnDisable()
+        {
+            Dead = false;
+
+            foreach (var collider in GetComponents<BoxCollider>())
+            {
+                collider.enabled = true;
+            }
+        }
+
         public override void Action(Peple peple)
         {
             peple.JumpImmediately(traits.jumpForceNormal);
@@ -17,7 +41,7 @@ namespace PepleJump
 
         private void OnTriggerEnter2D(Collider2D collider)
         {
-            if (collider.TryGetComponent<Peple>(out var peple))
+            if (collider.TryGetComponent<Peple>(out var peple) && !Dead)
             {
                 if (peple.gameObject.layer == LayerMask.NameToLayer("Invincible"))
                 {
@@ -36,11 +60,23 @@ namespace PepleJump
 
         public void Die()
         {
+            if (Dead) return;
+
             var normalPlatform = spawner.Spawn(PlatformType.Normal);
-            normalPlatform.transform.position = transform.position;
+            normalPlatform.transform.position = spawnPlatform.position;
+
+            Animator animator;
+            if (TryGetComponent<Animator>(out animator)) 
+                animator.SetTrigger("Die");
 
             scoreController.AddScore(traits.monsterScoreBonus);
-            Despawn();
+
+            foreach (var collider in GetComponents<BoxCollider>())
+            {
+                collider.enabled = false;
+            }
+
+            Dead = true;
         }
     }
 }
