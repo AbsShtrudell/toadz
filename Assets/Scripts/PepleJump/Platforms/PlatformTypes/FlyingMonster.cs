@@ -90,5 +90,10 @@ namespace PepleJump
 
             Dead = true;
         }
+
+        public bool isDead()
+        {
+            return Dead;
+        }
     }
 }

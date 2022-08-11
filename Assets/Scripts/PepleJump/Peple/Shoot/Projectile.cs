@@ -42,6 +42,7 @@ public class Projectile : MonoBehaviour
     {
         if (collider.TryGetComponent<IMonster>(out var monster))
         {
+            if (monster.isDead()) return;
             monster.Die();
             time = lifetime;
         }
