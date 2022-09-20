@@ -1,10 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
-using System.Linq;
 using System.Text;
-using TMPro;
+using System.Security.Cryptography;
 
 public class Web
 {
@@ -14,9 +12,10 @@ public class Web
         [SerializeField] public int id;
     }
     [System.Serializable]
-    public class Score
+    public class Session
     {
         [SerializeField] public int score;
+        [SerializeField] public int session_length;
     }
 
     public int game_id;
@@ -55,13 +54,18 @@ public class Web
         }
     }
 
-    public IEnumerator EndGame(int score)
+    public IEnumerator EndGame(int score, int seconds)
     {
-        Score score1= new Score();
-        score1.score = score;
-        string result = JsonUtility.ToJson(score1);
+        Session session= new Session();
 
-        byte[] myData = System.Text.Encoding.UTF8.GetBytes(result);
+        session.score = score;
+        session.session_length = seconds;
+
+        string result = JsonUtility.ToJson(session);
+
+        Debug.Log(AES.Encrypt(result, SHA.sha256(game_id.ToString()), "BkSKZK8LUMU9iLAK"));
+
+        byte[] myData = System.Text.Encoding.UTF8.GetBytes(AES.Encrypt(result, SHA.sha256(game_id.ToString()), "BkSKZK8LUMU9iLAK"));
 
         using (UnityWebRequest www = UnityWebRequest.Put("https://punk-verse.thesmartnik.com/platformer_games/" + game_id, myData))
         {

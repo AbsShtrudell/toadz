@@ -16,11 +16,18 @@ public class PepleJumpController : MonoBehaviour
     [SerializeField]
     private DeadZone deadZone;
 
+    private float time = 0f;
+
     private Web web = new Web();
 
     private void Awake()
     {
         StartCoroutine(web.InitGame());
+    }
+
+    private void Update()
+    {
+        time += Time.deltaTime;
     }
 
     void Start()
@@ -33,7 +40,7 @@ public class PepleJumpController : MonoBehaviour
         peple.StopAllCoroutines();
         onGameOver?.Invoke();
 
-        StartCoroutine(web.EndGame(peple.GetComponent<ScoreController>().score));
+        StartCoroutine(web.EndGame(peple.GetComponent<ScoreController>().score, (int)(time + 0.5f)));
     }
 
     public void Restart()
